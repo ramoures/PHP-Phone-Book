@@ -23,9 +23,7 @@ final class Database{
             }
            
         } catch (Exception $e) {
-            if(DEBUG)
-                return print $e->getMessage();
-            $this->dbError();
+            $this->error($e);
         }
        
     }
@@ -49,9 +47,7 @@ final class Database{
             // }
         }
        } catch (Exception $e) {
-            if(DEBUG)
-                return print $e->getMessage();
-            $this->dbError();
+            $this->error($e);
         }
 
     }

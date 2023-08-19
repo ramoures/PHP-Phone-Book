@@ -1,5 +1,5 @@
 <?php
-abstract class Base{
+abstract class BaseController{
     private function __construct()
     {
         print "ok";

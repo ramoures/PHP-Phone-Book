@@ -1,5 +1,5 @@
 <?php
-final class Frontend extends Base{
+final class Frontend extends BaseController{
     
 }
 

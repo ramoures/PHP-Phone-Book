@@ -1,5 +1,5 @@
 <?php
-final class Backend extends Base{
+final class Backend extends BaseController{
     
 }
 
