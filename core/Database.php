@@ -35,21 +35,17 @@ final class Database{
     }  
     public function search(){
        try {
-        $sql = 'SELECT * FROM posts WHERE author = ? && is_published = ? LIMIT ?';
-        $stmt = $this->pdo->prepare($sql);
-        if($stmt){
-            $stmt->execute(['ramin','1',10]);
-            $res = $stmt->fetchAll();
-            $res = json_encode($res,true);
-            Render('index',$res);
-            // foreach($posts as $post){
-            //     print $post->title."<br>";
-            // }
-        }
-       } catch (Exception $e) {
+            $sql = 'SELECT * FROM posts WHERE author = ? && is_published = ? LIMIT ?';
+            $stmt = $this->pdo->prepare($sql);
+            if($stmt){
+                $stmt->execute(['ramin','1',10]);
+                $res = $stmt->fetchAll();
+                $res = json_encode($res,true);
+                return $res;
+            }
+        } catch (Exception $e) {
             $this->error($e);
         }
-
     }
     public function update($object){
         

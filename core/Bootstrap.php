@@ -42,6 +42,7 @@ final class Bootstrap{
      try {
         $requestPath = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO']) : '';
         $requestPathArray = explode('/',$requestPath);
+
         array_shift($requestPathArray);
         $requestPathArray = array_map('trim',$requestPathArray);
         $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
@@ -63,54 +64,43 @@ final class Bootstrap{
      }
     }
     public function dispatcher($type,$route){
-        // print $type."<br>";
-        // print_r($route);
         try {
             if($type==='backend'){
-                $route[0] = $route[0]==='admin'?'dashboard':$route[0];
                 $rr = isset($route[1])?$route[1]:'home';
+                $routeFile = ROOT_PATH."controller/backend/".$route[0].".php";
                 $modelFile = ROOT_PATH."model/backend/".$route[0].".php";
-                $routeFile = ROOT_PATH."route/backend/".$route[0].".php";
-                if(!file_exists($modelFile) || !file_exists($routeFile) ){
+                if(!file_exists($modelFile) && !file_exists($routeFile))
                     return $this->error();
-                }else
-                {
-                    require_once($modelFile);
+                require_once($modelFile);
+                require_once($routeFile);
+                $className = ucwords($route[0]);
+                $instanceController = new $className($rr);
+                $isCallableMethod = array($instanceController,$rr);
+                if(!is_callable($isCallableMethod))
+                    return $this->error();
+                else  call_user_func($isCallableMethod);
+            }
+            else{
+                $route[0] = !isset($route[0])?'home':$route[0];
+                $rr = isset($route[1])?$route[1]:'home';
+                $routeFile = ROOT_PATH."controller/frontend/".$route[0].".php";
+                if(!file_exists($routeFile) )
+                    return $this->error();
+                else{
                     require_once($routeFile);
                     $className = ucwords($route[0]);
-                    $instanceController = new $className;
+                    $instanceController = new $className($rr);
                     $isCallableMethod = array($instanceController,$rr);
-
                     if(!is_callable($isCallableMethod))
                         return $this->error();
                     else  call_user_func($isCallableMethod);
                 }
-         
             }
         } catch (\Throwable $th) {
             return $this->error($th);
         }
-        // try {
-        //     $route = $route?$route:'home';
-        //     if($type ==='backend')
-        //     if(!file_exists(ROOT_PATH."model/".$type."/".$route.".php") || !file_exists(ROOT_PATH."route/".$type."/".$route.".php"))
-        //         return $this->error();
-        //     else{
-        //         require_once(ROOT_PATH."model/".$type."/".$route.".php");
-        //         require_once(ROOT_PATH."route/".$type."/".$route.".php");
-        //         $c = ucwords($route);
-        //         $d = new $c;
-        //         $d->home();
-
-        //     }
-      
-        // } catch (\Throwable $th) {
-        //     return $this->error($th);
-        // }
-      
       
     }
 }
-    // $db = Database::getInstance();
-    // $db->search();
+
 ?>
