@@ -28,7 +28,7 @@ abstract class Backend{
     {
         if($className!=='login'){
             if(!$this->adminIsLogin())
-            $this->Utils->redirect("admin/login");
+            $this->Utils->redirect(PROJECT_URL."admin/login");
         }
        
         

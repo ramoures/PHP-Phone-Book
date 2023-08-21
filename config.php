@@ -7,6 +7,7 @@ define("DB_PASWORD","");
 define("DB_NAME","pdoposts");
 define("ROW_LIMIT",10);
 //Project Informations:
+define("PROJECT_URL","https://localhost/phone_book/");
 define("PROJECT_NAME","Phone-Book");
 define("ADMIN_DIR_NAME","admin");
 define("FRONTEND_THEME_DIR_NAME", "default");

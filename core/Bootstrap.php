@@ -47,7 +47,8 @@ final class Bootstrap{
         $requestPathArray = array_map('trim',$requestPathArray);
         $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
         $type='';
-        if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME){
+ 
+        if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME ){
             //Backend
             $this->initSession();
             $type='backend';
@@ -58,6 +59,7 @@ final class Bootstrap{
             $type='frontend';
             $routeName = $requestPathArray??$requestPathArray;
         }
+        if($requestPathArray[0] !== 'view')
         $this->dispatcher($type,$routeName);
      } catch (\Throwable $th) {
         return $this->error($th);
