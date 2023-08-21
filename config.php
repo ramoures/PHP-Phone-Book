@@ -1,5 +1,6 @@
 <?php
 ini_set("display_errors","on");
+define('YEAR',date('Y'));
 //Database Information:
 define("DB_HOST","localhost");
 define("DB_USER","root");
@@ -7,12 +8,14 @@ define("DB_PASWORD","");
 define("DB_NAME","pdoposts");
 define("ROW_LIMIT",10);
 //Project Informations:
+define("PROJECT_VERSION","0.1 Beta");
 define("PROJECT_URL","https://localhost/phone_book/");
 define("PROJECT_NAME","Phone-Book");
 define("ADMIN_DIR_NAME","admin");
 define("FRONTEND_THEME_DIR_NAME", "default");
 define("BACKEND_THEME_DIR_NAME", "default");
 //Project Setting:
+define("DEFAULT_LANG",'en'); # if not en create file in /lang/fa.php
 define("DEBUG",true);
 define('SSL',true);
 define('DEFAULT_TIMEZONE','ASIA/TEHRAN');

@@ -1,207 +1,19 @@
 
 <!doctype html>
 <html lang="fa" data-bs-theme="auto">
-  <head>
-    <script>
-        /*!
- * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
- * Copyright 2011-2023 The Bootstrap Authors
- * Licensed under the Creative Commons Attribution 3.0 Unported License.
- */
-
-(() => {
-  'use strict'
-
-  const getStoredTheme = () => localStorage.getItem('theme')
-  const setStoredTheme = theme => localStorage.setItem('theme', theme)
-
-  const getPreferredTheme = () => {
-    const storedTheme = getStoredTheme()
-    if (storedTheme) {
-      return storedTheme
-    }
-    dir="ltr"
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  }
-
-  const setTheme = theme => {
-    if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.setAttribute('data-bs-theme', 'dark')
-    } else {
-      document.documentElement.setAttribute('data-bs-theme', theme)
-    }
-  }
-
-  setTheme(getPreferredTheme())
-
-  const showActiveTheme = (theme, focus = false) => {
-    const themeSwitcher = document.querySelector('#bd-theme')
-
-    if (!themeSwitcher) {
-      return
-    }
-
-    const themeSwitcherText = document.querySelector('#bd-theme-text')
-    const activeThemeIcon = document.querySelector('.theme-icon-active use')
-    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-    const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
-
-    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-      element.classList.remove('active')
-      element.setAttribute('aria-pressed', 'false')
-    })
-
-    btnToActive.classList.add('active')
-    btnToActive.setAttribute('aria-pressed', 'true')
-    activeThemeIcon.setAttribute('href', svgOfActiveBtn)
-    const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-    themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-
-    if (focus) {
-      themeSwitcher.focus()
-    }
-  }
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    const storedTheme = getStoredTheme()
-    if (storedTheme !== 'light' && storedTheme !== 'dark') {
-      setTheme(getPreferredTheme())
-    }
-  })
-
-  window.addEventListener('DOMContentLoaded', () => {
-    showActiveTheme(getPreferredTheme())
-
-    document.querySelectorAll('[data-bs-theme-value]')
-      .forEach(toggle => {
-        toggle.addEventListener('click', () => {
-          const theme = toggle.getAttribute('data-bs-theme-value')
-          setStoredTheme(theme)
-          setTheme(theme)
-          showActiveTheme(theme, true)
-        })
-      })
-  })
-})()
-        </script>
-
+<head>
+    <script src="{{media_url}}/js/color.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.115.4">
-    <title>Signin Template · Bootstrap v5.3</title>
-
+    <meta name="author" content="">
+    <meta name="generator" content="PHP Phone Book - github.com/ramoures/phone_book">
+    <title>PHP Phone Book</title>
     <link href="{{media_url}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{media_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
-
-
-<meta name="theme-color" content="#712cf9">
-
-
-    <style>
-        
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
-      html,
-body {
-  height: 100%;
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 1rem;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-</style>
-
-    
-    <!-- Custom styles for this template -->
-  </head>
+    <link href="{{media_url}}/css/app.css" rel="stylesheet">
+    <meta name="theme-color" content="#712cf9">
+</head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
@@ -218,9 +30,8 @@ body {
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
-
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+      <button class="btn btn-primary py-2 dropdown-toggle d-flex align-items-center"
               id="bd-theme"
               type="button"
               aria-expanded="false"
@@ -253,35 +64,30 @@ body {
         </li>
       </ul>
     </div>
-
-
-<main class="form-signin w-100 m-auto">
+<main class="form-signin w-100 m-auto bg-body rounded-4">
 <div class="d-flex mb-3 text-primary justify-content-center align-items-center gap-2 fs-1">    
     <i class="bi  bi-person-rolodex"></i> Phone Book
 </div>
   <form>
-
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
-
-    <div class="form-check text-start my-3">
-      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Remember me
-      </label>
-    </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="form-check text-start my-3">
+        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Remember me
+        </label>
+      </div>
+      <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+      <div class="mt-4 small text-body-secondary text-center">© {{constant('YEAR')}} Your Company, Inc</div>
   </form>
 </main>
 <script src="{{media_url}}/js/bootstrap.bundle.min.js"></script>
-
-    </body>
+</body>
 </html>
