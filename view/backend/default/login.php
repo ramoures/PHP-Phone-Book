@@ -20,7 +20,7 @@
     if (storedTheme) {
       return storedTheme
     }
-
+    dir="ltr"
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   }
 
@@ -92,7 +92,7 @@
     <meta name="generator" content="Hugo 0.115.4">
     <title>Signin Template · Bootstrap v5.3</title>
 
-    <link href="<?php print $data['media_url'] ?>/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="<?php print $data['media_url'] ?>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php print $data['media_url'] ?>/css/bootstrap-icons.min.css" rel="stylesheet">
 
 
@@ -197,7 +197,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-    </style>
+</style>
 
     
     <!-- Custom styles for this template -->

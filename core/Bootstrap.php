@@ -59,7 +59,6 @@ final class Bootstrap{
             $type='frontend';
             $routeName = $requestPathArray??$requestPathArray;
         }
-        if($requestPathArray[0] !== 'view')
         $this->dispatcher($type,$routeName);
      } catch (\Throwable $th) {
         return $this->error($th);

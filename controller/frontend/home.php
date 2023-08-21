@@ -2,7 +2,9 @@
 
 class Home extends Frontend{
     public function home(){
-       print "front home";
+        $object['media_url'] = PROJECT_URL."view/assets";
+
+        $this->Render('home',$object);
     }
 }
 ?>
