@@ -1,22 +1,12 @@
 <?php
-abstract class Backend{
-    protected $Utils;
-    protected $DB;
+abstract class Backend extends Base{
+
     public function __construct($className) {
-        $this->Utils = Utils::getInstance();
-        $this->DB = Database::getInstance();
+        parent::__construct($className);
         $this->checkAuth($className);
+        parent::initTwig('backend');
     }
-    public function Render($filePath,$res){
-        $data = $res;
-        include_once(ROOT_PATH."view/backend/".BACKEND_THEME_DIR_NAME."/$filePath.php");
-    }
-    // public function getAdminProfile()
-    // {
-    //     $q = $this->DB->get();
-    //     return $this->Utils->decode($q);
-       
-    // }
+   
     public function adminIsLogin()
     {
         if(isset($_SESSION['admin_id']))

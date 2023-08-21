@@ -1,8 +1,11 @@
 <?php
-abstract class Frontend{
-    public function Render($filePath,$res=''){
-        $data = $res??'';
-        include_once(ROOT_PATH."view/frontend/".BACKEND_THEME_DIR_NAME."/$filePath.php");
+abstract class Frontend extends Base{
+
+    public function __construct($className) {
+        parent::__construct($className);
+        parent::initTwig('frontend');
     }
+   
+
 }
 ?>

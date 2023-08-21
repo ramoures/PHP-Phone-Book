@@ -83,18 +83,18 @@
       })
   })
 })()
-        </script>
+</script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.115.4">
-    <title>Offcanvas navbar template · Bootstrap v5.3</title>
+    <title>Phonebook</title>
 
 
-    <link href="<?php print $data['media_url'] ?>/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php print $data['media_url'] ?>/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{media_url}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{media_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
 
 <meta name="theme-color" content="#712cf9">
 
@@ -287,21 +287,26 @@ body {
         </li>
       </ul>
     </div>
-
-
-
-
 <main class="container">
-  <div class="d-flex gap-2 align-items-center justify-content-between p-3 my-3 text-white bg-primary rounded shadow-sm">
-    <div class="flex-fill d-flex gap-2 align-items-center">
-    <i class="bi fs-2 bi-person-rolodex"></i>
-    <h1 class="h2 mb-0 text-white lh-1">Phone Book</h1>
+  <div class="d-flex align-items-center justify-content-between p-1 p-sm-3 my-3 text-white bg-primary rounded shadow-sm">
+    <div class="flex-fill d-flex gap-2 align-items-center ms-2 ms-md-0">
+        <i class="bi fs-2 bi-person-rolodex"></i>
+        <h1 class="h2 mb-0 text-white lh-1">Phone Book</h1>
     </div>
-     <button class="btn text-white py-0">
-            <i class="bi bi-search fs-3 py-0"></i>
-        </button>
+    <div class="d-flex">
+    <button class="btn btn-primary d-flex gap-2">
+        <i class="bi bi-search"></i>
+        <span class="d-none d-md-block">Search</span>
+    </button>
+    <button class="btn btn-primary d-flex gap-2">
+    <i class="bi bi-translate"></i>En
+    </button>   
+    </div>
+    <!--<button class="btn btn-primary">
+        Login
+    </button>-->
     <div class="position-relative col d-none">
-        <input type="text" class="form-control  pe-4" placeholder="Search..." aria-label="Search">
+        <input type="text" class="form-control pe-4" placeholder="Search..." aria-label="Search">
         <button class="btn btn-link position-absolute top-0 end-0 lh-1 py-0 mt-2">
             <i class="bi bi-search"></i>
         </button>
@@ -309,72 +314,123 @@ body {
   </div>
 
   <div class="row-cols-2 d-flex gap-4 my-3 bg-body rounded border shadow-sm">
-  <div class="col-auto border-end p-3" style="max-width:200px">
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          All
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          Customers
-        </a>
-      </li>
-    </ul>
-    </div>
-    <div class="col flex-fill pe-3 pt-4">
-    <h6 class="border-bottom pb-2 mb-0">All in phonebook</h6>
-    <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-      <p class="pb-3 mb-0 small lh-sm border-bottom">
-        <strong class="d-block text-gray-dark">@username</strong>
-        Some representative placeholder content, with some information about this user. Imagine this being some sort of status update, perhaps?
-      </p>
-    </div>
-    <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-      <p class="pb-3 mb-0 small lh-sm border-bottom">
-        <strong class="d-block text-gray-dark">@username</strong>
-        Some more representative placeholder content, related to this other user. Another status update, perhaps.
-      </p>
-    </div>
-    <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"/><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-      <p class="pb-3 mb-0 small lh-sm border-bottom">
-        <strong class="d-block text-gray-dark">@username</strong>
-        This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
-      </p>
-    </div>
-    
-    <nav class="mt-5" aria-label="Page navigation">
-        <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
+    <div class="d-none d-md-block col-auto border-end p-3" style="max-width:200px">
+        <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="#" class="nav-link active" aria-current="page">
+            All
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+                University
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+            Corporation
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+            Goverment
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link link-body-emphasis">
+            Customers
+            </a>
+        </li>
         </ul>
-    </nav>
+        </div>
+        <div class="col flex-fill ps-3 ps-md-0 pe-3 ">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3 mt-3">
+            <h4 class="p-0 m-0 mt-1">All Phone Numbers</h4>
+            <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
+        </div>
+        <div class="row d-grid gap-3">
+        <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
+            <div class="d-grid d-md-flex gap-2 justify-content-between align-items-center">
+                <div class="d-flex h-100">
+                    <div class="rounded-3 me-2 d-flex justify-content-center align-items-center text-white" style="background-color: #fd7e14;width:84px;height:84px;">
+                        <span class="rounded-circle bg-white text-dark d-flex justify-content-center align-items-center" style="width:54px;height:54px;">R</span>
+                    </div>
+                    <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
+                        <strong class="d-block text-gray-dark">Name</strong>
+                        <div >Description</div>
+                        <div >09359627253</div>
+                    </div>
+                </div>
+                <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
+                    <div class="fw-bold text-secondary"> Address:</div>
+                    This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
+                </div>
+            </div>
+        </div>    
+        <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
+            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="84" height="84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>R</title><rect width="100%" height="100%" fill="#e83e8c"/>
+                <text x="50%" y="50%" fill="#fff" dy=".3em">R</text>
+            </svg>
+            <div class="d-flex gap-2 justify-content-between align-items-center">
+                <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
+                    <strong class="d-block text-gray-dark">Name</strong>
+                    <div >Description</div>
+                    <div >09359627253</div>
+                </div>
+                <div class="flex-fill ps-4">
+                <div class="fw-bold text-secondary"> Address:</div>
+                This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
+                </div>
+            </div>
+        </div>    
+        <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
+            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="84" height="84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>R</title><rect width="100%" height="100%" fill="#6f42c1"/>
+                <text x="50%" y="50%" fill="#fff" dy=".3em">R</text>
+            </svg>
+            <div class="d-flex gap-2 justify-content-between align-items-center">
+                <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
+                    <strong class="d-block text-gray-dark">Name</strong>
+                    <div>Title</div>
+                    <div>09359627253</div>
+                </div>
+                <div class="flex-fill ps-4">
+            
+            </div>
+        </div>    
+        </div>
+        <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
+            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="84" height="84" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>R</title><rect width="100%" height="100%" fill="#198754"/>
+                <text x="50%" y="50%" fill="#fff" dy=".3em">R</text>
+            </svg>
+            <div class="d-flex gap-2 justify-content-between align-items-center">
+                <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
+                    <strong class="d-block text-gray-dark">Name</strong>
+                    <div >Description</div>
+                    <div >09359627253</div>
+                </div>
+                <div class="flex-fill ps-4">
+                <div class="fw-bold text-secondary"> Address:</div>
+                This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
+                </div>
+            </div>
+        </div>    
+   
+        <nav class="mt-2 pb-2" aria-label="Page navigation">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
    
   </div>
@@ -394,9 +450,9 @@ body {
     </ul>
   </footer>
 </div>
-<div class="d-flex gap-2 justify-content-center">Created by: <a href="https://github.com/ramoures">github.com/ramoures</a> . Licence</div>
+<div class="d-flex gap-2 p-3 justify-content-start justify-content-md-center ">Created by: <a href="https://github.com/ramoures">github.com/ramoures</a> . Licence</div>
 
-<script src="<?php print $data['media_url'] ?>/js/bootstrap.bundle.min.js"></script>
+<script src="{{media_url}}/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
