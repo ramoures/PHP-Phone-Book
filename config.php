@@ -15,7 +15,7 @@ define("ADMIN_DIR_NAME","admin");
 define("FRONTEND_THEME_DIR_NAME", "default");
 define("BACKEND_THEME_DIR_NAME", "default");
 //Project Setting:
-define("DEFAULT_LANG",'en'); # if not en create file in /lang/fa.php
+define("DEFAULT_LANG",'en'); # cookie set before
 define("DEBUG",true);
 define('SSL',true);
 define('DEFAULT_TIMEZONE','ASIA/TEHRAN');

@@ -8,6 +8,7 @@ class Admin extends Backend{
     public function login(){
  
         $object['media_url'] = PROJECT_URL."view/assets";
+
         $this->Render('login',$object);
     }
     public function home(){

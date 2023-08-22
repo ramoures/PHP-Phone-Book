@@ -5,12 +5,14 @@ abstract class Base{
     protected $templatePath;
     protected $twigLoader;
     protected $twig;
+    protected $language;
     protected $lang;
     public function __construct($className) {
-        if(file_exists(ROOT_PATH.'lang/'.DEFAULT_LANG.'.php'))
-            require_once(ROOT_PATH.'lang/'.DEFAULT_LANG.'.php');
-        $this->lang = $lang??'';
         $this->Utils = Utils::getInstance();
+        $this->language = $this->Utils->getLang()??DEFAULT_LANG;
+        if(file_exists(ROOT_PATH.'lang/'. $this->language .'.php'))
+            require_once(ROOT_PATH.'lang/'. $this->language .'.php');
+        $this->lang = $lang??'';
         $this->DB = Database::getInstance();
     }
     public function license(){

@@ -12,6 +12,17 @@ final class Utils{
         header("Location:$url");
         die;
     }
+    public function getLang(){
+        if(isset($_COOKIE["phone_book_lang"])){
+            $cookie = $this->encode($_COOKIE["phone_book_lang"]);
+            if(is_numeric($cookie) || strlen($cookie)>2)
+                return 'en';
+            else
+                return strtolower($cookie);
+        }
+        else
+            return null;
+    }
     public function post($key){
         if(isset($_POST[$key]) && !is_array($_POST[$key]))
             return trim($_POST[$key]);
