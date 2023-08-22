@@ -1,0 +1,79 @@
+{% extends "layouts/structure.html" %}
+{% block title %}{{'Phone Book'|lang}}{% endblock %}
+{% block content %}
+    
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Book'|lang}}</h1></div>
+        <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-center">
+            <div dir="ltr" class="d-flex">
+                <button class="btn btn-link lh-1">
+                    <i class="bi bi-search" ></i>
+                </button>
+                <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
+            </div>
+            <button class="btn btn-lg btn-success d-flex gap-2 fw-bold">
+                <i class="bi bi-plus-lg"></i>
+                {{'Add'|lang}} 
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped faDigits">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{'Nickname'|lang}}</th>
+                <th scope="col">{{'Full name'|lang}}</th>
+                <th scope="col">{{'Phone numbers'|lang}}</th>
+                <th scope="col">{{'Address'|lang}}</th>
+                <th scope="col">{{'Date & Time'|lang}}</th>
+                <th scope="col">{{'Operation'|lang}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>
+                    <div class="d-flex gap-3">
+                        <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
+                        <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>sadasd</td>
+                <td>
+                    <div class="d-flex gap-3 ">
+                        <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
+                        <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+       
+    </div>
+    <div class="d-flex justify-content-center">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+                <a class="page-link">{{'Previous'|lang}}</a>
+            </li>
+            
+            <li class="page-item">
+                <a class="page-link" href="#">{{'Next'|lang}}</a>
+            </li>
+        </ul>
+    </div>
+  </main>
+  {% endblock content %}

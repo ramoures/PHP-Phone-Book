@@ -1,22 +1,21 @@
-{% extends "layouts/structure.twig" %}
-{% block title %}{{'All'|lang}}{% endblock %}
+{% extends "layouts/structure.html" %}
+{% block title %}{{'All Phone Numbers'|lang}}{% endblock %}
 {% block content %}
 <main class="row-cols-2 d-flex gap-4 my-3 bg-body rounded border shadow-sm">
-  {% include('layouts/sidebar.twig') %}
-  <section id="content" class="col flex-fill ps-3 ps-md-0 pe-3 ">
+  <section id="content" class="col flex-fill px-3 ">
       <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3 mt-3">
-          <div class="d-flex gap-2">
-          <h4 class="p-0 m-0 mt-1">{{'All Phone Numbers'|lang}}</h4>
-          <a class="d-block d-md-none p-0 m-0 btn btn-link rounded-1"><i class="bi fs-3 lh-sm text-primary bi-funnel"></i></a>
-          </div>
-          <div>
+        <div class="d-flex gap-2 flex-fill">
+            <h4 class="p-0 m-0 mt-1">{{'Last Phone Numbers'|lang}}</h4>
+            <a class="d-block d-md-none p-0 m-0 btn btn-link rounded-1"><i class="bi fs-3 lh-sm text-primary bi-funnel"></i></a>
+        </div>
+        <div class="col-auto">
             <select class="d-none d-md-block form-select">
-              <option>{{'Latest'|lang}}</option>
-              <option>{{'A to Z'|lang}}</option>
-              <option>{{'Z to A'|lang}}</option>
+                <option>{{'Latest'|lang}}</option>
+                <option>{{'A to Z'|lang}}</option>
+                <option>{{'Z to A'|lang}}</option>
             </select>
-          </div>
-          <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
+        </div>
+        <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
       </div>
       <div class="row d-grid gap-3">
           <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
@@ -26,14 +25,14 @@
                           <span class="rounded-circle bg-white text-dark d-flex justify-content-center align-items-center" style="width:54px;height:54px;">R</span>
                       </div>
                       <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
-                          <strong class="d-block text-gray-dark">Name</strong>
-                          <div>Description</div>
-                          <div>09359627253</div>
+                          <strong class="d-block text-gray-dark">Nickname</strong>
+                          <div>Full Name</div>
+                          <h4 class="fw-normal">09359627253</h4>
                       </div>
                   </div>
                   <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
                       <div class="fw-bold text-secondary"> {{'Address'|lang}}:</div>
-                      This user also gets some representative placeholder content. Maybe they did something interesting, and you really want to highlight this in the recent updates.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta tempora laboriosam alias assumenda voluptate minus minima, nesciunt sunt neque tenetur!
                   </div>
               </div>
           </div>      
@@ -43,9 +42,7 @@
               <li class="page-item disabled">
                   <a class="page-link">{{'Previous'|lang}}</a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              
               <li class="page-item">
                   <a class="page-link" href="#">{{'Next'|lang}}</a>
               </li>

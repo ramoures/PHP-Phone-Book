@@ -35,14 +35,6 @@ final class Utils{
         else
         return null;
     }
-    public function isEmailValid($email){
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
-    }
-    
-    public function makeHash($str):string
-    {
-        return $str ? sha1(SECRET_KEY.$str."dv%".SECRET_KEY."a%w") : '';
-    }
     public function safeString($str):string
     {
         return $str ? htmlentities(addslashes($str), ENT_QUOTES, 'UTF-8') : '';
@@ -80,6 +72,7 @@ final class Utils{
         }
         return $data ? html_entity_decode(stripslashes($data),ENT_QUOTES,'UTF-8') : '';
     }
+    
 }
 
 ?>

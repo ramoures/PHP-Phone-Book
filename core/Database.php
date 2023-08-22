@@ -32,6 +32,27 @@ final class Database{
     }
     public function read($object){
         
+    }
+    public function getRow($tableName,$where){
+        try {
+            $sql = "SELECT id FROM $tableName WHERE username = ? AND password = ?";
+            $stmt = $this->pdo->prepare($sql);
+            if($stmt){
+                $stmt->execute($where);
+                $res = $stmt->fetchAll();
+                if(count($res)>0){
+                    $res = json_encode($res,true);
+                    return $res;
+                }
+                else
+                 return false;
+              
+            }
+            else
+                return false;
+        } catch (Exception $e) {
+            return false;
+        }
     }  
     public function search(){
        try {

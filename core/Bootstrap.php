@@ -67,7 +67,7 @@ final class Bootstrap{
     public function dispatcher($type,$route){
         try {
             if($type==='backend'){
-                $rr = isset($route[1])?$route[1]:'home';
+                $param = isset($route[1])?$route[1]:'home';
                 $routeFile = ROOT_PATH."controller/backend/".$route[0].".php";
                 $modelFile = ROOT_PATH."model/backend/".$route[0].".php";
                 if(!file_exists($modelFile) && !file_exists($routeFile))
@@ -75,23 +75,23 @@ final class Bootstrap{
                 require_once($modelFile);
                 require_once($routeFile);
                 $className = ucwords($route[0]);
-                $instanceController = new $className($rr);
-                $isCallableMethod = array($instanceController,$rr);
+                $instanceController = new $className($param);
+                $isCallableMethod = array($instanceController,$param);
                 if(!is_callable($isCallableMethod))
                     return $this->error();
                 else  call_user_func($isCallableMethod);
             }
             else{
                 $route[0] = !isset($route[0])?'home':$route[0];
-                $rr = isset($route[1])?$route[1]:'home';
+                $param = isset($route[1])?$route[1]:'home';
                 $routeFile = ROOT_PATH."controller/frontend/".$route[0].".php";
                 if(!file_exists($routeFile) )
                     return $this->error();
                 else{
                     require_once($routeFile);
                     $className = ucwords($route[0]);
-                    $instanceController = new $className($rr);
-                    $isCallableMethod = array($instanceController,$rr);
+                    $instanceController = new $className($param);
+                    $isCallableMethod = array($instanceController,$param);
                     if(!is_callable($isCallableMethod))
                         return $this->error();
                     else  call_user_func($isCallableMethod);

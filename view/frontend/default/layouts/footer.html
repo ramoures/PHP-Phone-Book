@@ -1,15 +1,18 @@
 <footer class="d-flex px-2 flex-wrap justify-content-between align-items-center py-3 my-4 text-primary border-top border-1 border-primary lh-1">
   <div class="d-flex gap-2 align-items-center justify-content-end">
     <i class="bi fs-3 bi-broadcast"></i>
-    <span  dir="ltr">© {{constant('YEAR')}} Company, Inc</span>
+    <span  dir="ltr">© {{constant('YEAR')}}.</span>
   </div>
   <ul class="nav justify-content-end align-items-center  list-unstyled d-flex gap-2">
     <i class="bi bi-twitter"></i>
     <i class="bi bi-instagram"></i>
-    <i class="bi bi-facebook"></i> . 
+    <i class="bi bi-facebook"></i>
+    {% if sign %}
+    . 
     <a class="bg-secondary text-white px-2 rounded-1 lh-base" href="{{constant('PROJECT_URL')}}admin/login">{{ 'Sign in'|lang }}</a>
+    {% endif %}
   </ul>
 </footer>
 <div dir="ltr" class="d-flex gap-2 p-3 justify-content-start justify-content-md-center">
-    PHP Phone Book (Open Source) . Under MIT Licence . Created by: <a href="https://github.com/ramoures">github.com/ramoures</a>
+     <span class="align-items-center d-flex gap-1">PHP<i class="bi small lh-i bi-heart"></i></span> Phone Book . Licensed MIT  . Created by: <a href="https://github.com/ramoures">github.com/ramoures</a>
 </div>

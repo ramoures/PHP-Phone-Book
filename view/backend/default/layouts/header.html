@@ -1,0 +1,33 @@
+
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+    
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-4 text-white" href="#">{{'PHP Phone Book'|lang}}</a>
+   <div class="d-flex align-items-center">
+    
+    <div class="dropstart me-md-3">
+        <a class="link-body-emphasis bg-body text-decoration-none d-flex gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-translate"></i>{{language}}
+        </a>
+        <ul class="dropdown-menu changeLanguage user-select-none">
+            <li>
+                <button id="en" class="dropdown-item {% if language =='EN' %}active{% endif %} d-flex gap-2 align-items-center">
+                    <span class="bg-body p-1 border rounded-1 lh-1 text-light">EN</span>
+                    {{'English'|lang}}
+                </button>
+            </li>   
+            <li>
+                <button id="fa" class="dropdown-item {% if language =='FA' %}active{% endif %} d-flex gap-2 align-items-center">
+                    <span class="bg-body p-1 border rounded-1 lh-1 text-light">FA</span>
+                    {{'Farsi'|lang}}
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <button class="nav-link px-3 fs-2 me-2 text-white d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+    </button>
+   
+   </div>
+    
+  </header>

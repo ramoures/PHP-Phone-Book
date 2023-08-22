@@ -4,6 +4,7 @@ $lang = [
     "Direction"=>"rtl", #rtl(Right To Left) or ltr(Left To Right)
     //Words:
     "Phone Book"=>"دفترچه تلفن",
+    "PHP Phone Book"=>"دفترچه تلفن با PHP",
 
     "English"=>'انگلیسی',
     "Farsi"=>'فارسی',
@@ -14,7 +15,8 @@ $lang = [
 
     "Please sign in"=>"وارد شوید",
     "Email address"=>"آدرس ایمیل",
-    "Password"=>"رمز عبور",
+    "Username"=>"نام کاربری",
+    "Password"=>"کلمه‌ی عبور",
     "Sign in"=>"ورود",
     
     "All"=>"همه",
@@ -27,5 +29,22 @@ $lang = [
     
     "Previous"=>"قبلی",
     "Next"=>"بعدی",
+
+    "Profile"=>"حساب کاربری",
+    "Add"=>"افزودن",
+    "Add phone number"=>"افزودن شماره‌تلفن",
+    "Sign out"=>"خروج",
+
+    "Signed out successfully."=>"با موفقیت خارج شدید",
+    "َUsername is empty."=>"نام کاربری خالی‌ است.",
+    "Password is empty."=>"رمز عبور خالی است.",
+    "َUser is not valid."=>"کاربر معتبر نیست.",
+
+    "Operation"=>"عملیات",
+    "Date & Time"=>"زمان",
+    "Address"=>"آدرس",
+    "Phone numbers"=>"شماره‌تلفن",
+    "Full name"=>"نام کامل",
+    "Nickname"=>"نام مستعار",
 ];
 ?>
