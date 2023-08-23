@@ -15,18 +15,13 @@ abstract class Base{
         $this->lang = $lang??'';
         $this->DB = Database::getInstance();
     }
-    public function adminIsSigned()
-    {
-        if(isset($_SESSION['admin_id']))
-            return true;
-        else
-            return false;
-    }
+    
     public function license(){
         print "/*
-        Powered by: DD CMS ".PROJECT_VERSION.". Created by: Ramin Moradi espili.
+        Powered by: PHP Phone Book ".PROJECT_VERSION.". Created by: Ramin Moradi espili.
         @ramoures (linkdin github gmail telegram instagram facebook twitter)
-        Copyright ".YEAR.". All right reserved.
+        License under the MIT.
+        github.com/ramoures
         www.awaweb.ir
         */\n";
     }

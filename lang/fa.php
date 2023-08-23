@@ -31,6 +31,7 @@ $lang = [
     "Next"=>"بعدی",
 
     "Profile"=>"حساب کاربری",
+    "Admin panel"=>"پنل مدیریت",
     "Add"=>"افزودن",
     "Add phone number"=>"افزودن شماره‌تلفن",
     "Sign out"=>"خروج",

@@ -9,7 +9,12 @@ abstract class Backend extends Base{
     }
    
    
-
+    protected function adminIsSigned(){
+        if(isset($_SESSION['admin_id']))
+            return true;
+        else
+            return false;
+    }
     public function setVar($path,$key,$value)
     {
         $_SESSION[$path][$key] = $value;

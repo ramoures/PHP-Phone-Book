@@ -47,7 +47,7 @@ final class Bootstrap{
         $requestPathArray = array_map('trim',$requestPathArray);
         $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
         $type='';
- 
+
         if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME ){
             //Backend
             $this->initSession();
@@ -67,7 +67,7 @@ final class Bootstrap{
     public function dispatcher($type,$route){
         try {
             if($type==='backend'){
-                $param = isset($route[1])?$route[1]:'home';
+                $param = isset($route[1])?$route[1]:'dashboard';
                 $routeFile = ROOT_PATH."controller/backend/".$route[0].".php";
                 $modelFile = ROOT_PATH."model/backend/".$route[0].".php";
                 if(!file_exists($modelFile) && !file_exists($routeFile))
@@ -83,7 +83,7 @@ final class Bootstrap{
             }
             else{
                 $route[0] = !isset($route[0])?'home':$route[0];
-                $param = isset($route[1])?$route[1]:'home';
+                $param = isset($route[1])?$route[1]:'index';
                 $routeFile = ROOT_PATH."controller/frontend/".$route[0].".php";
                 if(!file_exists($routeFile) )
                     return $this->error();

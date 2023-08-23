@@ -1,13 +1,12 @@
 <?php
 
 class Home extends Frontend{
-    
-    public function home(){
+
+    public function index(){
         $object['language'] = strtoupper($this->language);
         $object['media_url'] = PROJECT_URL."view/assets";
-        $object['sign'] = $this->adminIsSigned();
 
-        $this->Render('home',$object);
+        $this->Render('index',$object);
     }
 }
 ?>

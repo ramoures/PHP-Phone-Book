@@ -31,7 +31,7 @@ class Admin extends Backend{
                 if($resultSignin){
                     $this->delVar('username');
                     if($this->adminIsSigned())
-                        $this->Utils->redirect(PROJECT_URL."admin");
+                        $this->Utils->redirect(PROJECT_URL."admin/phone_book");
                 }
                 else
                     $this->Utils->redirect(PROJECT_URL."admin/signin?msg=err3");
@@ -43,11 +43,17 @@ class Admin extends Backend{
 
         $this->Render('signin',$this->object);
     }
-    public function home(){
+    public function dashboard(){
+        $this->Utils->redirect(PROJECT_URL."admin/phone_book");
+    }
+    public function phone_book(){
         $this->Render('phoneBook',$this->object);
-    } 
-    public function add(){
+    }
+    public function add_phone_number(){
         $this->Render('add',$this->object);
+    }
+    public function profile(){
+        $this->Render('profile',$this->object);
     }
     public function signout(){
         unset($_SESSION['admin_id']);
