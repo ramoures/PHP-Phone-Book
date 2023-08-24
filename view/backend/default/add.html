@@ -1,14 +1,124 @@
 {% extends "layouts/structure.html" %}
 {% block title %}{{'Add phone number'|lang}}{% endblock %}
 {% block content %}
-    
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<script>
+function invalidElement(id){
+    document.addEventListener("DOMContentLoaded", () => {
+        const element = document.getElementById(id);
+        element.classList.add("is-invalid");
+    });
+}
+</script>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-12 col-md-auto"><h1 class="h2">{{'Add phone number'|lang}}</h1></div>
        
     </div>
-    <div class="">
-        ss
+    <div class="col-12 col-md-9 col-lg-6 col-xl-4">
+        {% if status==1 %}
+            <div class="alert alert-danger">
+                {{'CSRF Token is not valid!'|lang}}
+            </div>
+        {% elseif status==2 %}
+            <div class="alert alert-danger">
+                {{'Please enter nickname.'|lang}}
+                <script>
+                   invalidElement('nickname')
+                </script>
+            </div>
+        {% elseif status==3 %}
+            <div class="alert alert-danger">
+                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
+                <script>
+                   invalidElement('phoneNumbers0')
+                </script>
+            </div>
+        {% elseif status==4 %}
+            <div class="alert alert-danger">
+                {{'Nickname is already exist.'|lang}}
+                <script>
+                   invalidElement('nickname')
+                </script>
+            </div>
+        {% elseif status==5 %}
+            <div class="alert alert-danger">
+                {{'Some of the phone numbers are duplicates.'|lang}}
+            </div>
+        {% elseif status==6 %}
+            <div class="alert alert-danger">
+                {{'Phone Number is already exist.'|lang}}
+                <script>
+                    invalidElement('phoneNumbers{{invalidKey}}')
+                 </script>
+            </div>
+        {% elseif status==7 %}
+            <div class="alert alert-danger">
+                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
+                <script>
+                   invalidElement('phoneNumbers{{invalidKey}}')
+                </script>
+            </div>
+        {% elseif status==8 %}
+            <div class="alert alert-danger">
+                {{'Error! Try again later.'|lang}}
+            </div>
+        {% elseif status==9 %}
+        <div class="alert alert-success">
+            {{'Submission Successful!'|lang}}
+        </div>
+        {% endif %}
+        <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
+            <input type="hidden" name="token" value="{{csrf_token}}">
+            <div class="mb-3">
+                <label for="nickname" class="form-label">{{'Nickname'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input type="text" name="nickname" class="form-control fs-5" id="nickname" value="{{form_info.nickname}}" required>
+                <div class="invalid-feedback">
+                    {{'Please enter nickname.'|lang}}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="fullname" class="form-label">{{'Full name'|lang}}</label>
+                <input type="text" name="full_name" class="form-control fs-5" id="fullname" value="{{form_info.full_name}}">
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumbers0" class="form-label phoneNumberLabel">{{'Phone number'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                    <div class="d-grid gap-2 flex-fill">
+                        <div class="flex-fill position-relative">
+                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" required>
+                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2 firstNumber d-none">1</div>
+                            <div class="invalid-feedback">
+                                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
+                            </div>
+                        </div>
+                      
+                        {% for key,item in form_info.phone_numbers|slice(1,555555555) %}
+                        <div class="d-flex">
+                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers{{key+1}}" value="{{item}}">
+                            <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
+                        </div>
+                        {% endfor %}
+                        <div>
+                            <a class="btn btn-link p-0 text-decoration-none addField">
+                                <i class="bi bi-plus-lg"></i>
+                                {{'add new field'|lang}}
+                            </a>
+                        </div>
+
+                    </div>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">{{'Address'|lang}}</label>
+                <textarea name="address" class="form-control fs-5" id="address" rows="5">{{form_info.address}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">{{'Image'|lang}}</label>
+                <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off">
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="submit" name="btn_submit" class="btn fs-5 btn-primary">{{'Submit'|lang}}</button>
+                <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
+            </div>
+          </form>
       
        
     </div>

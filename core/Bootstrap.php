@@ -6,8 +6,7 @@ final class Bootstrap{
         $this->init();
         $this->routing();
     }
-
-    public function errorReporting(){
+    private function errorReporting(){
         // error_reporting(-1);
         if(DEBUG)
             ini_set("display_errors",1); //develop mode
@@ -23,7 +22,6 @@ final class Bootstrap{
         ob_start();
     }
     private function initSession(){
-       
         if(isset($_COOKIE[SESSION_NAME])){
             if(!preg_match('/^[a-zA-Z0-9]{1,40}$/',$_COOKIE[SESSION_NAME]))
                 die('Security error!');
@@ -38,16 +36,14 @@ final class Bootstrap{
             session_start();
         }
     }
-    public function routing(){
+    private function routing(){
      try {
         $requestPath = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO']) : '';
         $requestPathArray = explode('/',$requestPath);
-
         array_shift($requestPathArray);
         $requestPathArray = array_map('trim',$requestPathArray);
         $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
         $type='';
-
         if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME ){
             //Backend
             $this->initSession();
@@ -64,19 +60,32 @@ final class Bootstrap{
         return $this->error($th);
      }
     }
-    public function dispatcher($type,$route){
+    private function convertString($str) : string {
+        $str = explode('_',$str);
+        $str = array_map(function ($str){return ucwords($str); }, array_values($str));
+        $str = implode($str);
+        return lcfirst($str);
+    }
+    private function dispatcher($type,$route){
         try {
             if($type==='backend'){
-                $param = isset($route[1])?$route[1]:'dashboard';
-                $routeFile = ROOT_PATH."controller/backend/".$route[0].".php";
-                $modelFile = ROOT_PATH."model/backend/".$route[0].".php";
+                if(count($route)>3)
+                    return $this->error();
+                $file = isset($route[2])?$route[2]:'home';
+                $folder = $this->convertString(isset($route[1])?$route[1]:$route[0]);
+                $file = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'home':$file;
+                $folder = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'admin':$folder;
+                $routeFile = ROOT_PATH."controller/backend/".$folder."/".$file.".php";
+                $modelFile = ROOT_PATH."model/backend/".$folder."/".$file.".php";
                 if(!file_exists($modelFile) && !file_exists($routeFile))
                     return $this->error();
                 require_once($modelFile);
                 require_once($routeFile);
-                $className = ucwords($route[0]);
-                $instanceController = new $className($param);
-                $isCallableMethod = array($instanceController,$param);
+                $params = $this->convertString(count($route)===3?$route[count($route)-1]."_".$route[count($route)-2]:$route[count($route)-1]);
+                $className = ucwords($params);
+                $className = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'Admin':$className;
+                $instanceController = new $className($params);
+                $isCallableMethod = array($instanceController,$params);
                 if(!is_callable($isCallableMethod))
                     return $this->error();
                 else  call_user_func($isCallableMethod);
@@ -100,7 +109,6 @@ final class Bootstrap{
         } catch (\Throwable $th) {
             return $this->error($th);
         }
-      
     }
 }
 

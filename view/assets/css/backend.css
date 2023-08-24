@@ -10,7 +10,7 @@
   
   @media (min-width: 768px) {
     .sidebar{
-      height: 100vh !important;
+      min-height: 100vh !important;
     }
     .sidebar .offcanvas-lg {
       position: -webkit-sticky;

@@ -38,8 +38,7 @@ abstract class Base{
 
         
     }
-    public function Render($file,$data=array()) // render twig
-    {
+    public function Render($file,$data=array()){
         $twigFile = $file.'.html';
         $filePath = $this->templatePath.$twigFile;
         if(file_exists($filePath))

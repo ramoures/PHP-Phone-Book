@@ -25,11 +25,11 @@ define('SAULT_ORDER',[3,0,1,2]);
 
 define('SESSION_NAME',PROJECT_NAME);
 
-//Backend Pages Setting
+##Backend Pages Setting
 define("B_DEFAULT_LANG",'en');
 define("B_LIMIT",'10'); 
 
-//Frontend Pages Setting
+##Frontend Pages Setting
 define("DEFAULT_LANG",'en'); # cookie set before
 define("LIMIT",'10'); # Limit post per pages
 
