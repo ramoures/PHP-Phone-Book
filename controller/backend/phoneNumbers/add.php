@@ -20,6 +20,7 @@ class AddPhoneNumbers extends Backend{
                     if (!$_POST['token'] || $_POST['token'] !== $_SESSION['token'])
                         $this->object['status']=1;
                     else{
+                        $phoneNumbersPattenr = "/^".PHONE_NUMBER_PATTERN."$/";
                         $nickname=$this->Utils->safeString($this->Utils->post('nickname'));
                         $fullName=$this->Utils->safeString($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
@@ -46,7 +47,7 @@ class AddPhoneNumbers extends Backend{
                                     $this->object['invalidKey']=$key;
                                 }
                                 else
-                                if(!is_numeric($phone_numbers[$key]) || !preg_match("/^[0-9]{11}$/",$phone_numbers[$key])){
+                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key])){
                                     $this->object['status']=7;
                                     $this->object['invalidKey']=$key;
                                 }

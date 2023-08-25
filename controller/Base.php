@@ -16,15 +16,6 @@ abstract class Base{
         $this->DB = Database::getInstance();
     }
     
-    public function license(){
-        print "/*
-        Powered by: PHP Phone Book ".PROJECT_VERSION.". Created by: Ramin Moradi espili.
-        @ramoures (linkdin github gmail telegram instagram facebook twitter)
-        License under the MIT.
-        github.com/ramoures
-        www.awaweb.ir
-        */\n";
-    }
     protected function initTwig($mode) //call twig
     {
         $this->templatePath = ROOT_PATH.'view/'.$mode.'/default/';

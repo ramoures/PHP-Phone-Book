@@ -33,11 +33,12 @@ function filedNumber(){
 
 $('.addField').on('click',function(){
     $('.firstNumber').removeClass('d-none');
-    $('#phoneNumbers0').addClass('pe-5')
+    $('#phoneNumbers0').addClass('pe-5');
+    let patern = $('#phoneNumbers0').attr('pattern');
     var html = `
         <div class="d-flex">
         <div class="position-relative flex-fill">
-            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5">
+            <input type="tel" pattern="${patern}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5">
             <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2"></div>
         </div>
         <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>

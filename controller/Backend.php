@@ -41,25 +41,23 @@ abstract class Backend extends Base{
         $sault = $secretSault[$saultOrder[0]].$str.SECRET_KEY.$secretSault[$saultOrder[1]].SECRET_KEY.SECRET_KEY.$secretSault[$saultOrder[2]].$str.$secretSault[$saultOrder[3]].SECRET_KEY;
         return hash('sha256',$sault);
     }
-    private function uploadImage($fieldName,$path,$maxSize=3145728){
+    private function uploadImage($fieldName,$path){
         try {
             $error = $_FILES[$fieldName]['error'];
             $tmp_name = $_FILES[$fieldName]['tmp_name'];
             $fileSize = $_FILES[$fieldName]['size'];
             $fileName = hash('sha256',date('YmdHis').mt_rand(1000000,9999999).date('YmdHis'));
             if($error === 0){
-                $allowFiles = array('image/jpg'=>'jpg','image/jpeg'=>'jpeg','image/png'=>'png');
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $mime = finfo_file($finfo, $tmp_name);
-                $index = array_search($mime,array_keys($allowFiles));
+                $index = array_search($mime,array_keys(ALLOW_FILES_TYPE));
                 if($index !== false){
                     $isImg = getimagesize($tmp_name);
                     if(is_array($isImg) && count($isImg) > 0 ){
-                        if($maxSize > 0)
-                            if($fileSize > $maxSize)
-                                return -6; //file is big
+                        if($fileSize > MAX_FILE_SIZE)
+                            return -6; //file is big
                         $newFileName = $fileName;
-                        $newFileName .= ".".$allowFiles[$mime];
+                        $newFileName .= ".".ALLOW_FILES_TYPE[$mime];
                         $move = move_uploaded_file($tmp_name,"$path/$newFileName");
                         if($move)
                             return $newFileName;
