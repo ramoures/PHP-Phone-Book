@@ -47,7 +47,7 @@ define("B_LIMIT",'6');
 
 ##Frontend Pages Setting
 define("DEFAULT_LANG",'en'); # cookie set before
-define("LIMIT",'10'); # Limit post per pages
+define("LIMIT",'4'); # Limit post per pages
 
 
 ?>
