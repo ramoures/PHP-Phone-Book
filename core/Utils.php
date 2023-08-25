@@ -13,20 +13,10 @@ final class Utils{
         header("Location:$url");
         die;
     }
-    public function backendGetLang(){
-        if(isset($_COOKIE["phone_book_b_lang"])){
-            $cookie = $this->encode($_COOKIE["phone_book_b_lang"]);
-            if(is_numeric($cookie) || strlen($cookie)>2)
-                return 'en';
-            else
-                return strtolower($cookie);
-        }
-        else
-            return null;
-    }
-    public function getLang(){
-        if(isset($_COOKIE["phone_book_lang"])){
-            $cookie = $this->encode($_COOKIE["phone_book_lang"]);
+    public function getLang($backend=false){
+        $cookieName = $backend?'phone_book_b_lang':'phone_book_lang';
+        if(isset($_COOKIE[$cookieName])){
+            $cookie = $this->encode($_COOKIE[$cookieName]);
             if(is_numeric($cookie) || strlen($cookie)>2)
                 return 'en';
             else
