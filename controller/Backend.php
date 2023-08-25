@@ -8,42 +8,41 @@ abstract class Backend extends Base{
             $this->Utils->redirect(PROJECT_URL."admin/signin");
     }
    
-   
     protected function adminIsSigned(){
         if(isset($_SESSION['admin_id']))
             return true;
         else
             return false;
     }
-    public function setVar($path,$key,$value)
+    protected function setVar($path,$key,$value)
     {
         $_SESSION[$path][$key] = $value;
     }
-    public function getVar($path,$key)
+    protected function getVar($path,$key)
     {
         if(isset($_SESSION[$path][$key]))
             return $_SESSION[$path][$key];
         else
             return null;
     }
-    public function delVarKey($path,$key)
+    protected function delVarKey($path,$key)
     {
         if(isset($_SESSION[$path][$key]))
             unset($_SESSION[$path][$key]);
     }
-    public function delVar($path)
+    protected function delVar($path)
     {
         if(isset($_SESSION[$path]))
             unset($_SESSION[$path]);
     } 
-    public function encrypt($str){
+    protected function encrypt($str){
         $secretSault = SECRET_SAULT??[];
         $saultOrder = SAULT_ORDER??[];
         $sault = $secretSault[$saultOrder[0]].$str.SECRET_KEY.$secretSault[$saultOrder[1]].SECRET_KEY.SECRET_KEY.$secretSault[$saultOrder[2]].$str.$secretSault[$saultOrder[3]].SECRET_KEY;
         return hash('sha256',$sault);
     }
-    public function uploadImage($fieldName,$path,$maxSize=3145728){
-        if(isset($_FILES[$fieldName])){
+    private function uploadImage($fieldName,$path,$maxSize=3145728){
+        try {
             $error = $_FILES[$fieldName]['error'];
             $tmp_name = $_FILES[$fieldName]['tmp_name'];
             $fileSize = $_FILES[$fieldName]['size'];
@@ -65,7 +64,7 @@ abstract class Backend extends Base{
                         if($move)
                             return $newFileName;
                         else
-                            return -5; //upload failed
+                            return -5; //move uploaded file failed
                     }
                     else
                         return -4;//file is not valid
@@ -75,31 +74,29 @@ abstract class Backend extends Base{
             }
             else
                 return -2; //upload failed
+           
+        } catch (\Throwable $th) {
+            return -2;
         }
-        else
-            return -1; //file is not isset
     }
-    public function uploader($folder){
-        if(isset($_FILES['image'])){
-            if(in_array($folder,MEDIA_TITLES)){
-                $fileField= $_FILES['image']['tmp_name'];
-                if($fileField){
-                    $resultUpload = $this->uploadImage('image',MEDIA_PATH."$folder");
-                    if(!is_int($resultUpload)){
-                        $file = $resultUpload;  
-                        return ['status'=>0,'folder'=>$folder,'file'=>$file];
-                    }
+    protected function uploader($fieldName,$folder){
+        try {
+            if(isset($_FILES[$fieldName])){
+                if(in_array($folder,VALID_UPLOAD_DIR_NAMES)){
+                    $fileField= $_FILES[$fieldName]['tmp_name'];
+                    if($fileField)
+                        return $this->uploadImage($fieldName,UPLOAD_PATH."$folder");
                     else
-                        return $resultUpload;
+                        return false; // file temp is not isset
                 }
                 else
-                    return ['status'=>1];
+                    return -2;
             }
             else
-                return -2;
+                return false; // file field is not isset
+        } catch (\Throwable $th) {
+            return false;
         }
-        else
-            return ['status'=>1];;
     }
 }
 ?>

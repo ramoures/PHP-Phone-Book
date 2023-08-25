@@ -51,26 +51,28 @@ class AddPhoneNumbers extends Backend{
                                     $this->object['invalidKey']=$key;
                                 }
                             }
+                            $uploadToDb = null;
                             if(!isset($this->object['status'])){
-                                
-                                $upload = $this->uploader('images');
-                                if(is_array($upload) && isset($upload['status']) && ($upload['status'] === 0 || $upload['status']===1)){
-                                    $data = ['tableName'=>'upload','data'=>['folder'=>$upload['folder'],'name'=>$upload['file'],'alt'=>$nickname]];
-                                    $uploadToDb = $upload['status']===1?true:$this->model->insertData($data);
-                                    if($uploadToDb){
-                                        $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb]];
-                                        $res = $this->model->insertData($obj);
-                                        if($res){
-                                            $_SESSION['form_info']='';
-                                            $this->object['status']=10;
-                                        }
+                                $upload = $this->uploader('image',IMAGES_DIR_NAME);
+                                if(!is_int($upload) && $upload !== false){
+                                    $data = ['tableName'=>'upload','data'=>['folder'=>IMAGES_DIR_NAME,'name'=>$upload,'alt'=>$nickname]];
+                                    $uploadToDb = $this->model->insertData($data);
+                                    if(!$uploadToDb)
+                                        $this->object['status'] = 9;
+                                }
+                                else
+                                if(is_int($upload) && $upload !== false)
+                                    $this->object['status'] = $upload;
+                                if(!isset($this->object['status'])){
+                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb]];
+                                    $res = $this->model->insertData($obj);
+                                    if($res){
+                                        $_SESSION['form_info']='';
+                                        $this->object['status']=10;
                                     }
                                     else
                                         $this->object['status'] = 9;
                                 }
-                                else
-                                    $this->object['status'] = $upload;
-                                 
                             }
                         }
                     }

@@ -84,7 +84,7 @@ function invalidElement(id){
                 <label for="phoneNumbers0" class="form-label phoneNumberLabel">{{'Phone number'|lang}}<sup class="text-danger ms-1">*</sup></label>
                     <div class="d-grid gap-2 flex-fill faDigits">
                         <div class="flex-fill position-relative">
-                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" required>
+                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" required>
                             <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2 firstNumber {% if form_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
                             <div class="invalid-feedback">
                                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567

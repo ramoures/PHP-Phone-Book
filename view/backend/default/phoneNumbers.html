@@ -31,7 +31,7 @@
                     
                     <a {% if orderChanged==false %}class="text-reset"{% endif %} href="?page={{page}}&asc={{ascChanged}}&nameSort=1">
                         {{'Nickname'|lang}}
-                        <i class="bi bi-caret-{%if ascChanged%}up{% else %}down{% endif %}-fill"></i>
+                        <i class="bi bi-caret-{%if orderChanged and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
                     
                 </th>
@@ -41,7 +41,7 @@
                 <th scope="col">
                     <a {% if orderChanged %}class="text-reset"{% endif %}  href="?page={{page}}&asc={{ascChanged}}&nameSort=0">
                         {{'Date & Time'|lang}}
-                        <i class="bi bi-caret-{%if ascChanged%}up{% else %}down{% endif %}-fill"></i>
+                        <i class="bi bi-caret-{%if orderChanged == false and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
                 </th>
                 <th scope="col">{{'Operation'|lang}}</th>
@@ -61,8 +61,8 @@
                     </th>
                     <td>
                         <div class="d-flex justify-content-center">
-                            {% if row.image %}
-                                {{row.image}}
+                            {% if row.image.name %}
+                                <img class="rounded-circle border border-2" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
                             {% else %}
                                 <div class="img-thumbnail opacity-50 rounded-circle d-flex lh-1 justify-content-center align-items-center" style="width: 45px;height: 45px;;">
                                     <i class="bi fs-6 bi-image"></i>

@@ -34,8 +34,13 @@
                             <div class="rounded-3 me-2 d-flex phoneImg justify-content-center align-self-center align-items-center text-white" style="background-color:{{colors[n]}}; min-width:135px;min-height:135px;max-width:135px;max-height:135px;">
                                 {% set n = n+1 %}
                                 {% if n>=6 %}{% set n = 0 %}{% endif %}
-                                <span class="rounded-circle fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center" style="width:85px;height:85px;">{{first[0]|join('')|upper}}</span>
+                                {% if row.image.name %}
+                                    <img class="rounded-circle border border-2" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="85px" height="85px" style="object-fit: cover;width: 85px;height: 85px;">
+                                {% else %}
+                                    <span class="rounded-circle fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center" style="width:85px;height:85px;">{{first[0]|join('')|upper}}</span>
+                                {% endif %}
                             </div>
+                           
                             <div class="fs-5 m-0 lh-sm pe-3 align-self-start faDigits position-relative">
                                 <strong class="d-block text-gray-dark">{{row.nickname}}</strong>
                                 <div>{{row.full_name}}</div>
