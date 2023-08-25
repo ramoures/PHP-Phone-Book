@@ -1,8 +1,8 @@
 {% extends "layouts/structure.html" %}
 {% block title %}{{'Phone Numbers'|lang}}{% endblock %}
 {% block content %}
-    
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+   
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
         <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-center">
@@ -12,17 +12,20 @@
                 </button>
                 <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
             </div>
-            <a href="{{constant('PROJECT_URL')~'admin/add_phone_number'}}" class="btn btn-lg btn-success d-flex gap-2 fw-bold">
+            <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn btn-lg btn-success d-flex gap-2 fw-bold">
                 <i class="bi bi-plus-lg"></i>
                 {{'Add'|lang}} 
             </a>
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-striped faDigits">
+        <table class="table table-bordered table-striped faDigits fs-4 fw-normal align-middle">
             <thead>
             <tr>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">
+                    <a href="{{url}}&desc=1">#</a>
+                </th>
+                <th class="text-center" scope="col">{{'Image'|lang}}</th>
                 <th scope="col">{{'Nickname'|lang}}</th>
                 <th scope="col">{{'Full name'|lang}}</th>
                 <th scope="col">{{'Phone numbers'|lang}}</th>
@@ -32,48 +35,81 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>
-                    <div class="d-flex gap-4">
-                        <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
-                        <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>sadasd</td>
-                <td>
-                    <div class="d-flex gap-4">
-                        <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
-                        <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
-                    </div>
-                </td>
-            </tr>
+                {% set rowId = rowNumber %}
+                {% for key,row in rows %}
+                {% set name = row.phone_numbers|split('+') %}
+                <tr class="text-nowrap">
+                    <th class="text-center" scope="row">
+                        {% if desc %}
+                            {{rowId+key+1}}
+                        {% else %}
+                            {{rowId-key-1}}
+                        {% endif %}
+                    </th>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            {% if row.image %}
+                                {{row.image}}
+                            {% else %}
+                                <div class="img-thumbnail opacity-50 rounded-circle d-flex lh-1 justify-content-center align-items-center" style="width: 45px;height: 45px;;">
+                                    <i class="bi fs-6 bi-image"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td>{{row.nickname}}</td>
+                    <td>{{row.full_name}}</td>
+                    <td>{{name|join('<br>')|raw}}</td>
+                    <td>{{row.address}}</td>
+                    <td class="small">
+                        <div>Created at: {{row.created_at}}</div>
+                        {% if row.updated_at %}
+                            <div class="text-secondary">Updated at: {{row.updated_at}}</div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="d-flex gap-4">
+                            <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
+                            <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+           
+           
             </tbody>
         </table>
        
     </div>
-    <div class="d-flex justify-content-center">
-        <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-                <a class="page-link">{{'Previous'|lang}}</a>
-            </li>
+    {% if totalPage > 1 %}
+        <div class="d-flex justify-content-center">
+            <ul class="pagination pagination-lg justify-content-end user-select-none">
+                <li class="page-item {% if page<=1 %}disabled{% endif %}">
+                    <a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{page-1}}">{{'Previous'|lang}}</a>
+                </li>
+                {% if totalPage>=5 %}
+                    {% for key,row in totalPageArray|slice(1,2) %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                    {% endfor %}
+                    <li class="page-item"><span class="page-link text-secondary">---</span></li>
+                    {% set t = totalPage %}
+                    {% for key,row in totalPageArray|slice(t-2,t,t) %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                    {% endfor %}
+                {% else %}
+                    {% for key,row in totalPageArray %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                    {% endfor %}
+                {% endif %}
+                
             
-            <li class="page-item">
-                <a class="page-link" href="#">{{'Next'|lang}}</a>
-            </li>
-        </ul>
-    </div>
+                    <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
+                        <a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{page+1}}">{{'Next'|lang}}</a>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+  
   </main>
   {% endblock content %}

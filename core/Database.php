@@ -7,7 +7,7 @@ final class Database{
     private $password=DB_PASWORD;
     private $dbname=DB_NAME;
     private $pdo = null;
-
+    public static $n;
     private function __construct(){
         try {
             //set DSN
@@ -43,15 +43,55 @@ final class Database{
             return false;
        }
     }
+    public function totalRows($object){
+        try {
+            if(isset($object['where'])){
+                $columns = array_map(function ($column){return $column."=?"; }, array_keys($object['where']));
+                $columnsStr = implode(" AND ",$columns);
+                $where = array_values($object['where']);
+                $sql = "SELECT * FROM ".$object['tableName']." WHERE $columnsStr";
+                $stmt = $this->pdo->prepare($sql);
+            }
+            else{
+                $sql = "SELECT * FROM ".$object['tableName'];
+                $stmt = $this->pdo->query($sql);
+            }
+            if($stmt){
+                if(isset($object['where']))
+                    $stmt->execute($where);
+                $res = $stmt->fetchAll();
+                    return count($res);
+            }
+            else
+                return 0;
+        } catch (\Throwable $th) {
+            return 0;
+        }
+    }
     public function read($object,$checkIsset=false){
         try {
-            $columns = array_map(function ($column){return $column."=?"; }, array_keys($object['where']));
-            $columnsStr = implode(" AND ",$columns);
-            $where = array_values($object['where']);
-            $sql = "SELECT * FROM ".$object['tableName']." WHERE $columnsStr";
-            $stmt = $this->pdo->prepare($sql);
+            if(isset($object['where'])){
+                $columns = array_map(function ($column){return $column."=?"; }, array_keys($object['where']));
+                $columnsStr = implode(" AND ",$columns);
+                $where = array_values($object['where']);
+                $sql = "SELECT * FROM ".$object['tableName']." WHERE $columnsStr";
+                if(isset($object['limit']))
+                    $sql .= " LIMIT ".$object['limit'];
+                if(isset($object['offset']))
+                    $sql .= " OFFSET ".$object['offset'];
+                $stmt = $this->pdo->prepare($sql);
+            }
+            else{
+                $sql = "SELECT * FROM ".$object['tableName'];
+                if(isset($object['limit']))
+                    $sql .= " LIMIT ".$object['limit'];
+                if(isset($object['offset']))
+                    $sql .= " OFFSET ".$object['offset'];
+                $stmt = $this->pdo->query($sql);
+            }
             if($stmt){
-                $stmt->execute($where);
+                if(isset($object['where']))
+                    $stmt->execute($where);
                 $res = $stmt->fetchAll();
                 if(count($res)>0){
                     if($checkIsset)

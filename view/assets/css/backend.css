@@ -4,10 +4,10 @@
     height: 1rem;
     fill: currentColor;
   }
-  a{
-    text-decoration: none;
-  }
-  
+a{
+  text-decoration: none;
+}
+
   @media (min-width: 768px) {
     .sidebar{
       min-height: 100vh !important;
