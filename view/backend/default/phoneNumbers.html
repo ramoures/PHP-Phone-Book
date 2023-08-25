@@ -12,38 +12,50 @@
                 </button>
                 <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
             </div>
-            <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn btn-lg btn-success d-flex gap-2 fw-bold">
+            <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn  btn-success d-flex gap-2 fw-bold">
                 <i class="bi bi-plus-lg"></i>
                 {{'Add'|lang}} 
             </a>
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped faDigits fs-4 fw-normal align-middle">
+        <table class="table table-bordered table-striped faDigits fw-normal align-middle">
             <thead>
             <tr>
                 <th class="text-center" scope="col">
-                    <a href="{{url}}&desc=1">#</a>
+                   #
                 </th>
                 <th class="text-center" scope="col">{{'Image'|lang}}</th>
-                <th scope="col">{{'Nickname'|lang}}</th>
+                <th scope="col">
+                    
+                    <a {% if orderChanged==false %}class="text-reset"{% endif %} href="?page={{page}}&asc={{ascChanged}}&nameSort=1">
+                        {{'Nickname'|lang}}
+                        <i class="bi bi-caret-{%if ascChanged%}up{% else %}down{% endif %}-fill"></i>
+                    </a>
+                    
+                </th>
                 <th scope="col">{{'Full name'|lang}}</th>
                 <th scope="col">{{'Phone numbers'|lang}}</th>
                 <th scope="col">{{'Address'|lang}}</th>
-                <th scope="col">{{'Date & Time'|lang}}</th>
+                <th scope="col">
+                    <a {% if orderChanged %}class="text-reset"{% endif %}  href="?page={{page}}&asc={{ascChanged}}&nameSort=0">
+                        {{'Date & Time'|lang}}
+                        <i class="bi bi-caret-{%if ascChanged%}up{% else %}down{% endif %}-fill"></i>
+                    </a>
+                </th>
                 <th scope="col">{{'Operation'|lang}}</th>
             </tr>
             </thead>
             <tbody>
                 {% set rowId = rowNumber %}
                 {% for key,row in rows %}
-                {% set name = row.phone_numbers|split('+') %}
+                {% set numb = row.phone_numbers|split('+') %}
                 <tr class="text-nowrap">
                     <th class="text-center" scope="row">
-                        {% if desc %}
-                            {{rowId+key+1}}
+                        {% if ascChanged %}
+                            {{rowId-key-1}} 
                         {% else %}
-                            {{rowId-key-1}}
+                            {{rowId+key+1}}
                         {% endif %}
                     </th>
                     <td>
@@ -59,7 +71,7 @@
                     </td>
                     <td>{{row.nickname}}</td>
                     <td>{{row.full_name}}</td>
-                    <td>{{name|join('<br>')|raw}}</td>
+                    <td>{{numb|join('<br>')|raw}}</td>
                     <td>{{row.address}}</td>
                     <td class="small">
                         <div>Created at: {{row.created_at}}</div>
@@ -75,36 +87,32 @@
                     </td>
                 </tr>
                 {% endfor %}
-           
-           
             </tbody>
         </table>
        
     </div>
     {% if totalPage > 1 %}
         <div class="d-flex justify-content-center">
-            <ul class="pagination pagination-lg justify-content-end user-select-none">
+            <ul class="pagination justify-content-end user-select-none">
                 <li class="page-item {% if page<=1 %}disabled{% endif %}">
-                    <a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{page-1}}">{{'Previous'|lang}}</a>
+                    <a class="page-link" href="?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Previous'|lang}}</a>
                 </li>
                 {% if totalPage>=5 %}
                     {% for key,row in totalPageArray|slice(1,2) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
                     {% endfor %}
                     <li class="page-item"><span class="page-link text-secondary">---</span></li>
                     {% set t = totalPage %}
                     {% for key,row in totalPageArray|slice(t-2,t,t) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
                     {% endfor %}
                 {% else %}
                     {% for key,row in totalPageArray %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{key+1}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
                     {% endfor %}
                 {% endif %}
-                
-            
                     <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
-                        <a class="page-link" href="{{constant('PROJECT_URL')}}admin/phone_numbers?page={{page+1}}">{{'Next'|lang}}</a>
+                        <a class="page-link" href="?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Next'|lang}}</a>
                     </li>
                 </li>
             </ul>

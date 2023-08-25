@@ -94,9 +94,11 @@ final class Bootstrap{
                 $route[0] = !isset($route[0])?'home':$route[0];
                 $param = isset($route[1])?$route[1]:'index';
                 $routeFile = ROOT_PATH."controller/frontend/".$route[0].".php";
-                if(!file_exists($routeFile) )
+                $modelFile = ROOT_PATH."model/frontend/".$route[0].".php";
+                if(!file_exists($routeFile) || !file_exists($modelFile) )
                     return $this->error();
                 else{
+                    require_once($modelFile);
                     require_once($routeFile);
                     $className = ucwords($route[0]);
                     $instanceController = new $className($param);

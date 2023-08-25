@@ -20,6 +20,10 @@ $('input, textarea').on('keyup',function(){
         $(this).addClass('is-invalid')
 });
 function filedNumber(){
+    if($('.filedNumber').length<=0){
+        $('#phoneNumbers0').removeClass('pe-5')
+        $('.firstNumber').addClass('d-none');
+    }
     for(let i = 0; i<=$('.filedNumber').length; i++){
         $('.filedNumber').eq(i).html(i+2);
         $('.numberFiled').eq(i).attr('id','phoneNumbers'+i);
@@ -29,10 +33,11 @@ function filedNumber(){
 
 $('.addField').on('click',function(){
     $('.firstNumber').removeClass('d-none');
+    $('#phoneNumbers0').addClass('pe-5')
     var html = `
-        <div class="d-flex ">
+        <div class="d-flex">
         <div class="position-relative flex-fill">
-            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5">
+            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5">
             <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2"></div>
         </div>
         <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>

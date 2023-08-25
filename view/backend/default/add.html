@@ -82,18 +82,19 @@ function invalidElement(id){
             </div>
             <div class="mb-3">
                 <label for="phoneNumbers0" class="form-label phoneNumberLabel">{{'Phone number'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                    <div class="d-grid gap-2 flex-fill">
+                    <div class="d-grid gap-2 flex-fill faDigits">
                         <div class="flex-fill position-relative">
-                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" required>
-                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2 firstNumber d-none">1</div>
+                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" required>
+                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2 firstNumber {% if form_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
                             <div class="invalid-feedback">
                                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
                             </div>
                         </div>
                       
                         {% for key,item in form_info.phone_numbers|slice(1,555555555) %}
-                        <div class="d-flex">
-                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers{{key+1}}" value="{{item}}">
+                        <div class="d-flex position-relative">
+                            <input type="tel" pattern="[0-9]{11}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
+                            <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-info rounded-circle px-2 filedNumber">{{key+2}}</div>
                             <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
                         </div>
                         {% endfor %}
@@ -115,7 +116,8 @@ function invalidElement(id){
                 <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off">
             </div>
             <div class="d-flex align-items-center gap-2">
-                <button type="submit" name="btn_submit" class="btn fs-5 btn-primary">{{'Submit'|lang}}</button>
+                <button type="submit" name="btn_submit" class="btn fs-5 btn-primary d-flex gap-2"><i class="bi bi-save"></i>{{'Submit'|lang}}</button>
+                <button onclick="form.reset()" type="button" class="btn btn-warning opacity-75">{{'Reset'|lang}}</button>
                 <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
             </div>
           </form>

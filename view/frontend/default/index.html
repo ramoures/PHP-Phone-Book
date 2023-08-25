@@ -3,51 +3,104 @@
 {% block content %}
 <main class="row-cols-2 d-flex gap-4 my-3 bg-body rounded border shadow-sm">
   <section id="content" class="col flex-fill px-3 ">
-      <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3 mt-3">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4 mt-3">
         <div class="d-flex gap-2 flex-fill">
             <h4 class="p-0 m-0 mt-1">{{'Last Phone Numbers'|lang}}</h4>
             <a class="d-block d-md-none p-0 m-0 btn btn-link rounded-1"><i class="bi fs-3 lh-sm text-primary bi-funnel"></i></a>
         </div>
         <div class="col-auto">
-            <select class="d-none d-md-block form-select">
-                <option>{{'Latest'|lang}}</option>
-                <option>{{'A to Z'|lang}}</option>
-                <option>{{'Z to A'|lang}}</option>
+            <select class="d-none d-md-block form-select sorting">
+                <option value="1" {% if orderChanged==false and ascChanged %}selected{% endif %}>{{'Latest'|lang}}</option>
+                <option value="2" {% if orderChanged==false and ascChanged==false %}selected{% endif %}>{{'Earliest'|lang}}</option>
+                <option value="3" {% if orderChanged and ascChanged==false %}selected{% endif %}>{{'A to Z'|lang}}</option>
+                <option value="4" {% if orderChanged and ascChanged %}selected{% endif %}>{{'Z to A'|lang}}</option>
             </select>
         </div>
         <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
-      </div>
-      <div class="row d-grid gap-3">
-          <div class="d-flex text-body-secondary pt-2 border-bottom pb-4">
-              <div class="d-grid d-md-flex gap-2 justify-content-between align-items-center">
-                  <div class="d-flex h-100">
-                      <div class="rounded-3 me-2 d-flex justify-content-center align-items-center text-white" style="background-color: #fd7e14;width:84px;height:84px;">
-                          <span class="rounded-circle bg-white text-dark d-flex justify-content-center align-items-center" style="width:54px;height:54px;">R</span>
-                      </div>
-                      <div class="fs-5 m-0 lh-sm pe-3 align-self-start">
-                          <strong class="d-block text-gray-dark">Nickname</strong>
-                          <div>Full Name</div>
-                          <h4 class="fw-normal">09359627253</h4>
-                      </div>
-                  </div>
-                  <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
-                      <div class="fw-bold text-secondary"> {{'Address'|lang}}:</div>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta tempora laboriosam alias assumenda voluptate minus minima, nesciunt sunt neque tenetur!
-                  </div>
-              </div>
-          </div>      
-      </div>
-      <nav class="mt-4 pb-2 faDigits" aria-label="Page navigation">
-          <ul class="pagination justify-content-end">
-              <li class="page-item disabled">
-                  <a class="page-link">{{'Previous'|lang}}</a>
-              </li>
-              
-              <li class="page-item">
-                  <a class="page-link" href="#">{{'Next'|lang}}</a>
-              </li>
-          </ul>
-      </nav>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-2 align-items-stretch justify-content-between flex-wrap g-2 g-lg-3 px-0 px-lg-2 mb-4">
+        {% set colors = ['#fd7e14','#6f42c1','#e83e8c','#20c997','#6c757d','#0dcaf0'] %}
+        {% set n = 0 %}
+
+        {% for key,row in rows %}
+
+            {% set numb = row.phone_numbers|split('+') %}
+            {% set first = row.nickname|split("") %}
+                <div class="col">
+                    <div class="bg-body-secondary rounded rounded-1 text-body-secondary d-flex w-100 p-4 h-100 align-items-center ">
+                    <div class="d-grid d-md-flex gap-2 justify-content-between align-items-start ">
+                        <div class="d-flex gap-2 h-100">
+                            <div class="rounded-3 me-2 d-flex phoneImg justify-content-center align-self-center align-items-center text-white" style="background-color:{{colors[n]}}; min-width:135px;min-height:135px;max-width:135px;max-height:135px;">
+                                {% set n = n+1 %}
+                                {% if n>=6 %}{% set n = 0 %}{% endif %}
+                                <span class="rounded-circle fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center" style="width:85px;height:85px;">{{first[0]|join('')|upper}}</span>
+                            </div>
+                            <div class="fs-5 m-0 lh-sm pe-3 align-self-start faDigits position-relative">
+                                <strong class="d-block text-gray-dark">{{row.nickname}}</strong>
+                                <div>{{row.full_name}}</div>
+                                <div class="fw-normal h4 p-0 m-0 mt-1">
+                                    {% for nmb in numb|slice(0,2) %}
+                                        {{nmb}}
+                                    {% endfor %}
+                                </div>
+                                <div class="fw-normal h4 p-0 m-0 moreNumbers d-none">
+                                    {% for nmb in numb|slice(2,20) %}
+                                        {{nmb}}
+                                    {% endfor %}
+                                    <a class="lessMoreNumbers po_cu">
+                                        ...Less
+                                    </a>
+                                </div>
+                                {% if numb|length > 2 %}
+                                    <a class="toMoreNumbers po_cu">
+                                        More...
+                                    </a>
+                                {% endif %}
+                            </div>
+                        
+                        </div>
+                        <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
+                            {% if row.address %}
+                                <div class="fw-bold text-secondary"> {{'Address'|lang}}:</div>
+                                {{row.address}}
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                </div>      
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if totalPage > 1 %}
+        <div class="d-flex flex-wrap justify-content-end">
+            <ul class="pagination justify-content-end user-select-none">
+                <li class="page-item {% if page<=1 %}disabled{% endif %}">
+                    <a class="page-link" href="?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Previous'|lang}}</a>
+                </li>
+                {% if totalPage>=5 %}
+                    {% for key,row in totalPageArray|slice(1,2) %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                    {% endfor %}
+                    <li class="page-item"><span class="page-link text-secondary">---</span></li>
+                    {% set t = totalPage %}
+                    {% for key,row in totalPageArray|slice(t-2,t,t) %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                    {% endfor %}
+                {% else %}
+                    {% for key,row in totalPageArray %}
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                    {% endfor %}
+                {% endif %}
+                
+            
+                    <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
+                        <a class="page-link" href="?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Next'|lang}}</a>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
   </section>
 </main>
 {% endblock %}

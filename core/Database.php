@@ -75,6 +75,12 @@ final class Database{
                 $columnsStr = implode(" AND ",$columns);
                 $where = array_values($object['where']);
                 $sql = "SELECT * FROM ".$object['tableName']." WHERE $columnsStr";
+                if(isset($object['orderBy']))
+                    $sql .= " ORDER BY ".$object['orderBy'];
+                if(isset($object['asc'])){
+                    $ascDesc = $object['asc']?'DESC':'ASC';
+                    $sql .= " ".$ascDesc;
+                }
                 if(isset($object['limit']))
                     $sql .= " LIMIT ".$object['limit'];
                 if(isset($object['offset']))
@@ -83,6 +89,12 @@ final class Database{
             }
             else{
                 $sql = "SELECT * FROM ".$object['tableName'];
+                if(isset($object['orderBy']))
+                    $sql .= " ORDER BY ".$object['orderBy'];
+                if(isset($object['asc'])){
+                    $ascDesc = $object['asc']?'DESC':'ASC';
+                    $sql .= " ".$ascDesc;
+                }
                 if(isset($object['limit']))
                     $sql .= " LIMIT ".$object['limit'];
                 if(isset($object['offset']))

@@ -1,5 +1,6 @@
 <?php
 final class Utils{
+    use errors;
     private static $instance = null;
     private function __construct() {}
     static function getInstance()
@@ -72,7 +73,19 @@ final class Utils{
         }
         return $data ? html_entity_decode(stripslashes($data),ENT_QUOTES,'UTF-8') : '';
     }
-    
+    public function renderNumber($asc=1,$limit,$page,$total)
+    {
+        try {
+            if($asc)
+                $n = $total - ($limit * $page) + $limit + 1;                
+            else
+                $n = ($limit * $page) - $limit;
+            return $n;
+
+        } catch (\Throwable $th) {
+            return $this->error($th);
+        }
+    }
 }
 
 ?>

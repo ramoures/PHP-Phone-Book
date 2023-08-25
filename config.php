@@ -27,7 +27,7 @@ define('SESSION_NAME',PROJECT_NAME);
 
 ##Backend Pages Setting
 define("B_DEFAULT_LANG",'en');
-define("B_LIMIT",'10'); 
+define("B_LIMIT",'6'); 
 
 ##Frontend Pages Setting
 define("DEFAULT_LANG",'en'); # cookie set before
