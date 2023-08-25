@@ -13,6 +13,20 @@ define("PROJECT_NAME","Phone-Book");
 define("ADMIN_DIR_NAME","admin");
 define("FRONTEND_THEME_DIR_NAME", "default");
 define("BACKEND_THEME_DIR_NAME", "default");
+
+
+define('MEDIA_PATH',ROOT_PATH.'media'.DS);
+
+define('MEDIA_TITLES',array('thumbnails','avatars','images','pdf','internal','posters'));
+define('THUMBNAILS_FOLDER_NAME','thumbnails/');
+define('AVATARS_FOLDER_NAME',"avatars/");
+define('IMAGES_FOLDER_NAME','images/');
+define('PDF_FOLDER_NAME','pdf/');
+define('INTERNAL_FOLDER_NAME','internal/');
+define('SCREENSHOTS_FOLDER_NAME','ss'.DS);
+
+
+
 //Project Setting:
 define("DEBUG",true);
 define('DEFAULT_TIMEZONE','ASIA/TEHRAN');

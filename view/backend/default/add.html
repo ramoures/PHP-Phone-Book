@@ -58,11 +58,11 @@ function invalidElement(id){
                    invalidElement('phoneNumbers{{invalidKey}}')
                 </script>
             </div>
-        {% elseif status==8 %}
+        {% elseif status in [8,9,-1,-2,-3,-4,-5,-6] %}
             <div class="alert alert-danger">
                 {{'Error! Try again later.'|lang}}
             </div>
-        {% elseif status==9 %}
+        {% elseif status==10 %}
         <div class="alert alert-success">
             {{'Submission Successful!'|lang}}
         </div>

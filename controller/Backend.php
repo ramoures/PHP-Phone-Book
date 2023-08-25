@@ -60,7 +60,7 @@ abstract class Backend extends Base{
                             if($fileSize > $maxSize)
                                 return -6; //file is big
                         $newFileName = $fileName;
-                        $newFileName .= ".".$allowFiles[$index];
+                        $newFileName .= ".".$allowFiles[$mime];
                         $move = move_uploaded_file($tmp_name,"$path/$newFileName");
                         if($move)
                             return $newFileName;
@@ -78,6 +78,28 @@ abstract class Backend extends Base{
         }
         else
             return -1; //file is not isset
+    }
+    public function uploader($folder){
+        if(isset($_FILES['image'])){
+            if(in_array($folder,MEDIA_TITLES)){
+                $fileField= $_FILES['image']['tmp_name'];
+                if($fileField){
+                    $resultUpload = $this->uploadImage('image',MEDIA_PATH."$folder");
+                    if(!is_int($resultUpload)){
+                        $file = $resultUpload;  
+                        return ['status'=>0,'folder'=>$folder,'file'=>$file];
+                    }
+                    else
+                        return $resultUpload;
+                }
+                else
+                    return ['status'=>1];
+            }
+            else
+                return -2;
+        }
+        else
+            return ['status'=>1];;
     }
 }
 ?>

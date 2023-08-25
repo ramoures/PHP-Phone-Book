@@ -18,6 +18,7 @@
         </div>
         <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
     </div>
+    {% if rows %}
     <div class="row row-cols-1 row-cols-lg-2 align-items-stretch justify-content-between flex-wrap g-2 g-lg-3 px-0 px-lg-2 mb-4">
         {% set colors = ['#fd7e14','#6f42c1','#e83e8c','#20c997','#6c757d','#0dcaf0'] %}
         {% set n = 0 %}
@@ -71,6 +72,12 @@
             </div>
         {% endfor %}
     </div>
+    {% else %}
+        <div class="d-flex justify-content-center mb-4">
+            <i class="fs-4 text-secondary">data not found!</i>
+        </div>
+    {% endif %}
+   
 
     {% if totalPage > 1 %}
         <div class="d-flex flex-wrap justify-content-end">

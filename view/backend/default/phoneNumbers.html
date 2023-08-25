@@ -18,6 +18,7 @@
             </a>
         </div>
     </div>
+    {% if rows %}
     <div class="table-responsive">
         <table class="table table-bordered table-striped faDigits fw-normal align-middle">
             <thead>
@@ -91,6 +92,10 @@
         </table>
        
     </div>
+    {% else %}
+        <i class="fs-4 text-secondary">data not found!</i>
+    {% endif %}
+   
     {% if totalPage > 1 %}
         <div class="d-flex justify-content-center">
             <ul class="pagination justify-content-end user-select-none">

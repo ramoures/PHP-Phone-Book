@@ -29,15 +29,16 @@ final class Database{
     }
     public function create($object){ //Insert Data
        try {
-            $columns = array_map(function ($column){return ":".$column; }, array_keys($object));
+            $columns = array_map(function ($column){return ":".$column; }, array_keys($object['data']));
             $columnsStr = implode(", ",$columns);
-            $object['phone_numbers'] =  implode("+",$object['phone_numbers']);;
-            $rows = implode(",",array_keys($object));
-            $sql = "INSERT INTO phone_numbers($rows) VALUES($columnsStr)";
+            if(isset($object['data']['phone_numbers']))
+                $object['data']['phone_numbers'] =  implode("+",$object['data']['phone_numbers']);;
+            $rows = implode(",",array_keys($object['data']));
+            $sql = "INSERT INTO ".$object['tableName']."($rows) VALUES($columnsStr)";
             $stmt = $this->pdo->prepare($sql);
-            $stmt = $stmt->execute($object);
+            $stmt = $stmt->execute($object['data']);
             if($stmt)
-                return true;
+                return $this->pdo->lastInsertId();
             return false;
        } catch (\Throwable $th) {
             return false;
@@ -165,20 +166,7 @@ final class Database{
              $this->error($e);
          }
      }
-    // public function search(){
-    //    try {
-    //         $sql = 'SELECT * FROM posts WHERE author = ? && is_published = ? LIMIT ?';
-    //         $stmt = $this->pdo->prepare($sql);
-    //         if($stmt){
-    //             $stmt->execute(['ramin','1',10]);
-    //             $res = $stmt->fetchAll();
-    //             $res = json_encode($res,true);
-    //             return $res;
-    //         }
-    //     } catch (Exception $e) {
-    //         $this->error($e);
-    //     }
-    // }
+
     public function update($object){
         
     }

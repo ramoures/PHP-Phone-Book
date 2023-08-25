@@ -8,7 +8,7 @@ class AddPhoneNumbersModel extends Models{
        try {
         $result = $this->db->create($data);
         if($result)
-            return true;
+            return $result;
         return false;
        } catch (\Throwable $th) {
         return false;
@@ -29,6 +29,8 @@ class AddPhoneNumbersModel extends Models{
             return false;
         }
     }
+    
+   
 
 }
 ?>
