@@ -4,8 +4,6 @@
     Licensed MIT . 
     Created by: github.com/ramoures
 */
-ini_set("display_errors","on");
-define('YEAR',date('Y'));
 //Database Information:
 define("DB_HOST","localhost");
 define("DB_USER","root");
@@ -43,11 +41,12 @@ define('SAULT_ORDER',[3,0,1,2]);
 
 ##Backend Pages Setting
 define("B_DEFAULT_LANG",'en');
-define("B_LIMIT",'10'); 
+define("B_LIMIT",'5'); 
 
 ##Frontend Pages Setting
 define("DEFAULT_LANG",'en'); # cookie set before
 define("LIMIT",'10'); # Limit post per pages
 
+define('YEAR',date('Y'));
 
 ?>

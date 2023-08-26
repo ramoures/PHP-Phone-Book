@@ -7,58 +7,70 @@ final class Bootstrap{
         $this->routing();
     }
     private function errorReporting(){
-        // error_reporting(-1);
-        if(DEBUG)
-            ini_set("display_errors",1); //develop mode
-        else{
-            //pro mode
-            ini_set("display_errors",0);
-            $logFileName = date("Y-m-d").".log";
-            ini_set("error_log",ROOT_PATH."logs/$logFileName");
+        try {
+            error_reporting(-1);
+            if(DEBUG)
+                ini_set("display_errors",1); //develop mode
+            else{
+                //pro mode
+                ini_set("display_errors",0);
+                $logFileName = date("Y-m-d").".log";
+                ini_set("error_log",ROOT_PATH."logs/$logFileName");
+            }
+        } catch (\Throwable $th) {
+            return $this->error($th);
         }
     }
     private function init(){
-        date_default_timezone_set(DEFAULT_TIMEZONE);
-        ob_start();
+       try {
+            date_default_timezone_set(DEFAULT_TIMEZONE);
+            ob_start();
+       } catch (\Throwable $th) {
+            return $this->error($th);
+       }
     }
     private function initSession(){
-        if(isset($_COOKIE[SESSION_NAME])){
-            if(!preg_match('/^[a-zA-Z0-9]{1,40}$/',$_COOKIE[SESSION_NAME]))
-                die('Security error!');
-        }
-        if(!isset($_SESSION)){
-            ini_set('session.cookie_samesite','Strict');
-            ini_set('session.cookie_httponly',1);
-            ini_set('session.hash_function','sha1');
-            if(SSL)
-                ini_set('session.cookie_secure','sha1');
-            ini_set('session.name',SESSION_NAME);
-            session_start();
-        }
+       try {
+            if(isset($_COOKIE[SESSION_NAME])){
+                if(!preg_match('/^[a-zA-Z0-9]{1,40}$/',$_COOKIE[SESSION_NAME]))
+                    die('Security error!');
+            }
+            if(!isset($_SESSION)){
+                ini_set('session.cookie_samesite','Strict');
+                ini_set('session.cookie_httponly',1);
+                ini_set('session.hash_function','sha1');
+                if(SSL)
+                    ini_set('session.cookie_secure','sha1');
+                ini_set('session.name',SESSION_NAME);
+                session_start();
+            }
+       } catch (\Throwable $th) {
+            return $this->error($th);
+       }
     }
     private function routing(){
-     try {
-        $requestPath = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO']) : '';
-        $requestPathArray = explode('/',$requestPath);
-        array_shift($requestPathArray);
-        $requestPathArray = array_map('trim',$requestPathArray);
-        $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
-        $type='';
-        if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME ){
-            //Backend
-            $this->initSession();
-            $type='backend';
-            $routeName = $requestPathArray;
+        try {
+            $requestPath = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO']) : '';
+            $requestPathArray = explode('/',$requestPath);
+            array_shift($requestPathArray);
+            $requestPathArray = array_map('trim',$requestPathArray);
+            $requestPathArray = array_filter($requestPathArray, fn($value) => trim($value) !== '');
+            $type='';
+            if(count($requestPathArray) > 0 && $requestPathArray[0] == ADMIN_DIR_NAME ){
+                //Backend
+                $this->initSession();
+                $type='backend';
+                $routeName = $requestPathArray;
+            }
+            else{
+                //Frontend
+                $type='frontend';
+                $routeName = $requestPathArray??$requestPathArray;
+            }
+            $this->dispatcher($type,$routeName);
+        } catch (\Throwable $th) {
+            return $this->error($th);
         }
-        else{
-            //Frontend
-            $type='frontend';
-            $routeName = $requestPathArray??$requestPathArray;
-        }
-        $this->dispatcher($type,$routeName);
-     } catch (\Throwable $th) {
-        return $this->error($th);
-     }
     }
     private function convertString($str) : string {
         $str = explode('_',$str);
