@@ -16,56 +16,81 @@ function invalidElement(id){
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
         {% if status==1 %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'CSRF Token is not valid!'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
         {% elseif status==2 %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'Please enter nickname.'|lang}}
-                <script>
-                   invalidElement('nickname')
-                </script>
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
+            <script>invalidElement('nickname')</script>
         {% elseif status==3 %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
-                <script>
-                   invalidElement('phoneNumbers0')
-                </script>
+                <i class="text-secondary ms-1">e.{{status}}</i>
+                <script>invalidElement('phoneNumbers0')</script>
             </div>
         {% elseif status==4 %}
-            <div class="alert alert-danger">
-                {{'Nickname is already exist.'|lang}}
-                <script>
-                   invalidElement('nickname')
-                </script>
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
+                {{'The Nickname is already exists.'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
+            <script>invalidElement('nickname')</script>
         {% elseif status==5 %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'Some of the phone numbers are duplicates.'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
         {% elseif status==6 %}
-            <div class="alert alert-danger">
-                {{'Phone Number is already exist.'|lang}}
-                <script>
-                    invalidElement('phoneNumbers{{invalidKey}}')
-                 </script>
-            </div>
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
+                {{'The phone number is already exists.'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
+            </div>  
+            <script>invalidElement('phoneNumbers{{invalidKey}}')</script>
         {% elseif status==7 %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
-                <script>
-                   invalidElement('phoneNumbers{{invalidKey}}')
-                </script>
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
-        {% elseif status in [8,9,-1,-2,-3,-4,-5,-6] %}
-            <div class="alert alert-danger">
+            <script>invalidElement('phoneNumbers{{invalidKey}}')</script>
+        {% elseif status in [8,9] %}
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
                 {{'Error! Try again later.'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
+            </div>
+        {% elseif status in [-1,-2,-4,-5] %}
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
+                {{'File Upload Failure! Try again later.'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
+            </div>
+        {% elseif status == -3 %}
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
+                {{'Error! The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
+            </div>
+        {% elseif status == -6 %}
+            <div class="alert alert-danger d-flex align-items-center">
+                <i class="bg-danger me-2 p-2 rounded"></i>
+                {{'Error! The file is too big. Max file size = 3mb'|lang}}
+                <i class="text-secondary ms-1">e.{{status}}</i>
             </div>
         {% elseif status==10 %}
-        <div class="alert alert-success">
-            {{'Submission Successful!'|lang}}
-        </div>
+            <div class="alert alert-success d-flex align-items-center">
+                <i class="bg-success me-2 p-2 rounded"></i>
+                {{'Submission successful!'|lang}}
+            </div>
         {% endif %}
         <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
             <input type="hidden" name="token" value="{{csrf_token}}">

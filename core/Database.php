@@ -171,13 +171,18 @@ final class Database{
         
     }
     public function delete($object){
-        //DELETE DATA
-        $id = 5;
-        $sql = "DELETE FROM posts WHERE id=?";
+     try {
+        $sql = "DELETE FROM ".$object['tableName']." WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([$id]);
-        if($stmt)
-            print "POST DELETED";
+        if($stmt){
+            $stmt->execute([$object['id']]);
+            return true;
+        }
+        else return false;
+     } catch (\Throwable $th) {
+        return false;
+     }
+      
     }
     static function getInstance()
     {

@@ -19,6 +19,7 @@
   <meta name="theme-color" content="#0d6efd">
 </head>
 <body dir="{{'Direction'|lang}}">
+    <div class="cover d-none"></div>
    {% include "layouts/color.html" %}
    {% include "layouts/header.html" %}
 <div class="container-fluid">
@@ -28,6 +29,8 @@
     </div>
     {% include("layouts/footer.html") %}
 </div>
+{% include "layouts/confirmModal.html" %}
+
 <script src="{{media_url}}/js/bootstrap.bundle.min.js"></script>
 <script src="{{media_url}}/js/jquery-3.7.0.min.js"></script>
 <script src="{{media_url}}/js/backend.js" type="module"></script>

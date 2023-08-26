@@ -11,31 +11,26 @@ abstract class Backend extends Base{
         if($param !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
     }
-   
     protected function adminIsSigned(){
         if(isset($_SESSION['admin_id']))
             return true;
         else
             return false;
     }
-    protected function setVar($path,$key,$value)
-    {
+    protected function setVar($path,$key,$value){
         $_SESSION[$path][$key] = $value;
     }
-    protected function getVar($path,$key)
-    {
+    protected function getVar($path,$key){
         if(isset($_SESSION[$path][$key]))
             return $_SESSION[$path][$key];
         else
             return null;
     }
-    protected function delVarKey($path,$key)
-    {
+    protected function delVarKey($path,$key){
         if(isset($_SESSION[$path][$key]))
             unset($_SESSION[$path][$key]);
     }
-    protected function delVar($path)
-    {
+    protected function delVar($path){
         if(isset($_SESSION[$path]))
             unset($_SESSION[$path]);
     } 

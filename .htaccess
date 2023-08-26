@@ -5,6 +5,7 @@ Deny from all
 <FilesMatch "config.php">
     Deny from all
 </fileSMatch>
+
 <FilesMatch "init.php">
     Deny from all
 </fileSMatch>
@@ -12,3 +13,4 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule (.*) index.php/$1 [QSA]
+

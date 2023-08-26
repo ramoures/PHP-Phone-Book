@@ -1,4 +1,6 @@
+import { COOKIE_NAME_FOR_FRONTEND_LANG } from "./config.js";
 import { setCookie } from "./Utils.js";
+
 $('.sorting').on('change',function(){
   let value = parseInt($(this).val());
     if(value===1)
@@ -14,10 +16,10 @@ $('.changeLanguage button').on('click',function(){
     try {
         let thisLang = $(this).attr('id').toLowerCase();
         if(thisLang.length===2 || isNaN(thisLang))
-            setCookie('phone_book_lang',thisLang);
+            setCookie(COOKIE_NAME_FOR_FRONTEND_LANG,thisLang);
             location.reload();
     } catch (e) {
-        setCookie('phone_book_lang','en');
+        setCookie(COOKIE_NAME_FOR_FRONTEND_LANG,'en');
     }
 
 });

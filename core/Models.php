@@ -4,6 +4,7 @@ abstract class Models{
     public function __construct() {
         $this->db = database::getInstance();
     }
+   
 }
 
 ?>

@@ -1,0 +1,32 @@
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="confirmModalLabel">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+                <h4 class="modal-title" id="confirmModalLabel">
+                    {{'Are you sure?'|lang}}
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div dir="{% if 'direction'|lang=='rtl' %}rtl{% else %}ltr{% endif %}" class="modal-body">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    
+                    <div dir="{% if 'direction'|lang=='rtl' %}ltr{% else %}rtl{% endif %}" class="d-flex gap-2">
+                        <form method="post" autocomplete="off">
+                            <input name="id" type="hidden" id="phoneNumbersId">
+                            <button type="submit" name="confirm_btn" class="btn btn-light border lh-1 fs-5">
+                                {{'Yes'|lang}}
+                            </button>
+                            <button type="button" id="closeModal" data-bs-dismiss="modal" class="btn btn-success lh-1 fs-5">
+                                {{'No'|lang}}
+                            </button>
+                        </form>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

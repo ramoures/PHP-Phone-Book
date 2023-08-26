@@ -43,11 +43,11 @@ define('SAULT_ORDER',[3,0,1,2]);
 
 ##Backend Pages Setting
 define("B_DEFAULT_LANG",'en');
-define("B_LIMIT",'6'); 
+define("B_LIMIT",'10'); 
 
 ##Frontend Pages Setting
 define("DEFAULT_LANG",'en'); # cookie set before
-define("LIMIT",'4'); # Limit post per pages
+define("LIMIT",'10'); # Limit post per pages
 
 
 ?>

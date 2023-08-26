@@ -1,23 +1,35 @@
 {% extends "layouts/structure.html" %}
 {% block title %}{{'Phone Numbers'|lang}}{% endblock %}
 {% block content %}
-   
+
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
-        <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-center">
-            <div dir="ltr" class="d-flex">
-                <button class="btn btn-link lh-1">
-                    <i class="bi bi-search" ></i>
-                </button>
-                <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
+        <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
+            <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-center">
+                <div dir="ltr" class="d-flex">
+                    <button class="btn btn-link lh-1">
+                        <i class="bi bi-search" ></i>
+                    </button>
+                    <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
+                </div>
+                <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn  btn-success d-flex gap-2 fw-bold">
+                    <i class="bi bi-plus-lg"></i>
+                    {{'Add'|lang}} 
+                </a>
             </div>
-            <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn  btn-success d-flex gap-2 fw-bold">
-                <i class="bi bi-plus-lg"></i>
-                {{'Add'|lang}} 
-            </a>
         </div>
+{% if msg %}
+    <div class="alert alert-{% if msg=='deleted' %}success{% else %}danger{% endif %} d-flex align-items-center">
+    {% if msg=='deleted' %}
+    <i class="{% if msg=='deleted' %}bg-success{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
+    {{'Item is successfully deleted.'|lang}}
+    {% else %}
+    <i class="{% if msg=='deleted' %}bg-info{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
+    {{'Item failed to be deleted. Try again later.'|lang}}
+    {% endif %}
     </div>
+{% endif %}
+
     {% if rows %}
     <div class="table-responsive">
         <table class="table table-bordered table-striped faDigits fw-normal align-middle">
@@ -83,7 +95,9 @@
                     <td>
                         <div class="d-flex gap-4">
                             <a class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
-                            <a class="text-danger"><i class="bi fs-4 bi-trash"></i></a>
+                            <button class="btn btn-link p-0 m-0 text-danger toConfirmModal" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{row.id}}">
+                                <i class="bi fs-4 bi-trash"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -123,6 +137,6 @@
             </ul>
         </div>
     {% endif %}
-  
+   
   </main>
   {% endblock content %}

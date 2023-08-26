@@ -10,18 +10,29 @@ class PhoneNumbers extends Backend{
         $this->object['language'] = strtoupper($this->language);
         $this->object['param'] = $param;
         $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
-        $this->object['url'] = $_SERVER['REQUEST_URI'];
     }
     
     public function phoneNumbers(){
         try {
+            if(isset($_POST['confirm_btn'])){
+                $id = $this->Utils->safeInt($this->Utils->post('id'));
+                if($id){
+                    $delete = $this->model->removeItem($id);
+                    if($delete)
+                        $this->object['msg'] = 'deleted';
+                    else
+                        $this->object['msg'] = 'not-delete';
+                }
+                else
+                    $this->object['msg'] = 'not-delete';
+                // $this->object['rows']=null;
+            }
             $page = $this->Utils->safeInt($this->Utils->get('page'));
             $getAsc = $this->Utils->safeInt($this->Utils->get('asc'));
             $asc = $getAsc?0:1;
             $order = $this->Utils->safeInt($this->Utils->get('nameSort'));
             $order = $order?1:0;
             $getOrder = $order?'nickname':'created_at';
-
             if(!is_numeric($page) || $page<=0)
                 $this->Utils->redirect(PROJECT_URL."admin/phone_numbers?page=1");
             $page = $page<=0?1:$page;
@@ -48,6 +59,8 @@ class PhoneNumbers extends Backend{
             $this->object['totalPageArray'] = array_fill(0, $pagePerTotal,$n++);
             $this->object['totalPage'] = $pagePerTotal;
             $this->object['rowNumber'] =$this->Utils->renderNumber($asc,(int)B_LIMIT,$page,$total);
+
+            
             $this->Render('phoneNumbers',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);

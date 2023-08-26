@@ -1,4 +1,16 @@
+import { COOKIE_NAME_FOR_BACKEND_LANG,MAX_PHONE_NUMBER_TO_BE_ADD } from "./config.js";
 import { setCookie } from "./Utils.js";
+const forms = document.querySelectorAll('.needs-validation')
+Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+    if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+    form.classList.add('was-validated')
+    }, false)
+})
+
 var stored = {};
 var inputs = $('.numberFiled');
 $.each(inputs,function(k,v){
@@ -12,7 +24,6 @@ for(let key in stored) {
     values.push(stored[key]);
   }
 }
-const MAX_NUM_ADD = 6;
 $('input, textarea').on('keyup',function(){
     if($(this).val().length > 0)
         $(this).removeClass('is-invalid')
@@ -44,7 +55,7 @@ $('.addField').on('click',function(){
         <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
         </div>
     `;
-    if($('.numberFiled').length<=MAX_NUM_ADD){
+    if($('.numberFiled').length<=MAX_PHONE_NUMBER_TO_BE_ADD-1){
         $(this).parent('div').before(html);
         filedNumber()
     }
@@ -55,7 +66,7 @@ $('.addField').on('click',function(){
 });
 function removeFiled(){
     $('.removeField').on('click',function(){
-        if($('.numberFiled').length>=MAX_NUM_ADD)
+        if($('.numberFiled').length>=MAX_PHONE_NUMBER_TO_BE_ADD-1)
             $('.addField').fadeIn();
         $(this).parent('div').remove();
         filedNumber();
@@ -68,22 +79,16 @@ $('.changeLanguage button').on('click',function(){
     try {
         let thisLang = $(this).attr('id').toLowerCase();
         if(thisLang.length===2 || isNaN(thisLang))
-            setCookie('phone_book_b_lang',thisLang);
+            setCookie(COOKIE_NAME_FOR_BACKEND_LANG,thisLang);
             location.reload();
     } catch (e) {
-        setCookie('phone_book_b_lang','en');
+        setCookie(COOKIE_NAME_FOR_BACKEND_LANG,'en');
     }
 });
-(() => {
-'use strict'
-const forms = document.querySelectorAll('.needs-validation')
-Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-    if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-    }
-    form.classList.add('was-validated')
-    }, false)
+$('.toConfirmModal').on('click',function(){
+    let thisId = $(this).attr('data-id');
+    $('#phoneNumbersId').val(thisId)
 })
-})()
+
+
+  
