@@ -50,7 +50,7 @@ $('.addField').on('click',function(){
         <div class="d-flex">
         <div class="position-relative flex-fill">
             <input type="tel" pattern="${patern}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5">
-            <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2"></div>
+            <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-light text-secondary rounded-circle px-2"></div>
         </div>
         <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
         </div>
@@ -85,6 +85,24 @@ $('.changeLanguage button').on('click',function(){
         setCookie(COOKIE_NAME_FOR_BACKEND_LANG,'en');
     }
 });
+
+$('.clearImage').on('click',function(){
+    $(this).addClass('d-none');
+    $('.chooseNewFile').addClass('d-none');
+    $('#image').parent().removeClass('d-none');
+    $('#image').prop('disabled',false);
+    $(this).parent().find('img').addClass('d-none');
+    $('.reloadImage').removeClass('d-none');
+});
+$('.reloadImage').on('click',function(){
+    $('#image').prop('disabled',true);
+    $(this).addClass('d-none');
+    $('.chooseNewFile').removeClass('d-none');
+    $('#image').parent().addClass('d-none');
+    $(this).parent().find('img').removeClass('d-none');
+    $('.clearImage').removeClass('d-none');
+});
+    
 $('.toConfirmModal').on('click',function(){
     let thisId = $(this).attr('data-id');
     $('#phoneNumbersId').val(thisId)

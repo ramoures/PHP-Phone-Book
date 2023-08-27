@@ -7,6 +7,15 @@
 a{
   text-decoration: none;
 }
+.firstNumber{
+  margin-left: 12px !important;
+}
+.filedNumber{
+  margin-right: 50px !important;
+}
+/* #phoneNumbers0{
+  padding-left: 40px !important;
+} */
 .cover{
   position: fixed;
   top:0;

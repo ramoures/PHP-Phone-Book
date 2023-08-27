@@ -1,0 +1,124 @@
+{% extends "layouts/structure.html" %}
+{% block title %}{{'Edit phone number'|lang}}{% endblock %}
+{% block content %}
+<script>
+function invalidElement(id){
+    document.addEventListener("DOMContentLoaded", () => {
+        const element = document.getElementById(id);
+        element.classList.add("is-invalid");
+    });
+}
+</script>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
+    <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="col-12 col-md-auto"><h1 class="h2">{{'Edit phone number'|lang}}</h1></div>
+       
+    </div>
+    <div class="col-12 col-md-9 col-lg-6 col-xl-4">
+        {% if msg %}
+            <div class="alert alert-{{msg.style}} d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="bg-{{msg.style}} me-2 p-2 rounded"></i>
+                    <div class="d-flex gap-2">
+                        {% if msg.name %}
+                            <strong>{{msg.name}}</strong>
+                            <i class="bi bi-arrow-right"></i> 
+                        {% endif %}
+                        {{msg.text|lang}} 
+                        {% if msg.ex %}
+                            {{'Ex.'|lang}} {{msg.ex|lang}}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if msg.status %}
+                    <i class="text-secondary ms-1">e.{{msg.status}}</i>
+                {% endif %}
+            </div>
+            {% if msg.script %}
+                <script>invalidElement('{{msg.script}}')</script>
+            {% endif %}
+        {% endif %}
+        
+        <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
+            <input type="hidden" name="token" value="{{csrf_token}}">
+            <div class="mb-3">
+                <label for="nickname" class="form-label">{{'Nickname'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input type="text" name="nickname" class="form-control fs-5" id="nickname" value="{{edit_form_info.nickname ?? row_info.nickname}}" required>
+                <div class="invalid-feedback">
+                    {{'Please enter nickname.'|lang}}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="fullname" class="form-label">{{'Full name'|lang}}</label>
+                <input type="text" name="full_name" class="form-control fs-5" id="fullname" value="{{row_info.full_name}}">
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumbers0" class="form-label phoneNumberLabel">{{'Phone number'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                    <div class="d-grid gap-2 flex-fill faDigits">
+                        <div class="flex-fill position-relative">
+                            <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{edit_form_info.phone_numbers[0] ?? row_info.phone_numbers[0]}}" style="padding-{% if 'Direction'|lang =='rtl' %}left{% else %}right{% endif %}: 40px !important;" required>
+                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-secondary rounded-circle px-2 firstNumber {% if edit_form_info.phone_numbers??row_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
+                            <div class="invalid-feedback">
+                                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
+                            </div>
+                        </div>
+                        {% if edit_form_info.phone_numbers %}
+                            {% for key,item in  edit_form_info.phone_numbers|slice(1,555555555) %}
+                            <div class="d-flex position-relative">
+                                <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
+                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber">{{key+2}}</div>
+                                <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            {% for key,item in  row_info.phone_numbers|slice(1,555555555) %}
+                            <div class="d-flex position-relative">
+                                <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
+                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber">{{key+2}}</div>
+                                <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        
+                        <div>
+                            <a class="btn btn-link p-0 text-decoration-none addField">
+                                <i class="bi bi-plus-lg"></i>
+                                {{'add new field'|lang}}
+                            </a>
+                        </div>
+
+                    </div>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">{{'Address'|lang}}</label>
+                <textarea name="address" class="form-control fs-5" id="address" rows="5">{{row_info.address}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">{{'Image'|lang}}</label>
+                {% if row_info.image.name %}
+                <div class="d-flex gap-2 align-items-center">
+                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{row_info.image.folder}}/{{row_info.image.name}}" alt="{{row_info.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                    <input type="hidden" value="{{row_info.image.id}}" name="image_id">
+                    <div class="d-none">
+                        <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off" disabled>
+                    </div>
+                  
+                    <button type="button" class="btn btn-sm clearImage btn-link text-secondary text-decoration-none border-bottom rounded-0 d-flex gap-1"><i class="bi bi-x-octagon"></i>Clear</button>
+                    <button type="button" class="btn btn-sm reloadImage d-none btn-dark text-white"><i class="bi bi-arrow-clockwise"></i></button>
+                </div>
+                {% else %}
+                    <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off">
+               {% endif %}
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <button type="submit" value="1" name="btn_submit" class="btn fs-5 btn-primary d-flex gap-2"><i class="bi bi-save"></i>{{'Submit'|lang}}</button>
+                <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
+            </div>
+          </form>
+      
+       
+    </div>
+   
+  </main>
+  {% endblock content %}

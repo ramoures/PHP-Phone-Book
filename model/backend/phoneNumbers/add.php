@@ -24,7 +24,8 @@ class AddPhoneNumbersModel extends Models{
     }
     public function search($tableName,$where) {
         try {
-            return $this->db->search($tableName,$where,true);
+            $obj = ["tableName"=>$tableName,"where"=>$where];
+            return $this->db->search($obj);
         } catch (\Throwable $th) {
             return false;
         }

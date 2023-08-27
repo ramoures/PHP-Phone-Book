@@ -1,8 +1,9 @@
 <?php
 class PhoneNumbersModel extends Models{
      public function getData($obj) {
-          return $this->db->read($obj,false);
+          return $this->db->read($obj);
      }
+     
      public function total($obj) {
           return $this->db->totalRows($obj);
      }

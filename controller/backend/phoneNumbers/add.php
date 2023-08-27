@@ -24,6 +24,8 @@ class AddPhoneNumbers extends Backend{
                         $nickname=$this->Utils->safeString($this->Utils->post('nickname'));
                         $fullName=$this->Utils->safeString($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
+                        $phone_numbers_map = array_map(function ($column){return "%".$column."%"; }, array_values($phone_numbers));
+
                         $address = $this->Utils->safeString($this->Utils->post('address'));
                         $_SESSION['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname]];

@@ -46,8 +46,8 @@ class PhoneNumbers extends Backend{
             $this->object['rows'] = $this->model->getData($obj);
             if($this->object['rows'])
                 foreach($this->object['rows'] as $key=>$value){
-                    if(isset($this->object['rows'][$key]['image_id']))
-                        $this->object['rows'][$key]['image'] = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]])[0];
+                    $image = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]]);
+                    $this->object['rows'][$key]['image'] = $image?$image[0]:false;
                 }
             $this->object['disabledNext'] = (int)$pagePerTotal === $page?true:false;
             $this->object['page'] = $page;

@@ -47,5 +47,9 @@ $lang = [
     "Phone numbers"=>"شماره‌تلفن",
     "Full name"=>"نام کامل",
     "Nickname"=>"نام مستعار",
+
+    //Alert Message
+    "CSRF Token is not valid!"=>"CSRF Token اشتباه است!",
+    "Submission successful!"=>"با موفقیت ثبت شد.",
 ];
 ?>
