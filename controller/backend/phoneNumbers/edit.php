@@ -38,23 +38,21 @@ class EditPhoneNumbers extends Backend{
                             $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter a valid phone number.','script'=>'phoneNumbers0'];
                         else
                         if($issetnickName)
-                            $this->object['msg']=['status'=>4,'style'=>'danger','text'=>'The Nickname is already exists.','script'=>'nickname'];
+                            $this->object['msg']=['status'=>4,'style'=>'danger','text'=>'The nickname is already exists.','script'=>'nickname'];
                         else{
                             if(count($phone_numbers) !== count(array_unique($phone_numbers)))
                                 $this->object['msg']=['status'=>5,'style'=>'danger','text'=>'Some of the phone numbers are duplicates.'];
                             else
                             foreach($phone_numbers as $key=>$value){
                                 $where['phone_numbers'] = '%'.$phone_numbers[$key].'%';
-                                if($this->model->search('phone_numbers',$where,$id)){
+                                if($this->model->search('phone_numbers',$where,$id))
                                     $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
-                                }
                                 else
-                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key])){
+                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
                                     $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
-                                }
+                                
                             }
                             $imageId = null;
-
                             if(!$this->object['msg']){
                                 if(isset($_FILES['image'])){
                                     $upload = $this->uploader('image',IMAGES_DIR_NAME);
@@ -66,12 +64,12 @@ class EditPhoneNumbers extends Backend{
                                     }
                                     else
                                     if(is_int($upload) && $upload !== false)
-                                    if(in_array($upload,[-1,-2,-4,-5]))
-                                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure! Try again later.','script'=>'image'];
-                                    else if($upload === -3)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
-                                    else if($upload === -6)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                        if(in_array($upload,[-1,-2,-4,-5]))
+                                            $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure! Try again later.','script'=>'image'];
+                                        else if($upload === -3)
+                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
+                                        else if($upload === -6)
+                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
                                 }
                                 else
                                     $imageId= $_POST['image_id'];
@@ -84,14 +82,12 @@ class EditPhoneNumbers extends Backend{
                                     }
                                     else
                                         $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-
                                 }
                             }
                         }
                     }
                 } catch (\Throwable $th) {
-                    $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-
+                    $this->object['msg']=['status'=>8,'style'=>'danger','text'=>'Error! Try again later.'];
                 }
             }else{  
                 $_SESSION['token'] = bin2hex(random_bytes(35));

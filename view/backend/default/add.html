@@ -15,82 +15,28 @@ function invalidElement(id){
        
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
-        {% if status==1 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'CSRF Token is not valid!'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
+        {% if msg %}
+            <div class="alert alert-{{msg.style}} d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="bg-{{msg.style}} me-2 p-2 rounded"></i>
+                    <div class="d-flex gap-2">
+                        {% if msg.name %}
+                            <strong>{{msg.name}}</strong>
+                            <i class="bi bi-arrow-right"></i> 
+                        {% endif %}
+                        {{msg.text|lang}} 
+                        {% if msg.ex %}
+                            {{'Ex.'|lang}} {{msg.ex|lang}}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if msg.status %}
+                    <i class="text-secondary ms-1">e.{{msg.status}}</i>
+                {% endif %}
             </div>
-        {% elseif status==2 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Please enter nickname.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-            <script>invalidElement('nickname')</script>
-        {% elseif status==3 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
-                <i class="text-secondary ms-1">e.{{status}}</i>
-                <script>invalidElement('phoneNumbers0')</script>
-            </div>
-        {% elseif status==4 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'The Nickname is already exists.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-            <script>invalidElement('nickname')</script>
-        {% elseif status==5 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Some of the phone numbers are duplicates.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-        {% elseif status==6 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'The phone number is already exists.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>  
-            <script>invalidElement('phoneNumbers{{invalidKey}}')</script>
-        {% elseif status==7 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-            <script>invalidElement('phoneNumbers{{invalidKey}}')</script>
-        {% elseif status in [8,9] %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Error! Try again later.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-        {% elseif status in [-1,-2,-4,-5] %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'File Upload Failure! Try again later.'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-        {% elseif status == -3 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Error! The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-        {% elseif status == -6 %}
-            <div class="alert alert-danger d-flex align-items-center">
-                <i class="bg-danger me-2 p-2 rounded"></i>
-                {{'Error! The file is too big. Max file size = 3mb'|lang}}
-                <i class="text-secondary ms-1">e.{{status}}</i>
-            </div>
-        {% elseif status==10 %}
-            <div class="alert alert-success d-flex align-items-center">
-                <i class="bg-success me-2 p-2 rounded"></i>
-                {{'Submission successful!'|lang}}
-            </div>
+            {% if msg.script %}
+                <script>invalidElement('{{msg.script}}')</script>
+            {% endif %}
         {% endif %}
         <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
             <input type="hidden" name="token" value="{{csrf_token}}">
@@ -110,7 +56,7 @@ function invalidElement(id){
                     <div class="d-grid gap-2 flex-fill faDigits">
                         <div class="flex-fill position-relative">
                             <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{form_info.phone_numbers[0]}}" style="padding-{% if 'Direction'|lang =='rtl' %}left{% else %}right{% endif %}: 40px !important;" required>
-                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-info rounded-circle px-2 firstNumber {% if form_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
+                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-secondary rounded-circle px-2 firstNumber {% if form_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
                             <div class="invalid-feedback">
                                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
                             </div>
@@ -119,7 +65,7 @@ function invalidElement(id){
                         {% for key,item in form_info.phone_numbers|slice(1,555555555) %}
                         <div class="d-flex position-relative">
                             <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
-                            <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-info rounded-circle px-2 filedNumber">{{key+2}}</div>
+                            <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber filedNumberClass">{{key+2}}</div>
                             <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
                         </div>
                         {% endfor %}
@@ -142,7 +88,7 @@ function invalidElement(id){
             </div>
             <div class="d-flex align-items-center gap-2">
                 <button type="submit" value="1" name="btn_submit" class="btn fs-5 btn-primary d-flex gap-2"><i class="bi bi-save"></i>{{'Submit'|lang}}</button>
-                <button onclick="form.reset()" type="button" class="btn btn-warning opacity-75">{{'Reset'|lang}}</button>
+                <button type="button" class="btn formReset btn-warning opacity-75">{{'Clear'|lang}}</button>
                 <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
             </div>
           </form>

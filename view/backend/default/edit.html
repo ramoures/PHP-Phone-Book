@@ -66,7 +66,7 @@ function invalidElement(id){
                             {% for key,item in  edit_form_info.phone_numbers|slice(1,555555555) %}
                             <div class="d-flex position-relative">
                                 <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
-                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber">{{key+2}}</div>
+                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber filedNumberClass">{{key+2}}</div>
                                 <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
                             </div>
                             {% endfor %}
@@ -74,7 +74,7 @@ function invalidElement(id){
                             {% for key,item in  row_info.phone_numbers|slice(1,555555555) %}
                             <div class="d-flex position-relative">
                                 <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
-                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber">{{key+2}}</div>
+                                <div class="position-absolute end-0 top-0 mt-2 me-5 bg-light text-secondary rounded-circle px-2 filedNumber filedNumberClass">{{key+2}}</div>
                                 <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
                             </div>
                             {% endfor %}

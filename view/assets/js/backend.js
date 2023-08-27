@@ -42,6 +42,10 @@ function filedNumber(){
 }
 
 
+$('.formReset').on('click',function(){
+    $(this).closest('form').find('input').removeClass('border-danger').val('');
+    $(this).closest('form').find('textarea').val('');
+});
 $('.addField').on('click',function(){
     $('.firstNumber').removeClass('d-none');
     $('#phoneNumbers0').addClass('pe-5');

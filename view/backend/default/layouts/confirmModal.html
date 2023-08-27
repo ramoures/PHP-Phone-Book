@@ -9,20 +9,21 @@
             </div>
             
             <div dir="{% if 'direction'|lang=='rtl' %}rtl{% else %}ltr{% endif %}" class="modal-body">
-                <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="d-flex justify-content-center align-items-center w-100">
                     
-                    <div dir="{% if 'direction'|lang=='rtl' %}ltr{% else %}rtl{% endif %}" class="d-flex gap-2">
                         <form method="post" autocomplete="off">
+                            <div dir="{% if 'direction'|lang=='rtl' %}ltr{% else %}rtl{% endif %}" class="d-flex gap-2">
                             <input name="id" type="hidden" id="phoneNumbersId">
-                            <button type="submit" value="1" name="confirm_btn" class="btn btn-light border lh-1 fs-5">
+                            <button type="submit" value="1" name="confirm_btn" class="btn btn-light border text-danger lh-1 fs-5">
                                 {{'Yes'|lang}}
                             </button>
-                            <button type="button" id="closeModal" data-bs-dismiss="modal" class="btn btn-success lh-1 fs-5">
+                            <button type="button" id="closeModal" data-bs-dismiss="modal" class="btn btn-success lh-1 fs-4">
                                 {{'No'|lang}}
                             </button>
+                        </div>
+
                         </form>
                         
-                    </div>
                     
                 </div>
             </div>

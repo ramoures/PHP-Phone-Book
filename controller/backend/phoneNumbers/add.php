@@ -18,69 +18,70 @@ class AddPhoneNumbers extends Backend{
             if(isset($_POST['btn_submit'])){
                 try {
                     if (!$_POST['token'] || $_POST['token'] !== $_SESSION['token'])
-                        $this->object['status']=1;
+                        $this->object['msg']=['status'=>1,'style'=>'danger','text'=>'CSRF Token is not valid!'];
                     else{
                         $phoneNumbersPattenr = "/^".PHONE_NUMBER_PATTERN."$/";
                         $nickname=$this->Utils->safeString($this->Utils->post('nickname'));
                         $fullName=$this->Utils->safeString($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
-                        $phone_numbers_map = array_map(function ($column){return "%".$column."%"; }, array_values($phone_numbers));
+                        // $phone_numbers_map = array_map(function ($column){return "%".$column."%"; }, array_values($phone_numbers));
 
                         $address = $this->Utils->safeString($this->Utils->post('address'));
                         $_SESSION['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname]];
                         $issetnickName = $this->model->issetData($data);
                         if($nickname==='')
-                            $this->object['status']=2;
+                            $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter nickname.','script'=>'nickname'];
                         else
                         if(count($phone_numbers)===0)
-                            $this->object['status']=3;
+                            $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter a valid phone number.','script'=>'phoneNumbers0'];
                         else
                         if($issetnickName)
-                            $this->object['status']=4;
+                            $this->object['msg']=['status'=>4,'style'=>'danger','text'=>'The nickname is already exists.','script'=>'nickname'];
                         else{
                             if(count($phone_numbers) !== count(array_unique($phone_numbers)))
-                                $this->object['status']=5;
+                                $this->object['msg']=['status'=>5,'style'=>'danger','text'=>'Some of the phone numbers are duplicates.'];
                             else
                             foreach($phone_numbers as $key=>$value){
                                 $where['phone_numbers'] = '%'.$phone_numbers[$key].'%';
-                                if($this->model->search('phone_numbers',$where)){
-                                    $this->object['status']=6;
-                                    $this->object['invalidKey']=$key;
-                                }
+                                if($this->model->search('phone_numbers',$where))
+                                    $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
                                 else
-                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key])){
-                                    $this->object['status']=7;
-                                    $this->object['invalidKey']=$key;
-                                }
+                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
+                                    $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
                             }
                             $uploadToDb = null;
-                            if(!isset($this->object['status'])){
+                            if(!$this->object['msg']){
                                 $upload = $this->uploader('image',IMAGES_DIR_NAME);
                                 if(!is_int($upload) && $upload !== false){
                                     $data = ['tableName'=>'upload','data'=>['folder'=>IMAGES_DIR_NAME,'name'=>$upload,'alt'=>$nickname]];
                                     $uploadToDb = $this->model->insertData($data);
                                     if(!$uploadToDb)
-                                        $this->object['status'] = 9;
+                                        $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
                                 }
                                 else
                                 if(is_int($upload) && $upload !== false)
-                                    $this->object['status'] = $upload;
-                                if(!isset($this->object['status'])){
+                                    if(in_array($upload,[-1,-2,-4,-5]))
+                                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure! Try again later.','script'=>'image'];
+                                    else if($upload === -3)
+                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
+                                    else if($upload === -6)
+                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                if(!$this->object['msg']){
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb]];
                                     $res = $this->model->insertData($obj);
                                     if($res){
                                         $_SESSION['form_info']='';
-                                        $this->object['status']=10;
+                                        $this->object['msg']=['style'=>'success','text'=>'Submission successful!'];
                                     }
                                     else
-                                        $this->object['status'] = 9;
+                                        $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
                                 }
                             }
                         }
                     }
                 } catch (\Throwable $th) {
-                    $this->object['status']=8;
+                    $this->object['msg']=['status'=>8,'style'=>'danger','text'=>'Error! Try again later.'];
                 }
             }else{  
                 $_SESSION['token'] = bin2hex(random_bytes(35));
