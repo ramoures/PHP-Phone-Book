@@ -68,7 +68,7 @@ class AddPhoneNumbers extends Backend{
                                     else if($upload === -6)
                                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
                                 if(!$this->object['msg']){
-                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb]];
+                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);
                                     if($res){
                                         $_SESSION['form_info']='';

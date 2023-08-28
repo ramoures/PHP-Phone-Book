@@ -1,5 +1,7 @@
 import { COOKIE_NAME_FOR_BACKEND_LANG,MAX_PHONE_NUMBER_TO_BE_ADD } from "./config.js";
 import { setCookie } from "./Utils.js";
+if (window.history.replaceState) 
+    window.history.replaceState( null, null, window.location.href );
 const forms = document.querySelectorAll('.needs-validation')
 Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
@@ -54,7 +56,7 @@ $('.addField').on('click',function(){
         <div class="d-flex">
         <div class="position-relative flex-fill">
             <input type="tel" pattern="${patern}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5">
-            <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-light text-secondary rounded-circle px-2"></div>
+            <div class="position-absolute filedNumber end-0 top-0 mt-2 me-2 bg-magic-light text-secondary rounded-circle px-2"></div>
         </div>
         <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
         </div>
@@ -106,11 +108,67 @@ $('.reloadImage').on('click',function(){
     $(this).parent().find('img').removeClass('d-none');
     $('.clearImage').removeClass('d-none');
 });
+addEventListener("resize", () => {
+    $('.moreInfo').addClass('d-none').prop('hidden',true);
+    $('.toMoreInfo').attr('data-toggle',0);
+    $('.toMoreInfo i').removeClass('bi-caret-up-fill').addClass('bi-caret-down-fill');
+
+});
+
+$('.toMoreInfo').on('click',function(){
+    const toggle = parseInt($(this).attr('data-toggle'));
+    if(toggle){
+        $('i',this).removeClass('bi-caret-up-fill').addClass('bi-caret-down-fill');
+        $(this).parent().parent().parent().next().addClass('d-none').prop('hidden',true);
+        $(this).attr('data-toggle',0)
+    }
+    else{
+        $(this).attr('data-toggle',1)
+        $('i',this).removeClass('bi-caret-down-fill').addClass('bi-caret-up-fill');
+
+        let fullNameTtl = $(this).closest('tr').parent().prev().find('.fullNameTtl').text();
+        let addressTtl = $(this).closest('tr').parent().prev().find('.addressTtl').text();
+        let datetimeTtl = $(this).closest('tr').parent().prev().find('.datetimeTtl').text();
+        let fullNameBd = $(this).closest('tr').find('.fullNameBd').html();
+        let fullName = fullNameBd?`<strong>${fullNameTtl}</strong> : ${fullNameBd}<br>`:'';
+        let addressBd = $(this).closest('tr').find('.addressBd').html();
+        let address = addressBd?`<strong>${addressTtl}</strong> : ${addressBd}<br>`:'';
+        let datetimeBd = $(this).closest('tr').find('.datetimeBd').html();
+        let html = `
+      
+            ${fullName}${address}
+            <strong>${datetimeTtl}</strong> : ${datetimeBd}
+       
+        `;
+        $(this).parent().parent().parent().next().removeClass('d-none').prop('hidden',false).find('td').html(html)
+    }
     
+});
 $('.toConfirmModal').on('click',function(){
     let thisId = $(this).attr('data-id');
     $('#phoneNumbersId').val(thisId)
-})
+});
+$('#txtSearchProdAssign').keypress(function (e) {
+    var key = e.which;
+    if(key == 13)  // the enter key code
+     {
+       $('input[name = butAssignProd]').click();
+       return false;  
+     }
+   });
+function serach(){
+    const text = $('.searcher').parent().find('input').val();
+    const baseUrl = $('.searcher').attr('data-base-target');
+    location.href = baseUrl+"&s="+text;
+}
+$('.searcher').on('click',function(){
+    serach();
+});
+$('.searcher').parent().find('input').on('keypress',function(e){
+    var key = e.which;
+    if(key == 13){
+        serach();
+        return false;  
+     }
+});
 
-
-  

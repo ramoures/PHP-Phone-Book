@@ -41,9 +41,8 @@ class EditPhoneNumbersModel extends Models{
             return false;
         }
     }
-    public function search($tableName,$where,$id) {
+    public function search($obj) {
         try {
-            $obj = ["tableName"=>$tableName,"where"=>$where,'whereNot'=>['id'=>$id]];
             return $this->db->search($obj);
         } catch (\Throwable $th) {
             return false;

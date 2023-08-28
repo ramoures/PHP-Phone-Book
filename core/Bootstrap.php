@@ -2,8 +2,8 @@
 final class Bootstrap{
     use errors;
     public function __construct(){
-        $this->errorReporting();       
         $this->init();
+        $this->errorReporting();       
         $this->routing();
     }
     private function errorReporting(){
@@ -23,7 +23,7 @@ final class Bootstrap{
     }
     private function init(){
        try {
-            date_default_timezone_set(DEFAULT_TIMEZONE);
+            date_default_timezone_set('UTC');
             ob_start();
        } catch (\Throwable $th) {
             return $this->error($th);

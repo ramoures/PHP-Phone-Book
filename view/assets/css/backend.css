@@ -4,6 +4,29 @@
     height: 1rem;
     fill: currentColor;
   }
+
+.table{
+  --bs-table-bg:transparent !important;
+}
+.table tbody tr:nth-child(odd of :not([hidden])){
+  background-color: var(--bs-tertiary-bg) !important
+}
+.moreInfo :nth-child(odd){
+  background-color: var(--bs-body-bg) !important
+}
+.moreInfo :nth-child(even){
+  background-color: var(--bs-body-bg) !important
+}
+.bg-magic-light{
+  background-color: var(--bs-secondary-bg) !important
+}
+
+.btn-magic-light{
+  background-color: var(--bs-tertiary-bg) !important
+}
+.btn-magic-light:hover{
+  background-color: var(--bs-body-bg) !important
+}
 a{
   text-decoration: none;
 }
@@ -13,9 +36,35 @@ a{
 .filedNumberClass{
   margin-right: 50px !important;
 }
-/* #phoneNumbers0{
-  padding-left: 40px !important;
-} */
+.homeTableImg{
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
+}
+@media (max-width: 768px) {
+  .homeTableImg{
+    object-fit: cover;
+    width: 25px;
+    height: 25px;
+    position: relative;
+  }
+  .homeTableImg i{
+   font-size: 9pt !important;
+   text-align: center;
+   display: grid;
+   align-items: center;
+  }
+  table thead{
+    font-size: 8pt !important;
+  }
+  table tbody{
+    font-size: 9pt !important;
+  }
+  .operations i{
+    font-size: 14px !important;
+  }
+}
+
 .cover{
   position: fixed;
   top:0;
@@ -82,3 +131,4 @@ a{
   .navbar .form-control {
     padding: .75rem 1rem;
   }
+

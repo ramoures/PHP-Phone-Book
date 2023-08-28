@@ -44,31 +44,7 @@ final class Database{
             return false;
        }
     }
-    public function totalRows($object){
-        try {
-            if(isset($object['where'])){
-                $columns = array_map(function ($column){return $column."=?"; }, array_keys($object['where']));
-                $columnsStr = implode(" AND ",$columns);
-                $where = array_values($object['where']);
-                $sql = "SELECT * FROM ".$object['tableName']." WHERE $columnsStr";
-                $stmt = $this->pdo->prepare($sql);
-            }
-            else{
-                $sql = "SELECT * FROM ".$object['tableName'];
-                $stmt = $this->pdo->query($sql);
-            }
-            if($stmt){
-                if(isset($object['where']))
-                    $stmt->execute($where);
-                $res = $stmt->fetchAll();
-                    return count($res);
-            }
-            else
-                return 0;
-        } catch (\Throwable $th) {
-            return 0;
-        }
-    }
+    
     public function read($object){
         try {
             $issetCheck = $object['issetCheck']??false;
@@ -146,11 +122,12 @@ final class Database{
     public function search($object){
         try {
             $issetCheck = $object['issetCheck']??false;
+            $count = $object['count']??false;
             $sql = sprintf("SELECT * FROM %s",$object['tableName']);
 
             if(isset($object['where'])){
                 $columns = array_map(function ($column){return $column." LIKE ?"; }, array_keys($object['where']));
-                $columnsStr = implode(" AND ",$columns);
+                $columnsStr = implode(" OR ",$columns);
                 $where = array_values($object['where']);
                 $sql .= sprintf(" WHERE (%s)",$columnsStr);
             }
@@ -158,11 +135,21 @@ final class Database{
                 if(isset($object['where'])) 
                     $sql .= " AND ";
                 $columnsWn = array_map(function ($column){return $column."=?"; }, array_keys($object['whereNot']));
-                $columnsStrWn = implode(" AND ",$columnsWn);
+                $columnsStrWn = implode(" OR ",$columnsWn);
                 $whereNot = array_values($object['whereNot']);
                 $sql .= sprintf(" NOT (%s)",$columnsStrWn);
                 $where = array_merge($where,$whereNot);
             }
+            if(isset($object['orderBy']))
+                $sql .= sprintf(" ORDER BY %s",$object['orderBy']);
+            if(isset($object['asc'])){
+                $ascDesc = $object['asc']?'DESC':'ASC';
+                $sql .= sprintf(" %s",$ascDesc);
+            }
+            if(isset($object['limit']))
+                $sql .= sprintf(" LIMIT %s",$object['limit']);
+            if(isset($object['offset']))
+                $sql .= sprintf(" OFFSET %s",$object['offset']);
             if(isset($object['where']) || isset($object['whereNot'])){
                 $stmt = $this->pdo->prepare($sql);
                 $stmt->execute($where);
@@ -174,6 +161,9 @@ final class Database{
                 if(count($res)>0){
                     if($issetCheck)
                         return true;
+                    else
+                    if($count)
+                        return count($res);
                     else
                         return json_decode(json_encode($res),true);
                 }

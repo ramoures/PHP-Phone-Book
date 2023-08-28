@@ -3,16 +3,16 @@
 {% block content %}
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
-    <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
-            <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-center">
-                <div dir="ltr" class="d-flex">
-                    <button class="btn btn-link lh-1">
-                        <i class="bi bi-search" ></i>
-                    </button>
-                    <input class="form-control" placeholder="{{'Search'|lang}}" style="width:220px">
-                </div>
-                <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn  btn-success d-flex gap-2 fw-bold">
+    <div class="d-flex flex-wrap  justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
+            <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-between mt-2 mt-sm-0">
+                    <div dir="ltr" class="d-flex">
+                        <button class="btn btn-link lh-1 searcher" data-base-target="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">
+                            <i class="bi bi-search" ></i>
+                        </button>
+                        <input class="form-control" id="searchText" placeholder="{{'Search'|lang}}" value="{{search}}" style="width:220px">
+                    </div>
+                <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn btn-success d-flex gap-2 fw-bold">
                     <i class="bi bi-plus-lg"></i>
                     {{'Add'|lang}} 
                 </a>
@@ -32,26 +32,24 @@
 
     {% if rows %}
     <div class="table-responsive">
-        <table class="table table-bordered table-striped faDigits fw-normal align-middle">
+        <table class="table table-bordered faDigits fw-normal align-middle bg-transparent">
             <thead>
             <tr>
                 <th class="text-center" scope="col">
                    #
                 </th>
-                <th class="text-center" scope="col">{{'Image'|lang}}</th>
+                <th class="text-center " scope="col">{{'Image'|lang}}</th>
                 <th scope="col">
-                    
-                    <a {% if orderChanged==false %}class="text-reset"{% endif %} href="?page={{page}}&asc={{ascChanged}}&nameSort=1">
+                    <a {% if orderChanged==false %}class="text-reset"{% endif %} href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=1&s={{search}}">
                         {{'Nickname'|lang}}
                         <i class="bi bi-caret-{%if orderChanged and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
-                    
                 </th>
-                <th scope="col">{{'Full name'|lang}}</th>
+                <th scope="col" class="d-none d-lg-table-cell fullNameTtl">{{'Full name'|lang}}</th>
                 <th scope="col">{{'Phone numbers'|lang}}</th>
-                <th scope="col">{{'Address'|lang}}</th>
-                <th scope="col">
-                    <a {% if orderChanged %}class="text-reset"{% endif %}  href="?page={{page}}&asc={{ascChanged}}&nameSort=0">
+                <th scope="col" class="d-none d-lg-table-cell addressTtl">{{'Address'|lang}}</th>
+                <th scope="col" class="d-none d-lg-table-cell datetimeTtl">
+                    <a {% if orderChanged %}class="text-reset"{% endif %} href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=0&s={{search}}">
                         {{'Date & Time'|lang}}
                         <i class="bi bi-caret-{%if orderChanged == false and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
@@ -74,31 +72,43 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             {% if row.image.name %}
-                                <img class="rounded-circle border border-2" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                                <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}"><img class="rounded-circle border border-2 homeTableImg" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="45px" height="45px"></a>
                             {% else %}
-                                <div class="img-thumbnail opacity-50 rounded-circle d-flex lh-1 justify-content-center align-items-center" style="width: 45px;height: 45px;;">
+                                <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}" class="img-thumbnail text-body opacity-50 homeTableImg rounded-circle d-flex lh-1 justify-content-center align-items-center">
                                     <i class="bi fs-6 bi-image"></i>
-                                </div>
+                                </a>
                             {% endif %}
                         </div>
                     </td>
-                    <td>{{row.nickname}}</td>
-                    <td>{{row.full_name}}</td>
+                    <td><a class="text-body" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}">{{row.nickname}}</a></td>
+                    <td class="d-none d-lg-table-cell fullNameBd">{{row.full_name}}</td>
                     <td>{{numb|join('<br>')|raw}}</td>
-                    <td>{{row.address}}</td>
-                    <td class="small">
-                        <div>Created at: {{row.created_at}}</div>
+                    <td class="d-none d-lg-table-cell addressBd">{{row.address}}</td>
+                    <td class="small d-none d-lg-table-cell datetimeBd">
+                        <div>{{'Created at'|lang}}: <span dir="ltr">{{row.created_at}}</span></div>
                         {% if row.updated_at %}
-                            <div class="text-secondary">Updated at: {{row.updated_at}}</div>
+                            <div class="text-secondary">{{'Updated at'|lang}}: <span dir="ltr">{{row.updated_at}}</span></div>
                         {% endif %}
                     </td>
                     <td>
-                        <div class="d-flex gap-4">
-                            <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}" class="text-primary"><i class="bi fs-4 bi-pencil-square"></i></a>
-                            <button class="btn btn-link p-0 m-0 text-danger toConfirmModal" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{row.id}}">
-                                <i class="bi fs-4 bi-trash"></i>
+                        <div class="d-flex operations justify-content-between align-items-center">
+                            <div class="d-flex gap-1 gap-sm-4">  
+                                <button onclick="location.href = '{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}'" class="text-primary btn btn-link p-0 m-0">
+                                    <i class="bi fs-4 bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-link p-0 m-0 text-danger toConfirmModal" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{row.id}}">
+                                    <i class="bi fs-4 bi-trash"></i>
+                                </button>
+                            </div>
+                            <button class="d-block d-lg-none btn btn-link p-0 m-0 me-0 me-md-2 text-secondary toMoreInfo" data-id="{{row.id}}">
+                                <i class="bi fs-4 bi-caret-down-fill"></i>
                             </button>
                         </div>
+                    </td>
+                    
+                </tr>
+                <tr class="moreInfo" hidden>
+                    <td colspan="5">
                     </td>
                 </tr>
                 {% endfor %}
@@ -114,24 +124,24 @@
         <div class="d-flex justify-content-center">
             <ul class="pagination justify-content-end user-select-none">
                 <li class="page-item {% if page<=1 %}disabled{% endif %}">
-                    <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Previous'|lang}}</a>
+                    <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Previous'|lang}}</a>
                 </li>
                 {% if totalPage>=5 %}
                     {% for key,row in totalPageArray|slice(1,2) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                     {% endfor %}
                     <li class="page-item"><span class="page-link text-secondary">---</span></li>
                     {% set t = totalPage %}
                     {% for key,row in totalPageArray|slice(t-2,t,t) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                     {% endfor %}
                 {% else %}
                     {% for key,row in totalPageArray %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                     {% endfor %}
                 {% endif %}
                     <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
-                        <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Next'|lang}}</a>
+                        <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Next'|lang}}</a>
                     </li>
                 </li>
             </ul>

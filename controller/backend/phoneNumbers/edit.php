@@ -44,8 +44,9 @@ class EditPhoneNumbers extends Backend{
                                 $this->object['msg']=['status'=>5,'style'=>'danger','text'=>'Some of the phone numbers are duplicates.'];
                             else
                             foreach($phone_numbers as $key=>$value){
-                                $where['phone_numbers'] = '%'.$phone_numbers[$key].'%';
-                                if($this->model->search('phone_numbers',$where,$id))
+                                $searchObj = ["tableName"=>'phone_numbers',"where"=>['phone_numbers'=>'%'.$phone_numbers[$key].'%'],'whereNot'=>['id'=>$id]];
+
+                                if($this->model->search($searchObj))
                                     $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
                                 else
                                 if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
@@ -74,7 +75,7 @@ class EditPhoneNumbers extends Backend{
                                 else
                                     $imageId= $_POST['image_id'];
                                 if(!$this->object['msg']){
-                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId],'where'=>['id'=>$id]];
+                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'updated_at'=>date("Y-m-d H:i:s")],'where'=>['id'=>$id]];
                                     $res = $this->model->updateData($obj);
                                     if($res){
                                         $_SESSION['edit_form_info']='';

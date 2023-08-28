@@ -3,10 +3,10 @@ class PhoneNumbersModel extends Models{
      public function getData($obj) {
           return $this->db->read($obj);
      }
-     
-     public function total($obj) {
-          return $this->db->totalRows($obj);
+     public function searchData($obj) {
+          return $this->db->search($obj);
      }
+
      public function removeItem($id){
        try {
           $imageId = $this->db->read(['tableName'=>'phone_numbers','where'=>['id'=>$id]]);

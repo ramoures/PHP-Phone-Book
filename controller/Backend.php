@@ -79,7 +79,7 @@ abstract class Backend extends Base{
     protected function uploader($fieldName,$folder){
         try {
             if(isset($_FILES[$fieldName])){
-                if(in_array($folder,VALID_UPLOAD_DIR_NAMES)){
+                if(in_array($folder,VALID_DIR_NAMES_TO_UPLOAD)){
                     $fileField= $_FILES[$fieldName]['tmp_name'];
                     if($fileField)
                         return $this->uploadImage($fieldName,UPLOAD_PATH."$folder");
