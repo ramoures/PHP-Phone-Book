@@ -1,10 +1,16 @@
 <?php
 final class Bootstrap{
     use errors;
-    public function __construct(){
+    private static $instance;
+    private function __construct(){
         $this->init();
         $this->errorReporting();       
         $this->routing();
+    }
+    static function run(){
+        if(self::$instance==null)
+            self::$instance = new Bootstrap();
+        return self::$instance;
     }
     private function errorReporting(){
         try {

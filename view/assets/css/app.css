@@ -9,7 +9,20 @@ a {
 .po_cu{
     cursor: pointer;
 }
+[data-bs-theme=dark] {
+    color-scheme: dark;
+    --bs-primary-rgb: 30,120,195 !important;
+}
+[data-bs-theme=dark] .btn-primary {
+    --bs-btn-bg: #1e79c3 !important;
+    --bs-btn-border-color: #1e79c3 !important;
+    --bs-btn-hover-bg: #1b6bac !important;
+    --bs-btn-hover-border-color: #1b6bac !important;
+    --bs-btn-active-bg: #1b6098 !important;
+    --bs-btn-active-border-color: #1b6098 !important;
+}
 .bd-placeholder-img {
+    background-attachment: #1e79c3;
     font-size: 1.125rem;
     text-anchor: middle;
     -webkit-user-select: none;

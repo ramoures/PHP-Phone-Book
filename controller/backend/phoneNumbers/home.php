@@ -27,8 +27,6 @@ class PhoneNumbers extends Backend{
             $order = $this->Utils->safeInt($this->Utils->get('nameSort'));
             $order = $order?1:0;
             $getOrder = $order?'nickname':'created_at';
-            if(!is_numeric($page) || $page<=0)
-                $this->Utils->redirect(PROJECT_URL."admin/phone_numbers?page=1");
             $page = $page<=0?1:$page;
             $offset = (int)B_LIMIT * $page - (int)B_LIMIT;
 
@@ -47,7 +45,7 @@ class PhoneNumbers extends Backend{
             }
             $pagePerTotal = ceil($total / (int)B_LIMIT);
             if($pagePerTotal && $pagePerTotal<$page)
-                $this->Utils->redirect(PROJECT_URL."admin/phone_numbers?page=".$pagePerTotal);
+                $this->Utils->redirect(PROJECT_URL."admin/phone_numbers?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
             if($this->object['rows'])
                 foreach($this->object['rows'] as $key=>$value){
                     $image = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]]);
@@ -73,7 +71,7 @@ class PhoneNumbers extends Backend{
             $this->object['totalPage'] = $pagePerTotal;
             $this->object['rowNumber'] =$this->Utils->renderNumber($asc,(int)B_LIMIT,$page,$total);
             $this->object['search'] = $search;
-            $this->Render('phoneNumbers',$this->object);
+            return $this->Render('phoneNumbers',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);
         }

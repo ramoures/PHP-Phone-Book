@@ -82,37 +82,7 @@
             <i class="fs-4 text-secondary">data not found!</i>
         </div>
     {% endif %}
-   
-
-    {% if totalPage > 1 %}
-        <div class="d-flex flex-wrap justify-content-end">
-            <ul class="pagination justify-content-end user-select-none">
-                <li class="page-item {% if page<=1 %}disabled{% endif %}">
-                    <a class="page-link" href="?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Previous'|lang}}</a>
-                </li>
-                {% if totalPage>=5 %}
-                    {% for key,row in totalPageArray|slice(1,2) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
-                    {% endfor %}
-                    <li class="page-item"><span class="page-link text-secondary">---</span></li>
-                    {% set t = totalPage %}
-                    {% for key,row in totalPageArray|slice(t-2,t,t) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
-                    {% endfor %}
-                {% else %}
-                    {% for key,row in totalPageArray %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{key+1}}</a></li>
-                    {% endfor %}
-                {% endif %}
-                
-            
-                    <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
-                        <a class="page-link" href="?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Next'|lang}}</a>
-                    </li>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
+    {% include "layouts/pagination.html" %}
   </section>
 </main>
 {% endblock %}

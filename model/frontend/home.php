@@ -1,10 +1,18 @@
 <?php
 class HomeModel extends Models{
      public function getData($obj) {
-          return $this->db->read($obj);
+          try {
+               return $this->db->read($obj);
+          } catch (\Throwable $th) {
+               return false;
+          }
      }
      public function total($obj) {
-          return $this->db->search($obj);
+          try {
+               return $this->db->search($obj);
+          } catch (\Throwable $th) {
+               return false;
+          }
      }
 }
 ?>

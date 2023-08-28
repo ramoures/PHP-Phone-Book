@@ -21,12 +21,11 @@ final class Database{
                 //diabled PDO emulate:
                 $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             }
-           
         } catch (Exception $e) {
             $this->error($e);
         }
     }
-    public function create($object){ //Insert Data
+    public function create($object){
        try {
             $columns = array_map(function ($column){return ":".$column; }, array_keys($object['data']));
             $columnsStr = implode(", ",$columns);
@@ -206,11 +205,14 @@ final class Database{
         return false;
      }
     }
-    static function getInstance()
-    {
-        if(self::$instance==null)
-            self::$instance = new Database();
-        return self::$instance;
+    static function getInstance(){
+       try {
+            if(self::$instance==null)
+                self::$instance = new Database();
+            return self::$instance;
+       } catch (\Throwable $th) {
+             self::error($th);
+       }
     }
     public function __destruct(){
         $this->pdo = null;

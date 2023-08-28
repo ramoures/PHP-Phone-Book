@@ -1,16 +1,13 @@
 <?php
 class EditPhoneNumbersModel extends Models{
-    public function __construct() {
-        parent::__construct();
-    }
     public function getData($obj){
         try {
-         $result = $this->db->read($obj);
-         if($result)
-             return $result;
-         return false;
+            $result = $this->db->read($obj);
+            if($result)
+                return $result;
+            return false;
         } catch (\Throwable $th) {
-         return false;
+            return false;
         }
     }
     public function insertData($data){

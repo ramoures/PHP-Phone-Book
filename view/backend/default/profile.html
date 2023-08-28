@@ -42,7 +42,7 @@ function invalidElement(id){
             <input type="hidden" name="token" value="{{csrf_token}}">
             <div class="mb-3">
                 <label for="username" class="form-label">{{'Username'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <input type="text" name="username" class="form-control fs-5" id="username" value="{{edit_form_info.username ?? row_info.username}}" required>
+                <input type="text" name="username" class="form-control fs-5" id="username" value="{{profile_form_info.username ?? row_info.username}}" required>
                 <div class="invalid-feedback">
                     {{'Please enter username.'|lang}}
                 </div>
@@ -72,7 +72,7 @@ function invalidElement(id){
             </div>
             <div class="mb-3 newPass d-none">
                 <label for="currentPassword" class="form-label">{{'Current password'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <input type="text" name="currentPassword" autocomplete="off" class="form-control fs-5" id="currentPassword" required>
+                <input disabled type="text" name="currentPassword" autocomplete="off" class="form-control fs-5" id="currentPassword" required>
                 <div class="invalid-feedback">
                     {{'Please enter current password.'|lang}}
                 </div>

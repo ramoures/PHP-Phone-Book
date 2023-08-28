@@ -39,7 +39,7 @@ class Admin extends Backend{
              }
              $this->object['username'] = $this->getVar('admin/signin','username');
  
-             $this->Render('signin',$this->object);
+             return $this->Render('signin',$this->object);
         } catch (\Throwable $th) {
              return $this->error($th);
         }

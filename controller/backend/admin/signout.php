@@ -4,7 +4,7 @@ class SignoutAdmin extends Backend{
     public function signout(){
         try {
             unset($_SESSION['admin_id']);
-            $this->Utils->redirect(PROJECT_URL."admin/signin?msg=signout");
+            return $this->Utils->redirect(PROJECT_URL."admin/signin?msg=signout");
         } catch (\Throwable $th) {
             if(isset($_SESSION['admin_id']))
                 unset($_SESSION['admin_id']);

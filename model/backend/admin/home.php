@@ -1,8 +1,5 @@
 <?php
 class AdminModel extends Models{
-    public function __construct() {
-        parent::__construct();
-    }
     public function signin($object){
         try {
             $login = $this->db->read($object);

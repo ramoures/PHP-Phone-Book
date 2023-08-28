@@ -117,32 +117,6 @@
     {% else %}
         <i class="fs-4 text-secondary">data not found!</i>
     {% endif %}
-    {% if totalPage > 1 %}
-        <div class="d-flex justify-content-center">
-            <ul class="pagination justify-content-end user-select-none">
-                <li class="page-item {% if page<=1 %}disabled{% endif %}">
-                    <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Previous'|lang}}</a>
-                </li>
-                {% if totalPage>=5 %}
-                    {% for key,row in totalPageArray|slice(1,2) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
-                    {% endfor %}
-                    <li class="page-item"><span class="page-link text-secondary">---</span></li>
-                    {% set t = totalPage %}
-                    {% for key,row in totalPageArray|slice(t-2,t,t) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
-                    {% endfor %}
-                {% else %}
-                    {% for key,row in totalPageArray %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
-                    {% endfor %}
-                {% endif %}
-                    <li class="page-item {% if page>=totalPage %}disabled{% endif %}">
-                        <a class="page-link" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Next'|lang}}</a>
-                    </li>
-                </li>
-            </ul>
-        </div>
-    {% endif %}
+    {% include "layouts/pagination.html" %}
 </main>
 {% endblock content %}

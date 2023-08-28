@@ -1,5 +1,4 @@
 <?php
-
 class Home extends Frontend{
     protected $model;
     public function __construct($param) {
@@ -7,38 +6,41 @@ class Home extends Frontend{
         $this->model = new HomeModel();
     }
     public function index(){
-        $page = $this->Utils->safeInt($this->Utils->get('page'));
-        $getAsc = $this->Utils->safeInt($this->Utils->get('asc'));
-        $asc = $getAsc?0:1;
-        $order = $this->Utils->safeInt($this->Utils->get('nameSort'));
-        $order = $order?1:0;
-        $getOrder = $order?'nickname':'created_at';
-        if(!is_numeric($page) || $page<=0)
-            $this->Utils->redirect(PROJECT_URL."?page=1");
-        $page = $page<=0?1:$page;
-        $offset = (int)LIMIT * $page - (int)LIMIT;
-        $total = $this->model->total(['tableName'=>'phone_numbers','count'=>true]);
-        $pagePerTotal = ceil($total / (int)LIMIT);
-        if($pagePerTotal && $pagePerTotal<$page)
-            $this->Utils->redirect(PROJECT_URL."?page=1");
-        $obj = ['tableName'=>'phone_numbers','limit'=>LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc];
-        $this->object['rows'] = $this->model->getData($obj);
-        if($this->object['rows'])
-            foreach($this->object['rows'] as $key=>$value){
-                if(isset($this->object['rows'][$key]['image_id']))
-                    $this->object['rows'][$key]['image'] = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]])[0];
-            }
-        $this->object['disabledNext'] = (int)$pagePerTotal === $page?true:false;
-        $this->object['page'] = $page;
-        $this->object['asc'] = $getAsc;
-        $this->object['ascChanged'] = $asc;
-        $this->object['order'] = $getOrder;
-        $this->object['orderChanged'] = $order;
-        $n=0;
-        $this->object['totalPageArray'] = array_fill(0, $pagePerTotal,$n++);
-        $this->object['totalPage'] = $pagePerTotal;
-        $this->object['rowNumber'] =$this->Utils->renderNumber($asc,(int)LIMIT,$page,$total);
-        $this->Render('index',$this->object);
+        try {
+            $page = $this->Utils->safeInt($this->Utils->get('page'));
+            $getAsc = $this->Utils->safeInt($this->Utils->get('asc'));
+            $asc = $getAsc?0:1;
+            $order = $this->Utils->safeInt($this->Utils->get('nameSort'));
+            $order = $order?1:0;
+            $getOrder = $order?'nickname':'created_at';
+            $page = $page<=0?1:$page;
+            $offset = (int)LIMIT * $page - (int)LIMIT;
+            $search=null;
+            $total = $this->model->total(['tableName'=>'phone_numbers','count'=>true]);
+            $pagePerTotal = ceil($total / (int)LIMIT);
+            if($pagePerTotal && $pagePerTotal<$page)
+                $this->Utils->redirect(PROJECT_URL."?page=1"."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
+            $obj = ['tableName'=>'phone_numbers','limit'=>LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc];
+            $this->object['rows'] = $this->model->getData($obj);
+            if($this->object['rows'])
+                foreach($this->object['rows'] as $key=>$value){
+                    if(isset($this->object['rows'][$key]['image_id']))
+                        $this->object['rows'][$key]['image'] = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]])[0];
+                }
+            $this->object['disabledNext'] = (int)$pagePerTotal === $page?true:false;
+            $this->object['page'] = $page;
+            $this->object['asc'] = $getAsc;
+            $this->object['ascChanged'] = $asc;
+            $this->object['order'] = $getOrder;
+            $this->object['orderChanged'] = $order;
+            $n=0;
+            $this->object['totalPageArray'] = array_fill(0, $pagePerTotal,$n++);
+            $this->object['totalPage'] = $pagePerTotal;
+            $this->object['rowNumber'] =$this->Utils->renderNumber($asc,(int)LIMIT,$page,$total);
+            return $this->Render('index',$this->object);
+        } catch (\Throwable $th) {
+            return $this->error($th);
+        }
     }
 }
 ?>

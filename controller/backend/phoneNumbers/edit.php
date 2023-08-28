@@ -62,7 +62,7 @@ class EditPhoneNumbers extends Backend{
                                         else if($upload === -3)
                                             $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
                                         else if($upload === -6)
-                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
                                 }
                                 else
                                     $imageId= $_POST['image_id'];
@@ -94,7 +94,7 @@ class EditPhoneNumbers extends Backend{
             if(isset($rowInfo[0]['image_id']))
                 $this->object['row_info']['image'] = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$rowInfo[0]['image_id']]])[0];
             $this->object['edit_form_info'] = $_SESSION['edit_form_info'];
-            $this->Render('edit',$this->object);
+            return $this->Render('edit',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);
         }

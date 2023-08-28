@@ -59,7 +59,7 @@ class AddPhoneNumbers extends Backend{
                                     else if($upload === -3)
                                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
                                     else if($upload === -6)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
                                 if(!isset($this->object['msg'])){
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);
@@ -81,7 +81,7 @@ class AddPhoneNumbers extends Backend{
                 $this->object['csrf_token'] = $_SESSION['token'];
             }
             $this->object['form_info'] = $_SESSION['form_info']??'';
-            $this->Render('add',$this->object);
+            return $this->Render('add',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);
         }
