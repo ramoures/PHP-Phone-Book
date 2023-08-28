@@ -12,7 +12,6 @@ function invalidElement(id){
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-12 col-md-auto"><h1 class="h2">{{'Add phone number'|lang}}</h1></div>
-       
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
         {% if msg %}
@@ -61,7 +60,6 @@ function invalidElement(id){
                                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
                             </div>
                         </div>
-                      
                         {% for key,item in form_info.phone_numbers|slice(1,555555555) %}
                         <div class="d-flex position-relative">
                             <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5 pe-5" id="phoneNumbers{{key+1}}" value="{{item}}">
@@ -75,7 +73,6 @@ function invalidElement(id){
                                 {{'add new field'|lang}}
                             </a>
                         </div>
-
                     </div>
             </div>
             <div class="mb-3">
@@ -92,9 +89,6 @@ function invalidElement(id){
                 <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
             </div>
           </form>
-      
-       
     </div>
-   
-  </main>
-  {% endblock content %}
+</main>
+{% endblock content %}

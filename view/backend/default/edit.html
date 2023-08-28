@@ -4,7 +4,6 @@
 <script>
 function invalidElement(id){
     document.addEventListener("DOMContentLoaded", () => {
-        
         const element = document.getElementById(id);
         element.classList.add("is-invalid");
     });
@@ -13,7 +12,6 @@ function invalidElement(id){
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-12 col-md-auto"><h1 class="h2">{{'Edit phone number'|lang}}</h1></div>
-       
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
         {% if msg %}
@@ -79,9 +77,7 @@ function invalidElement(id){
                                 <button type="button" class="btn btn-link text-danger removeField"><i class="bi bi-trash"></i></button>
                             </div>
                             {% endfor %}
-                        {% endif %}
-
-                        
+                        {% endif %}                        
                         <div>
                             <a class="btn btn-link p-0 text-decoration-none addField">
                                 <i class="bi bi-plus-lg"></i>
@@ -117,9 +113,6 @@ function invalidElement(id){
                 <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
             </div>
           </form>
-      
-       
     </div>
-   
-  </main>
-  {% endblock content %}
+</main>
+{% endblock content %}

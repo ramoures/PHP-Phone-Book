@@ -48,8 +48,5 @@ class EditPhoneNumbersModel extends Models{
             return false;
         }
     }
-    
-   
-
 }
 ?>

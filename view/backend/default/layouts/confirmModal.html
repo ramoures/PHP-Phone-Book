@@ -9,12 +9,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
-            
             <div dir="{% if 'direction'|lang=='rtl' %}rtl{% else %}ltr{% endif %}" class="modal-body">
                 <div class="d-flex justify-content-center align-items-center w-100">
-                    
-                        <form method="post" autocomplete="off">
-                            <div dir="{% if 'direction'|lang=='rtl' %}ltr{% else %}rtl{% endif %}" class="d-flex gap-2">
+                    <form method="post" autocomplete="off">
+                        <div dir="{% if 'direction'|lang=='rtl' %}ltr{% else %}rtl{% endif %}" class="d-flex gap-2">
                             <input name="id" type="hidden" id="phoneNumbersId">
                             <button type="submit" value="1" name="confirm_btn" class="btn btn-light btn-magic-light border text-danger lh-1 fs-5">
                                 {{'Yes'|lang}}
@@ -23,13 +21,10 @@
                                 {{'No'|lang}}
                             </button>
                         </div>
-
-                        </form>
-                        
-                    
+                    </form>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
+<!--github.com/ramoures-->

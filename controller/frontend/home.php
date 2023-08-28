@@ -23,7 +23,7 @@ class Home extends Frontend{
             $this->Utils->redirect(PROJECT_URL."?page=1");
         $page = $page<=0?1:$page;
         $offset = (int)LIMIT * $page - (int)LIMIT;
-        $total = $this->model->total(['tableName'=>'phone_numbers']);
+        $total = $this->model->total(['tableName'=>'phone_numbers','count'=>true]);
         $pagePerTotal = ceil($total / (int)LIMIT);
         if($pagePerTotal && $pagePerTotal<$page)
             $this->Utils->redirect(PROJECT_URL."?page=1");

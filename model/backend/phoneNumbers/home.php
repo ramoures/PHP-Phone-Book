@@ -6,7 +6,6 @@ class PhoneNumbersModel extends Models{
      public function searchData($obj) {
           return $this->db->search($obj);
      }
-
      public function removeItem($id){
        try {
           $imageId = $this->db->read(['tableName'=>'phone_numbers','where'=>['id'=>$id]]);

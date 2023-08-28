@@ -25,7 +25,6 @@ final class Database{
         } catch (Exception $e) {
             $this->error($e);
         }
-       
     }
     public function create($object){ //Insert Data
        try {
@@ -97,7 +96,6 @@ final class Database{
         } catch (\Throwable $th) {
             return false;
         }
-       
     }
     public function getRow($tableName,$where){
         try {
@@ -111,7 +109,6 @@ final class Database{
                 }
                 else
                  return false;
-              
             }
             else
                 return false;
@@ -134,7 +131,7 @@ final class Database{
             if(isset($object['whereNot'])){
                 if(isset($object['where'])) 
                     $sql .= " AND ";
-                $columnsWn = array_map(function ($column){return $column."=?"; }, array_keys($object['whereNot']));
+                $columnsWn = array_map(function ($column){return $column." LIKE ?"; }, array_keys($object['whereNot']));
                 $columnsStrWn = implode(" OR ",$columnsWn);
                 $whereNot = array_values($object['whereNot']);
                 $sql .= sprintf(" NOT (%s)",$columnsStrWn);
@@ -175,23 +172,16 @@ final class Database{
         } catch (\Throwable $th) {
             return false;
         }
-       
      }
-
     public function update($object){
         try {
-            // $sql = "UPDATE posts SET body=:body WHERE id=:id";
-
             $columns = array_map(function ($column){return $column."=:".$column; }, array_keys($object['data']));
             $columnsStr = implode(" , ",$columns);
             if(isset($object['data']['phone_numbers']))
                 $object['data']['phone_numbers'] =  implode("+",$object['data']['phone_numbers']);;
-
             $whereColumns = array_map(function ($column){return $column."=:".$column; }, array_keys($object['where']));
             $whereStr = implode(" AND ",$whereColumns);
-
             $exe = array_merge($object['data'],$object['where']);
-
             $sql = sprintf("UPDATE %s SET %s WHERE %s",$object['tableName'],$columnsStr,$whereStr);
             
             $stmt = $this->pdo->prepare($sql);
@@ -215,7 +205,6 @@ final class Database{
      } catch (\Throwable $th) {
         return false;
      }
-      
     }
     static function getInstance()
     {

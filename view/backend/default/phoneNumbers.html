@@ -1,7 +1,6 @@
 {% extends "layouts/structure.html" %}
 {% block title %}{{'Phone Numbers'|lang}}{% endblock %}
 {% block content %}
-
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
     <div class="d-flex flex-wrap  justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
             <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
@@ -29,7 +28,6 @@
     {% endif %}
     </div>
 {% endif %}
-
     {% if rows %}
     <div class="table-responsive">
         <table class="table table-bordered faDigits fw-normal align-middle bg-transparent">
@@ -119,7 +117,6 @@
     {% else %}
         <i class="fs-4 text-secondary">data not found!</i>
     {% endif %}
-   
     {% if totalPage > 1 %}
         <div class="d-flex justify-content-center">
             <ul class="pagination justify-content-end user-select-none">
@@ -147,6 +144,5 @@
             </ul>
         </div>
     {% endif %}
-   
-  </main>
-  {% endblock content %}
+</main>
+{% endblock content %}

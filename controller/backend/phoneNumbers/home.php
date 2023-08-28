@@ -11,10 +11,8 @@ class PhoneNumbers extends Backend{
         $this->object['param'] = $param;
         $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
     }
-    
     public function phoneNumbers(){
         try {
-            
             if($this->Utils->safeInt($this->Utils->post('confirm_btn'))){
                 $id = $this->Utils->safeInt($this->Utils->post('id'));
                 if($id){
@@ -80,13 +78,10 @@ class PhoneNumbers extends Backend{
             $this->object['totalPage'] = $pagePerTotal;
             $this->object['rowNumber'] =$this->Utils->renderNumber($asc,(int)B_LIMIT,$page,$total);
             $this->object['search'] = $search;
-
-            
             $this->Render('phoneNumbers',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);
         }
     }
-
 }
 ?>
