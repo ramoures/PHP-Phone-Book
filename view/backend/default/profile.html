@@ -1,17 +1,105 @@
 {% extends "layouts/structure.html" %}
-{% block title %}{{'Profile'|lang}}{% endblock %}
+{% block title %}{{'Edit'|lang}} {{'Profile'|lang}}{% endblock %}
 {% block content %}
-    
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<script>
+function invalidElement(id){
+    document.addEventListener("DOMContentLoaded", () => {
+        const element = document.getElementById(id);
+        element.classList.add("is-invalid");
+    });
+}
+</script>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <div class="col-12 col-md-auto"><h1 class="h2">{{'Profile'|lang}}</h1></div>
-       
+    <div class="col-12 col-md-auto"><h1 class="h2">{{'Edit'|lang}} {{'Profile'|lang}}</h1></div>
     </div>
-    <div class="">
-        profile
-      
-       
+    <div class="col-12 col-md-9 col-lg-6 col-xl-4">
+        {% if msg %}
+            <div class="alert alert-{{msg.style}} d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="bg-{{msg.style}} me-2 p-2 rounded"></i>
+                    <div class="d-flex gap-2">
+                        {% if msg.name %}
+                            <strong>{{msg.name}}</strong>
+                            <i class="bi bi-arrow-right"></i> 
+                        {% endif %}
+                        {{msg.text|lang}} 
+                        {% if msg.ex %}
+                            {{'Ex.'|lang}} {{msg.ex|lang}}
+                        {% endif %}
+                    </div>
+                </div>
+                {% if msg.status %}
+                    <i class="text-secondary ms-1">e.{{msg.status}}</i>
+                {% endif %}
+            </div>
+            {% if msg.script %}
+                <script>invalidElement('{{msg.script}}')</script>
+            {% endif %}
+        {% endif %}
+        
+        <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
+            <input type="hidden" name="token" value="{{csrf_token}}">
+            <div class="mb-3">
+                <label for="username" class="form-label">{{'Username'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input type="text" name="username" class="form-control fs-5" id="username" value="{{edit_form_info.username ?? row_info.username}}" required>
+                <div class="invalid-feedback">
+                    {{'Please enter username.'|lang}}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">{{'Avatar'|lang}}</label>
+                {% if row_info.image.name %}
+                <div class="d-flex gap-2 align-items-center">
+                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{row_info.image.folder}}/{{row_info.image.name}}" alt="{{row_info.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                    <input type="hidden" value="{{row_info.image.id}}" name="image_id">
+                    <div class="d-none">
+                        <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off" disabled>
+                    </div>
+                  
+                    <button type="button" class="btn btn-sm clearImage btn-link text-secondary text-decoration-none border-bottom rounded-0 d-flex gap-1"><i class="bi bi-x-octagon"></i>Clear</button>
+                    <button type="button" class="btn btn-sm reloadImage d-none btn-secondary text-white"><i class="bi bi-arrow-clockwise"></i></button>
+                </div>
+                {% else %}
+                    <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off">
+               {% endif %}
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch user-select-none">
+                    <input class="form-check-input" type="checkbox" role="switch" id="newPassCheckBox">
+                    <label class="form-check-label text-primary po_cu" for="newPassCheckBox">{{'Change password?'|lang}}</label>
+                  </div>
+            </div>
+            <div class="mb-3 newPass d-none">
+                <label for="currentPassword" class="form-label">{{'Current password'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input type="text" name="currentPassword" autocomplete="off" class="form-control fs-5" id="currentPassword" required>
+                <div class="invalid-feedback">
+                    {{'Please enter current password.'|lang}}
+                </div>
+            </div>
+            
+            <div class="mb-3 newPass d-none">
+                <label for="newPassword" class="form-label">{{'New password'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input disabled type="text" autocomplete="off" name="newPassword" class="form-control fs-5" id="newPassword"  required>
+                <div class="invalid-feedback">
+                    {{'Please enter new password.'|lang}}
+                </div>
+               
+            </div>
+            <div class="mb-3 newPass d-none">
+                <label for="cnfNewPassword" class="form-label">{{'Confirm new password'|lang}}<sup class="text-danger ms-1">*</sup></label>
+                <input disabled type="text" autocomplete="off" name="cnfNewPassword" class="form-control fs-5" id="cnfNewPassword" required>
+                <div class="invalid-feedback">
+                    {{'Please enter confirm new password.'|lang}}
+                </div>
+               
+            </div>
+           
+            <div class="d-flex align-items-center gap-2">
+                <button type="submit" value="1" name="btn_submit" class="btn fs-5 btn-primary d-flex gap-2"><i class="bi bi-save"></i>{{'Submit'|lang}}</button>
+                <button onclick="history.back()" type="button" class="btn btn-secondary opacity-50">{{'Back'|lang}}</button>
+            </div>
+          </form>
     </div>
-   
-  </main>
-  {% endblock content %}
+</main>
+{% endblock content %}

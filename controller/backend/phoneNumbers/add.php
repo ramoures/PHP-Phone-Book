@@ -2,14 +2,9 @@
 class AddPhoneNumbers extends Backend{
     use errors;
     private $model;
-    private $object;
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new AddPhoneNumbersModel();
-        $this->object['media_url'] = PROJECT_URL."view/assets";
-        $this->object['language'] = strtoupper($this->language);
-        $this->object['param'] = $param;
-        $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
     }
     public function addPhoneNumbers() {
         try {
@@ -24,11 +19,9 @@ class AddPhoneNumbers extends Backend{
                         $nickname=$this->Utils->safeString($this->Utils->post('nickname'));
                         $fullName=$this->Utils->safeString($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
-                        // $phone_numbers_map = array_map(function ($column){return "%".$column."%"; }, array_values($phone_numbers));
-
                         $address = $this->Utils->safeString($this->Utils->post('address'));
                         $_SESSION['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
-                        $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname]];
+                        $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'issetCheck'=>true];
                         $issetnickName = $this->model->issetData($data);
                         if($nickname==='')
                             $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter nickname.','script'=>'nickname'];
@@ -51,7 +44,7 @@ class AddPhoneNumbers extends Backend{
                                     $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
                             }
                             $uploadToDb = null;
-                            if(!$this->object['msg']){
+                            if(!isset($this->object['msg'])){
                                 $upload = $this->uploader('image',IMAGES_DIR_NAME);
                                 if(!is_int($upload) && $upload !== false){
                                     $data = ['tableName'=>'upload','data'=>['folder'=>IMAGES_DIR_NAME,'name'=>$upload,'alt'=>$nickname]];
@@ -67,7 +60,7 @@ class AddPhoneNumbers extends Backend{
                                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
                                     else if($upload === -6)
                                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too big. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
-                                if(!$this->object['msg']){
+                                if(!isset($this->object['msg'])){
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);
                                     if($res){

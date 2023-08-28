@@ -13,8 +13,8 @@ final class Utils{
         header("Location:$url");
         die;
     }
-    public function getLang($backend=false){
-        $cookieName = $backend?'phone_book_b_lang':'phone_book_lang';
+    public function getLang($type='backend'){
+        $cookieName = $type==='backend'?'phone_book_b_lang':'phone_book_lang';
         if(isset($_COOKIE[$cookieName])){
             $cookie = $this->encode($_COOKIE[$cookieName]);
             if(is_numeric($cookie) || strlen($cookie)>2)

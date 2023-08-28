@@ -4,7 +4,9 @@
     height: 1rem;
     fill: currentColor;
   }
-
+.po_cu{
+    cursor: pointer;
+}
 .table{
   --bs-table-bg:transparent !important;
 }

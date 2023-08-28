@@ -1,14 +1,8 @@
 <?php
 abstract class Backend extends Base{
-
     public function __construct($param) {
         parent::__construct($param);
-        parent::initTwig('backend');
-        $this->language = $this->Utils->getLang(true)??B_DEFAULT_LANG;
-        if(file_exists(ROOT_PATH.'lang/'. $this->language .'.php'))
-            require_once(ROOT_PATH.'lang/'. $this->language .'.php');
-        $this->lang = $lang??'';
-        if($param !== 'signin' && !$this->adminIsSigned())
+        if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
     }
     protected function adminIsSigned(){

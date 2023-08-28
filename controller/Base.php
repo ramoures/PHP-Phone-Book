@@ -1,15 +1,23 @@
 <?php
 abstract class Base{
     protected $Utils;
-    protected $DB;
     protected $templatePath;
     protected $twigLoader;
     protected $twig;
     protected $language;
     protected $lang;
-    public function __construct() {
+    protected $object;
+    public function __construct($param) {
         $this->Utils = Utils::getInstance();
-        
+        $this->initTwig($param['type']);
+        $this->object['method'] = $param['method'];
+        $this->object['media_url'] = PROJECT_URL."view/assets";
+
+        $this->language = $this->Utils->getLang($param['type'])??B_DEFAULT_LANG;
+        if(file_exists(ROOT_PATH.'lang/'. $this->language .'.php'))
+            require_once(ROOT_PATH.'lang/'. $this->language .'.php');
+        $this->lang = $lang??'';
+        $this->object['language'] = strtoupper($this->language);
     }
     protected function initTwig($mode) { //call twig
         $this->templatePath = ROOT_PATH.'view/'.$mode.'/default/';

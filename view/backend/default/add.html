@@ -1,5 +1,5 @@
 {% extends "layouts/structure.html" %}
-{% block title %}{{'Add phone number'|lang}}{% endblock %}
+{% block title %}{{'Add'|lang}} {{'Phone number'|lang}}{% endblock %}
 {% block content %}
 <script>
 function invalidElement(id){
@@ -11,7 +11,7 @@ function invalidElement(id){
 </script>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <div class="col-12 col-md-auto"><h1 class="h2">{{'Add phone number'|lang}}</h1></div>
+    <div class="col-12 col-md-auto"><h1 class="h2">{{'Add'|lang}} {{'Phone number'|lang}}</h1></div>
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
         {% if msg %}
@@ -70,7 +70,7 @@ function invalidElement(id){
                         <div>
                             <a class="btn btn-link p-0 text-decoration-none addField">
                                 <i class="bi bi-plus-lg"></i>
-                                {{'add new field'|lang}}
+                                {{'Add new field'|lang}}
                             </a>
                         </div>
                     </div>

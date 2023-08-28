@@ -2,14 +2,9 @@
 class EditPhoneNumbers extends Backend{
     use errors;
     private $model;
-    private $object;
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new EditPhoneNumbersModel();
-        $this->object['media_url'] = PROJECT_URL."view/assets";
-        $this->object['language'] = strtoupper($this->language);
-        $this->object['param'] = $param;
-        $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
     }
     public function editPhoneNumbers() {
         try {
@@ -28,7 +23,6 @@ class EditPhoneNumbers extends Backend{
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
                         $address = $this->Utils->safeString($this->Utils->post('address'));
                         $_SESSION['edit_form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
-
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'whereNot'=>['id'=>$id]];
                         $issetnickName = $this->model->issetData($data);
                         if($nickname==='')
@@ -45,16 +39,14 @@ class EditPhoneNumbers extends Backend{
                             else
                             foreach($phone_numbers as $key=>$value){
                                 $searchObj = ["tableName"=>'phone_numbers',"where"=>['phone_numbers'=>'%'.$phone_numbers[$key].'%'],'whereNot'=>['id'=>$id]];
-
                                 if($this->model->search($searchObj))
                                     $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
                                 else
                                 if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
                                     $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
-                                
                             }
                             $imageId = null;
-                            if(!$this->object['msg']){
+                            if(!isset($this->object['msg'])){
                                 if(isset($_FILES['image'])){
                                     $upload = $this->uploader('image',IMAGES_DIR_NAME);
                                     if(!is_int($upload) && $upload !== false){
@@ -74,7 +66,7 @@ class EditPhoneNumbers extends Backend{
                                 }
                                 else
                                     $imageId= $_POST['image_id'];
-                                if(!$this->object['msg']){
+                                if(!isset($this->object['msg'])){
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'updated_at'=>date("Y-m-d H:i:s")],'where'=>['id'=>$id]];
                                     $res = $this->model->updateData($obj);
                                     if($res){

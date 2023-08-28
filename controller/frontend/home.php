@@ -2,14 +2,8 @@
 
 class Home extends Frontend{
     protected $model;
-    protected $object;
     public function __construct($param) {
         parent::__construct($param);
-        $this->object['media_url'] = PROJECT_URL."view/assets";
-        $this->object['language'] = strtoupper($this->language);
-        $this->object['param'] = $param;
-        $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
-        $this->object['url'] = $_SERVER['REQUEST_URI'];
         $this->model = new HomeModel();
     }
     public function index(){

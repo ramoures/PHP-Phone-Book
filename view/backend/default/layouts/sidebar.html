@@ -7,18 +7,18 @@
     <div class="offcanvas-body d-md-flex flex-column p-0 pt-2 overflow-y-auto ">
         <ul class="nav nav-pills flex-column gap-1 mb-auto p-1 p-xl-3">
             <li class="nav-item">
-                <a href="{{constant('PROJECT_URL')~'admin/phone_numbers'}}" class="nav-link d-flex align-items-center justify-content-start lh-1 gap-3 {% if param=='home' or param=='phoneNumbers' %}active{% endif %}" aria-current="page" href="#">
+                <a href="{{constant('PROJECT_URL')~'admin/phone_numbers'}}" class="nav-link d-flex align-items-center justify-content-start lh-1 gap-3 {% if method=='home' or method=='phoneNumbers' %}active{% endif %}" aria-current="page" href="#">
                     <div><i class="bi bi-person-rolodex"></i></div>
                     <div>{{'Phone Numbers'|lang}}</div>
                 </a>
-                <a href="{{constant('PROJECT_URL')~'admin/phone_numbers/add'}}" class="nav-link mt-2 d-flex align-items-center justify-content-start lh-1 gap-3 {% if param=='addPhoneNumbers' %}active{% endif %}">
+                <a href="{{constant('PROJECT_URL')~'admin/phone_numbers/add'}}" class="nav-link mt-2 d-flex align-items-center justify-content-start lh-1 gap-3 {% if method=='addPhoneNumbers' %}active{% endif %}">
                     <span><i class="bi bi-plus-lg"></i></span>
-                    <span>{{'Add phone number'|lang}}</span>
+                    <span>{{'Add'|lang}} {{'Phone number'|lang}}</span>
                 </a>
             </li>
             <hr>
             <li class="nav-item">
-                <a href="{{constant('PROJECT_URL')~'admin/profile'}}" class="nav-link d-flex align-items-center justify-content-start lh-1 gap-3 {% if param=='profile' %}active{% endif %}" aria-current="page" href="#">
+                <a href="{{constant('PROJECT_URL')~'admin/profile'}}" class="nav-link d-flex align-items-center justify-content-start lh-1 gap-3 {% if method=='profile' %}active{% endif %}" aria-current="page" href="#">
                     <div><i class="bi bi-person-fill"></i></div>
                     <div>{{'Profile'|lang}}</div>
                 </a>

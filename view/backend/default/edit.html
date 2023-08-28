@@ -1,5 +1,5 @@
 {% extends "layouts/structure.html" %}
-{% block title %}{{'Edit phone number'|lang}}{% endblock %}
+{% block title %}{{'Edit'|lang}} {{'Phone number'|lang}}{% endblock %}
 {% block content %}
 <script>
 function invalidElement(id){
@@ -11,7 +11,7 @@ function invalidElement(id){
 </script>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
     <div class="d-flex justify-content-between flex-wrap  justify-content-center align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <div class="col-12 col-md-auto"><h1 class="h2">{{'Edit phone number'|lang}}</h1></div>
+    <div class="col-12 col-md-auto"><h1 class="h2">{{'Edit'|lang}} {{'Phone number'|lang}}</h1></div>
     </div>
     <div class="col-12 col-md-9 col-lg-6 col-xl-4">
         {% if msg %}
@@ -49,7 +49,7 @@ function invalidElement(id){
             </div>
             <div class="mb-3">
                 <label for="fullname" class="form-label">{{'Full name'|lang}}</label>
-                <input type="text" name="full_name" class="form-control fs-5" id="fullname" value="{{row_info.full_name}}">
+                <input type="text" name="full_name" class="form-control fs-5" id="fullname" value="{{edit_form_info.full_name ?? row_info.full_name}}">
             </div>
             <div class="mb-3">
                 <label for="phoneNumbers0" class="form-label phoneNumberLabel">{{'Phone number'|lang}}<sup class="text-danger ms-1">*</sup></label>
@@ -81,7 +81,7 @@ function invalidElement(id){
                         <div>
                             <a class="btn btn-link p-0 text-decoration-none addField">
                                 <i class="bi bi-plus-lg"></i>
-                                {{'add new field'|lang}}
+                                {{'Add new field'|lang}}
                             </a>
                         </div>
 
@@ -89,7 +89,7 @@ function invalidElement(id){
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">{{'Address'|lang}}</label>
-                <textarea name="address" class="form-control fs-5" id="address" rows="5">{{row_info.address}}</textarea>
+                <textarea name="address" class="form-control fs-5" id="address" rows="5">{{edit_form_info.address ?? row_info.address}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">{{'Image'|lang}}</label>
@@ -100,7 +100,6 @@ function invalidElement(id){
                     <div class="d-none">
                         <input type="file" name="image" class="form-control fs-5" id="image" autocomplete="off" disabled>
                     </div>
-                  
                     <button type="button" class="btn btn-sm clearImage btn-link text-secondary text-decoration-none border-bottom rounded-0 d-flex gap-1"><i class="bi bi-x-octagon"></i>Clear</button>
                     <button type="button" class="btn btn-sm reloadImage d-none btn-secondary text-white"><i class="bi bi-arrow-clockwise"></i></button>
                 </div>

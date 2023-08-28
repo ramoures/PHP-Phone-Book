@@ -171,4 +171,8 @@ $('.searcher').parent().find('input').on('keypress',function(e){
         return false;  
      }
 });
-
+$('#newPassCheckBox').on('change',function(){
+    $('.newPass').addClass('d-none').find('input').prop('disabled',true);
+    if(this.checked)
+        $('.newPass').removeClass('d-none').find('input').prop('disabled',false);
+});

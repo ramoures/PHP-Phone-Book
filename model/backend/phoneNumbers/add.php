@@ -14,9 +14,9 @@ class AddPhoneNumbersModel extends Models{
         return false;
        }
     }  
-    public function issetData($data){
+    public function issetData($object){
         try {
-            return $this->db->read($data,true);
+            return $this->db->read($object);
         }
         catch (\Throwable $th) {
             return false;

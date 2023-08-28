@@ -1,10 +1,10 @@
 <?php
-/*
-    Phone Book Ver.0.1 Beta . 
-    Licensed MIT . 
-    Created by: github.com/ramoures
+/**
+ * PHP Phone Book
+ * @Version: 0.1 Beta
+ * @Author: ramin moradi . github.com/ramoures
+ * @License: MIT
 */
-
 //Database Information
     define("DB_HOST","localhost");
     define("DB_USER","root");

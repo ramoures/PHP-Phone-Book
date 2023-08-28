@@ -93,18 +93,18 @@ final class Bootstrap{
                     return $this->error();
                 require_once($modelFile);
                 require_once($routeFile);
-                $params = $this->convertString(count($route)===3?$route[count($route)-1]."_".$route[count($route)-2]:$route[count($route)-1]);
-                $className = ucwords($params);
+                $method = $this->convertString(count($route)===3?$route[count($route)-1]."_".$route[count($route)-2]:$route[count($route)-1]);
+                $className = ucwords($method);
                 $className = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'Admin':$className;
-                $instanceController = new $className($params);
-                $isCallableMethod = array($instanceController,$params);
+                $instanceController = new $className(['type'=>'backend','method'=>$method]);
+                $isCallableMethod = array($instanceController,$method);
                 if(!is_callable($isCallableMethod))
                     return $this->error();
                 else  call_user_func($isCallableMethod);
             }
             else{
                 $route[0] = !isset($route[0])?'home':$route[0];
-                $param = isset($route[1])?$route[1]:'index';
+                $method = isset($route[1])?$route[1]:'index';
                 $routeFile = ROOT_PATH."controller/frontend/".$route[0].".php";
                 $modelFile = ROOT_PATH."model/frontend/".$route[0].".php";
                 if(!file_exists($routeFile) || !file_exists($modelFile) )
@@ -113,8 +113,8 @@ final class Bootstrap{
                     require_once($modelFile);
                     require_once($routeFile);
                     $className = ucwords($route[0]);
-                    $instanceController = new $className($param);
-                    $isCallableMethod = array($instanceController,$param);
+                    $instanceController = new $className(['type'=>'frontend','method'=>$method]);
+                    $isCallableMethod = array($instanceController,$method);
                     if(!is_callable($isCallableMethod))
                         return $this->error();
                     else  call_user_func($isCallableMethod);
