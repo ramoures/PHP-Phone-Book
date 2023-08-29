@@ -1,21 +1,23 @@
 <?php
 abstract class Models{
     use errors;
-    protected $db=null;
+    protected $db;
+    protected $adminInfo;
     public function __construct() {
         $this->db = database::getInstance();
     }
-    public function avatar($id) {
+    public function adminInfo($id) {
         try {
-            $avatarId = $this->db->read(['tableName'=>'admins','selector'=>['avatar_id'],'where'=>['id'=>$id]]);
-            $avatarId = $avatarId?$avatarId[0]['avatar_id']:false;
+            $admin = $this->db->read(['tableName'=>'admins','selector'=>['avatar_id','username'],'where'=>['id'=>$id]]);
+            $this->adminInfo['username'] = $admin?$admin[0]['username']:null;
+            $avatarId = $admin?$admin[0]['avatar_id']:false;
             if($avatarId){
                 $avatar = $this->db->read(['tableName'=>'upload','selector'=>['name','alt','folder'],'where'=>['id'=>$avatarId]]);
                 $avatar = $avatar?$avatar[0]:false;
                 if($avatar)
-                return $avatar;
+                     $this->adminInfo['avatar'] = $avatar;
             }
-            return false;
+            return $this->adminInfo;
 
         } catch (\Throwable $th) {
             return 0;

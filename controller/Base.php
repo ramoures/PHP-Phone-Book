@@ -18,7 +18,6 @@ abstract class Base{
         $this->lang = $lang??'';
         $this->object['language'] = strtoupper($this->language);
         $this->initTwig($param['type']);
-
     }
     protected function initTwig($mode) {
         try {

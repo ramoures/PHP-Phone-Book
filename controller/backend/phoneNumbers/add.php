@@ -5,7 +5,7 @@ class AddPhoneNumbers extends Backend{
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new AddPhoneNumbersModel();
-        $this->object['avatar_info'] = $this->model->avatar($this->Utils->safeInt($_SESSION['admin_id']));
+        $this->object['admin_info'] = $this->model->adminInfo($this->Utils->safeInt($_SESSION['admin_id']));
     }
     public function addPhoneNumbers() {
         try {

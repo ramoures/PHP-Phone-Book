@@ -31,6 +31,9 @@ final class Bootstrap{
        try {
             date_default_timezone_set('UTC');
             ob_start();
+            header('X-Frame-Options: DENY');
+            header('X-XSS-Protection: 1; mode=block');
+            header('X-Content-Type-Options: nosniff');
        } catch (\Throwable $th) {
             return $this->error($th);
        }
@@ -46,7 +49,7 @@ final class Bootstrap{
                 ini_set('session.cookie_httponly',1);
                 ini_set('session.hash_function','sha1');
                 if(SSL)
-                    ini_set('session.cookie_secure','sha1');
+                    ini_set('session.cookie_secure',1);
                 ini_set('session.name',SESSION_NAME);
                 session_start();
             }

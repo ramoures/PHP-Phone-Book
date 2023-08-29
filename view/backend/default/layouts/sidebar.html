@@ -20,13 +20,19 @@
             <li class="nav-item">
                 <a href="{{constant('PROJECT_URL')~'admin/profile'}}" class="nav-link d-flex align-items-center justify-content-start lh-1 gap-3 {% if method=='profile' %}active{% endif %}" aria-current="page" href="#">
                     <div>
-                    {% if avatar_info.name %}
-                        <img class="rounded-circle border border-1" src="{{constant('PROJECT_URL')}}media/{{avatar_info.folder}}/{{avatar_info.name}}" alt="{{avatar_info.alt}}" title="{{avatar_info.alt}}" width="26px" height="26px">
+                    {% if admin_info.avatar.name %}
+                        <img class="rounded-circle border border-1" src="{{constant('PROJECT_URL')}}media/{{admin_info.avatar.folder}}/{{admin_info.avatar.name}}" alt="{{admin_info.avatar.alt}}" width="26px" height="26px">
                     {% else %}
                         <i class="bi bi-person-fill"></i>
                     {% endif %}
                     </div>
-                    <div>{{'Profile'|lang}}</div>
+                    <div>
+                        {% if admin_info.username %}
+                            {{admin_info.username}}
+                        {% else %}
+                        {{'Profile'|lang}}
+                        {% endif %}
+                    </div>
                 </a>
             </li>
             
