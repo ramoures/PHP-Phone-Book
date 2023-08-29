@@ -5,7 +5,6 @@ class Admin extends Backend{
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new AdminModel();
-        $this->object['msg'] = $this->Utils->safeString($this->Utils->get('msg'));
     }
     public function admin(){
         $this->Utils->redirect(PROJECT_URL."admin/phone_numbers");
@@ -13,32 +12,35 @@ class Admin extends Backend{
    
     public function signin(){
         try {
-             if($this->adminIsSigned())
+            if($this->adminIsSigned())
                  $this->Utils->redirect(PROJECT_URL."admin");
+            $signout = $this->Utils->safeInt($this->Utils->get('signout'));
+                if($signout)
+                    $this->object['msg']=['style'=>'success','text'=>'Signed out successfully.'];   
              if(isset($_POST['btn_signin'])){
-                 $username= $this->Utils->safeString($this->Utils->post('username'));
-                 $password= $this->Utils->safeString($this->Utils->post('password'));
-                 $this->setVar('admin/signin','username',$username);
-                 $this->setVar('admin/signin','password',$password);
-                 if($username=='')
-                     $this->Utils->redirect(PROJECT_URL."admin/signin?msg=err1");
-                 else
-                 if($password=='')
-                     $this->Utils->redirect(PROJECT_URL."admin/signin?msg=err2");
-                 else{
-                     $object = ['tableName'=>'admins','where'=>['username'=>$username,'password'=>$this->encrypt($password)]];
-                     $resultSignin = $this->model->signin($object);
-                     if($resultSignin){
-                         $this->delVar('username');
-                         if($this->adminIsSigned())
-                             $this->Utils->redirect(PROJECT_URL."admin");
-                     }
-                     else
-                         $this->Utils->redirect(PROJECT_URL."admin/signin?msg=err3");
+                $username= $this->Utils->encode($this->Utils->post('username'));
+                $password= $this->Utils->encode($this->Utils->post('password'));
+                if($username=='')
+                    $this->object['msg']=['status'=>'1','style'=>'danger','text'=>'Username is empty.'];
+                else
+                if($password=='')
+                    $this->object['msg']=['status'=>'2','style'=>'danger','text'=>'Password is empty.'];
+                else{
+                    $object = ['tableName'=>'admins','selector'=>['id'],'where'=>['username'=>$username,'password'=>$this->encrypt($password)]];
+                    $resultSignin = $this->model->signin($object);
+                    if($resultSignin){
+                        $_SESSION['admin_id'] = $resultSignin['id'];
+                        $obj = ['tableName'=>'admins','data'=>['last_signed_at'=>date('Y-m-d H:i:s')],'where'=>['id'=>$resultSignin['id']]];
+                        $this->model->setLastSigned($obj);
+                        if($this->adminIsSigned())
+                            $this->Utils->redirect(PROJECT_URL."admin");
+                    }
+                    else
+                        $this->object['msg']=['status'=>'3','style'=>'danger','text'=>'User is not valid.'];
                  }
+                 $this->object['username'] = $this->Utils->decode($username);
              }
-             $this->object['username'] = $this->getVar('admin/signin','username');
- 
+             
              return $this->Render('signin',$this->object);
         } catch (\Throwable $th) {
              return $this->error($th);
@@ -48,7 +50,7 @@ class Admin extends Backend{
      public function signout(){
         try {
             unset($_SESSION['admin_id']);
-            $this->Utils->redirect(PROJECT_URL."admin/signin?msg=signout");
+            $this->Utils->redirect(PROJECT_URL."admin/signin?signout=1");
         } catch (\Throwable $th) {
             if(isset($_SESSION['admin_id']))
                 unset($_SESSION['admin_id']);

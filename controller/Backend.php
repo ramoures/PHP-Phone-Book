@@ -4,6 +4,7 @@ abstract class Backend extends Base{
         parent::__construct($param);
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
+            
     }
     protected function adminIsSigned(){
         try {
@@ -15,39 +16,6 @@ abstract class Backend extends Base{
             return $this->error($th);
         }
     }
-    protected function setVar($path,$key,$value){
-        try {
-            $_SESSION[$path][$key] = $value;
-        } catch (\Throwable $th) {
-            return $this->error($th);
-        }
-    }
-    protected function getVar($path,$key){
-        try {
-            if(isset($_SESSION[$path][$key]))
-                return $_SESSION[$path][$key];
-            else
-                return null;
-        } catch (\Throwable $th) {
-            return $this->error($th);
-        }
-    }
-    protected function delVarKey($path,$key){
-        try {
-            if(isset($_SESSION[$path][$key]))
-            unset($_SESSION[$path][$key]);
-        } catch (\Throwable $th) {
-            return $this->error($th);
-        }
-    }
-    protected function delVar($path){
-        try {
-            if(isset($_SESSION[$path]))
-                unset($_SESSION[$path]);
-        } catch (\Throwable $th) {
-            return $this->error($th);
-        }
-    } 
     protected function encrypt($str){
        try {
             $secretSault = SECRET_SAULT??[];
@@ -61,7 +29,7 @@ abstract class Backend extends Base{
     private function uploadImage($fieldName,$path){
         try {
             $error = $this->Utils->safeInt($_FILES[$fieldName]['error']);
-            $tmp_name = $this->Utils->safeString($_FILES[$fieldName]['tmp_name']);
+            $tmp_name = $this->Utils->encode($_FILES[$fieldName]['tmp_name']);
             $fileSize = $this->Utils->safeInt($_FILES[$fieldName]['size']);
             $fileName = hash('sha256',date('YmdHis').mt_rand(1000000,9999999).date('YmdHis'));
             if($error === 0){
@@ -98,7 +66,7 @@ abstract class Backend extends Base{
         try {
             if(isset($_FILES[$fieldName])){
                 if(in_array($folder,VALID_DIR_NAMES_TO_UPLOAD)){
-                    $fileField= $this->Utils->safeString($_FILES[$fieldName]['tmp_name']);
+                    $fileField= $this->Utils->encode($_FILES[$fieldName]['tmp_name']);
                     if($fileField)
                         return $this->uploadImage($fieldName,UPLOAD_PATH."$folder");
                     else

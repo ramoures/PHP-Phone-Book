@@ -25,38 +25,65 @@
 <div class="d-flex mb-3 text-primary justify-content-center align-items-center gap-2 fs-1">    
     <i class="bi  bi-person-rolodex"></i> {{'Phone Book'|lang}}
 </div>
-{% if msg=='signout' %}
-  <div class="alert alert-success">
-    {{'Signed out successfully.'|lang}}
-  </div>
-{% elseif msg=='err1' %}
-  <div class="alert alert-danger">
-    {{'Username is empty.'|lang}}
-  </div>
-{% elseif msg=='err2' %}
-  <div class="alert alert-danger">
-    {{'Password is empty.'|lang}}
-  </div>
-{% elseif msg=='err3' %}
-  <div class="alert alert-danger">
-    {{'User is not valid.'|lang}}
+
+{% if msg %}
+  <div class="alert alert-{{msg.style}} d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+          <i class="bg-{{msg.style}} me-2 p-2 rounded"></i>
+          <div class="d-flex gap-2">
+              {% if msg.name %}
+                  <strong>{{msg.name}}</strong>
+                  <i class="bi bi-arrow-right"></i> 
+              {% endif %}
+              {{msg.text|lang}} 
+              {% if msg.ex %}
+                  {{'Ex.'|lang}} {{msg.ex|lang}}
+              {% endif %}
+          </div>
+      </div>
+      {% if msg.status %}
+          <i class="text-secondary ms-1">e.{{msg.status}}</i>
+      {% endif %}
   </div>
 {% endif %}
   <form method="post" action="" autocomplete="off">
       <h1 class="h3 mb-3 fw-normal">{{'Please sign in'|lang}}</h1>
       <div class="form-floating">
-        <input name="username" type="text" class="form-control" id="floatingUsername" placeholder="Username" value="{{ username|raw }}">
+        <input dir="ltr" name="username" id="username" type="text" class="form-control" id="floatingUsername" placeholder="Username" value="{{ username }}">
         <label for="floatingUsername">{{'Username'|lang}}</label>
       </div>
       <div class="form-floating">
-        <input name="password" autocomplete="off" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input dir="ltr" name="password" id="password" autocomplete="off" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">{{'Password'|lang}}</label>
       </div>
    
       <button class="btn btn-primary w-100 py-2 mt-2" name="btn_signin" value="1" type="submit">{{'Sign in'|lang}}</button>
       <div dir="ltr" class="mt-4 small text-body-secondary text-center">© {{constant('YEAR')}} Your Company, Inc</div>
   </form>
+  <div class="dropstart mt-3 d-flex justify-content-center">
+    <a class="link-body-emphasis bg-body text-decoration-none d-flex gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-translate"></i>{{language}}
+    </a>
+    <ul class="dropdown-menu changeLanguage user-select-none">
+        <li>
+            <button id="en" class="dropdown-item {% if language =='EN' %}active{% endif %} d-flex gap-2 align-items-center">
+                <span class="bg-body p-1 border rounded-1 lh-1 text-body">EN</span>
+                {{'English'|lang}}
+            </button>
+        </li>   
+        <li>
+            <button id="fa" class="dropdown-item {% if language =='FA' %}active{% endif %} d-flex gap-2 align-items-center">
+                <span class="bg-body p-1 border rounded-1 lh-1 text-body">FA</span>
+                {{'Farsi'|lang}}
+            </button>
+        </li>
+    </ul>
+</div>
+
 </main>
+
 <script src="{{media_url}}/js/bootstrap.bundle.min.js"></script>
+<script src="{{media_url}}/js/jquery-3.7.0.min.js"></script>
+<script src="{{media_url}}/js/backend.js" type="module"></script>
 </body>
 </html>

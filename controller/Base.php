@@ -10,15 +10,15 @@ abstract class Base{
     protected $object;
     public function __construct($param) {
         $this->Utils = Utils::getInstance();
-        $this->initTwig($param['type']);
         $this->object['method'] = $param['method'];
         $this->object['media_url'] = PROJECT_URL."view/assets";
-        
         $this->language = $this->Utils->getLang($param['type'])??B_DEFAULT_LANG;
         if(file_exists(ROOT_PATH.'lang/'. $this->language .'.php'))
             require_once(ROOT_PATH.'lang/'. $this->language .'.php');
         $this->lang = $lang??'';
         $this->object['language'] = strtoupper($this->language);
+        $this->initTwig($param['type']);
+
     }
     protected function initTwig($mode) {
         try {

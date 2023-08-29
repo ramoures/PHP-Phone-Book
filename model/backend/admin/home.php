@@ -4,12 +4,16 @@ class AdminModel extends Models{
         try {
             $login = $this->db->read($object);
             if($login){
-                // $login = json_decode(json_encode($login),true);
-                $login = $login;
-                $_SESSION['admin_id'] = $login[0]['id'];
-                return true;
+                return $login[0];
             }
             return false;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+    public function setLastSigned($object) {
+        try {
+            $this->db->update($object);
         } catch (\Throwable $th) {
             return false;
         }

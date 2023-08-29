@@ -27,9 +27,9 @@ final class Utils{
                     return strtolower($cookie);
             }
             else
-                return null;
+                return 'en';
         } catch (\Throwable $th) {
-            return null;
+            return 'en';
         }
     }
     public function post($key){
@@ -59,8 +59,13 @@ final class Utils{
             return null;
         }
     }
+
     public function safeInt($int):int{
-        return (int)$int<=0?0:(int)$int;
+        try {
+            return (!is_numeric($int) || is_nan($int) || $int<=0)?0:(int)$int;
+        } catch (\Throwable $th) {
+            return 0;
+        }
     }
     function encode($data) {
         try {
@@ -77,6 +82,18 @@ final class Utils{
         } catch (\Throwable $th) {
             return null;
         }
+    }
+    public function decode($data) {
+        if (is_array($data)) {
+            return array_map(array($this,'decode'), $data);
+        }
+        if (is_object($data)) {
+            $tmp = clone $data; 
+            foreach ( $data as $k => $var )
+                $tmp->{$k} = $this->decode($var);
+            return $tmp;
+        }
+        return $data ? html_entity_decode(stripslashes($data),ENT_QUOTES,'UTF-8') : '';
     }
     public function renderNumber($asc=1,$limit,$page,$total){
         try {

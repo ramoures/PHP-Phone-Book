@@ -40,11 +40,6 @@ $lang = [
     "Sign out"=>"خروج",
     "Add new field"=>"افزودن فیلد",
 
-    "Signed out successfully."=>"با موفقیت خارج شدید",
-    "َUsername is empty."=>"نام کاربری خالی‌ است.",
-    "Password is empty."=>"رمز عبور خالی است.",
-    "َUser is not valid."=>"کاربر معتبر نیست.",
-
     "Operation"=>"عملیات",
     "Date & Time"=>"زمان",
     "Address"=>"آدرس",
@@ -53,6 +48,12 @@ $lang = [
     "Full name"=>"نام کامل",
     "Nickname"=>"نام مستعار",
     "Image"=>"تصویر",
+    "Avatar"=>"تصویر پروفایل",
+    
+    "Change password"=>"تغییر رمز عبور",
+    "Current password"=>"رمز عبور جاری",
+    "New password"=>"رمز عبور تازه",
+    "Confirm new password"=>"تکرار رمز عبور تازه",
     
     "Are you sure?"=>"آیا مطمئن هستید؟",
     "Yes"=>"بله",
@@ -62,7 +63,27 @@ $lang = [
     "Updated at"=>"وبرایش",
 
     //Alert Message:
+    "Signed out successfully."=>"با موفقیت خارج شدید.",
+    "Username is empty."=>"نام کاربری خالی‌ است.",
+    "Password is empty."=>"رمز عبور خالی است.",
+    "User is not valid."=>"کاربر معتبر نیست.",
+
+    "Current password is empty."=>"رمز عبور جاری خالی است.",
+    "New password is empty."=>"رمز عبور تازه خالی است.",
+    "Confirm new password is empty."=>"تکرار رمز عبور تازه خالی است.",
+    "New and confirm password dos'nt matched."=>"رمز عبور تازه با تکرارش، برابر نیست.",
+
+    "Please enter nickname."=>"نام مستعار را وارد کنید.",
+    "Please enter a valid phone number."=>"شماره‌تلفن صحیح را وارد کنید.",
+    "Ex."=>"مثال:",
+    "The nickname is already exists."=>"این نام مستعار، از قبل وجود دارد.",
+    "The phone number is already exists."=>"این شماره‌تلفن، از قبل وجود دارد.",
+    "Some of the phone numbers are duplicates."=>"تعدادی از شماره‌تلفن‌های وارد شده تکراری است.",
+
     "CSRF Token is not valid!"=>"CSRF Token اشتباه است!",
     "Submission successful!"=>"با موفقیت ثبت شد.",
+
+
+
 ];
 ?>

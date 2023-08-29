@@ -4,7 +4,9 @@ class PhoneNumbers extends Backend{
     private $model;
     public function __construct($param) {
         parent::__construct($param);
+
         $this->model = new PhoneNumbersModel();
+        $this->object['avatar_info'] = $this->model->avatar($this->Utils->safeInt($_SESSION['admin_id']));
     }
     public function phoneNumbers(){
         try {
@@ -31,17 +33,19 @@ class PhoneNumbers extends Backend{
             $offset = (int)B_LIMIT * $page - (int)B_LIMIT;
 
             $search=null;
-            if($this->Utils->safeString($this->Utils->get('s'))){
-                $search = $this->Utils->safeString($this->Utils->get('s'));
+            if($this->Utils->get('s')){
+                $search = $this->Utils->encode($this->Utils->get('s'));
+     
                 $total = $this->model->searchData(['tableName'=>'phone_numbers','where'=>['nickname'=>"%$search%",'full_name'=>"%$search%",'phone_numbers'=>"%$search%",'address'=>"%$search%"],'count'=>true]);
-
                 $obj = ['tableName'=>'phone_numbers','limit'=>B_LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc,'where'=>['nickname'=>"%$search%",'full_name'=>"%$search%",'phone_numbers'=>"%$search%",'address'=>"%$search%"]];
-                $this->object['rows'] = $this->model->searchData($obj);
+                $this->object['rows'] = $this->Utils->decode($this->model->searchData($obj));
+                $search = $this->Utils->decode($search);
+
             }
             else{
                 $total = $this->model->searchData(['tableName'=>'phone_numbers','count'=>true]);
                 $obj = ['tableName'=>'phone_numbers','limit'=>B_LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc];
-                $this->object['rows'] = $this->model->getData($obj);
+                $this->object['rows'] = $this->Utils->decode($this->model->getData($obj));
             }
             $pagePerTotal = ceil($total / (int)B_LIMIT);
             if($pagePerTotal && $pagePerTotal<$page)

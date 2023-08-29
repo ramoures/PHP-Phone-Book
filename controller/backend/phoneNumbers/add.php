@@ -5,6 +5,7 @@ class AddPhoneNumbers extends Backend{
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new AddPhoneNumbersModel();
+        $this->object['avatar_info'] = $this->model->avatar($this->Utils->safeInt($_SESSION['admin_id']));
     }
     public function addPhoneNumbers() {
         try {
@@ -16,10 +17,10 @@ class AddPhoneNumbers extends Backend{
                         $this->object['msg']=['status'=>1,'style'=>'danger','text'=>'CSRF Token is not valid!'];
                     else{
                         $phoneNumbersPattenr = "/^".PHONE_NUMBER_PATTERN."$/";
-                        $nickname=$this->Utils->safeString($this->Utils->post('nickname'));
-                        $fullName=$this->Utils->safeString($this->Utils->post('full_name'));
+                        $nickname=$this->Utils->encode($this->Utils->post('nickname'));
+                        $fullName=$this->Utils->encode($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
-                        $address = $this->Utils->safeString($this->Utils->post('address'));
+                        $address = $this->Utils->encode($this->Utils->post('address'));
                         $_SESSION['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'issetCheck'=>true];
                         $issetnickName = $this->model->issetData($data);
@@ -40,7 +41,7 @@ class AddPhoneNumbers extends Backend{
                                 if($this->model->search('phone_numbers',$where))
                                     $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
                                 else
-                                if(!is_numeric($phone_numbers[$key]) || !preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
+                                if(!preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
                                     $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
                             }
                             $uploadToDb = null;

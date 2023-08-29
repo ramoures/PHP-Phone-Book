@@ -26,6 +26,10 @@
         define('AVATARS_DIR_NAME',"avatars");
         define('IMAGES_DIR_NAME','images');
         define('VALID_DIR_NAMES_TO_UPLOAD',array('avatars','images'));
+    #New password strongly
+        // define('PASSWORD_PATTERN','(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*()\-__+.]){2,}).{8,}'); 
+        //This pattern = 8 minimum character, [a-z]=(1 min char.), [A-Z]=(1 min char.), [0-9]=(2 min number.), [!@#$%^&*()\-__+.]=(2 min char.)
+        define('PASSWORD_PATTERN',false); //for disabled password strongly. 
     #Upload
         define('ALLOW_FILES_TYPE', array('image/jpg'=>'jpg','image/jpeg'=>'jpeg','image/png'=>'png'));
         define('MAX_FILE_SIZE','3000000'); // 3 Megabytes = 3000000 Byte

@@ -176,3 +176,17 @@ $('#newPassCheckBox').on('change',function(){
     if(this.checked)
         $('.newPass').removeClass('d-none').find('input').prop('disabled',false);
 });
+    $('.showPass').on('click',function(){
+        const type = $(this).parent().find('input').attr('type')
+        if(type==='password')
+        {
+            $(this).parent().find('input').attr('type','text');
+            $(this).find('i').removeAttr('class').addClass('bi bi-eye-slash fs-4 opacity-75')
+        }
+        else
+        {
+            $(this).parent().find('input').attr('type','password');
+            $(this).find('i').removeAttr('class').addClass('bi bi-eye fs-4 opacity-75')
+        }
+    });
+

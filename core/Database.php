@@ -46,7 +46,8 @@ final class Database{
     public function read($object){
         try {
             $issetCheck = $object['issetCheck']??false;
-            $sql = sprintf("SELECT * FROM %s",$object['tableName']);
+            $selector = isset($object['selector'])?implode(', ',$object['selector']):'*';
+            $sql = sprintf("SELECT $selector FROM %s",$object['tableName']);
 
             if(isset($object['where'])){
                 $columns = array_map(function ($column){return $column."=?"; }, array_keys($object['where']));
@@ -124,7 +125,7 @@ final class Database{
             if(isset($object['where'])){
                 $columns = array_map(function ($column){return $column." LIKE ?"; }, array_keys($object['where']));
                 $columnsStr = implode(" OR ",$columns);
-                $where = array_values($object['where']);
+                $where =  array_map(function ($val){return strstr($val,'/')?addslashes($val):$val; }, array_values($object['where']));
                 $sql .= sprintf(" WHERE (%s)",$columnsStr);
             }
             if(isset($object['whereNot'])){
@@ -132,7 +133,7 @@ final class Database{
                     $sql .= " AND ";
                 $columnsWn = array_map(function ($column){return $column." LIKE ?"; }, array_keys($object['whereNot']));
                 $columnsStrWn = implode(" OR ",$columnsWn);
-                $whereNot = array_values($object['whereNot']);
+                $whereNot =  array_map(function ($val){return strstr($val,'/')?addslashes($val):$val; }, array_values($object['whereNot']));
                 $sql .= sprintf(" NOT (%s)",$columnsStrWn);
                 $where = array_merge($where,$whereNot);
             }
