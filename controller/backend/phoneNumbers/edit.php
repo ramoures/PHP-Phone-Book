@@ -10,7 +10,6 @@ class EditPhoneNumbers extends Backend{
     public function editPhoneNumbers() {
         try {
             $id=$this->Utils->safeInt($this->Utils->get('id'));
-            $_SESSION['edit_form_info']=null;
             if(isset($_SESSION['token']))
                 $this->object['csrf_token'] = $_SESSION['token'];
             if(isset($_POST['btn_submit'])){
@@ -23,7 +22,7 @@ class EditPhoneNumbers extends Backend{
                         $fullName=$this->Utils->encode($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
                         $address = $this->Utils->encode($this->Utils->post('address'));
-                        $_SESSION['edit_form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
+                        $this->object['edit_form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'whereNot'=>['id'=>$id]];
                         $issetnickName = $this->model->issetData($data);
                         if($nickname==='')
@@ -59,11 +58,11 @@ class EditPhoneNumbers extends Backend{
                                     else
                                     if(is_int($upload) && $upload !== false)
                                         if(in_array($upload,[-1,-2,-4,-5]))
-                                            $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure! Try again later.','script'=>'image'];
+                                            $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>'image'];
                                         else if($upload === -3)
-                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
+                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>'image'];
                                         else if($upload === -6)
-                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                            $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size=','ex'=>MAX_FILE_SIZE,'script'=>'image'];
                                 }
                                 else
                                     $imageId= $this->Utils->safeInt($this->Utils->post('image_id'));
@@ -71,7 +70,7 @@ class EditPhoneNumbers extends Backend{
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'updated_at'=>date("Y-m-d H:i:s")],'where'=>['id'=>$id]];
                                     $res = $this->model->updateData($obj);
                                     if($res){
-                                        $_SESSION['edit_form_info']='';
+                                        $this->object['edit_form_info']='';
                                         $this->object['msg']=['style'=>'success','text'=>'Submission successful!'];
                                     }
                                     else
@@ -94,7 +93,6 @@ class EditPhoneNumbers extends Backend{
             $this->object['row_info']['phone_numbers'] = isset($rowInfo[0]['phone_numbers'])?explode('+',$rowInfo[0]['phone_numbers']):null;
             if(isset($rowInfo[0]['image_id']))
                 $this->object['row_info']['image'] = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$rowInfo[0]['image_id']]])[0];
-            $this->object['edit_form_info'] = $_SESSION['edit_form_info'];
             return $this->Render('edit',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);

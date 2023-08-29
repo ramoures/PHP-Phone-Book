@@ -21,7 +21,7 @@ class AddPhoneNumbers extends Backend{
                         $fullName=$this->Utils->encode($this->Utils->post('full_name'));
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
                         $address = $this->Utils->encode($this->Utils->post('address'));
-                        $_SESSION['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
+                        $this->object['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
                         $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'issetCheck'=>true];
                         $issetnickName = $this->model->issetData($data);
                         if($nickname==='')
@@ -56,16 +56,16 @@ class AddPhoneNumbers extends Backend{
                                 else
                                 if(is_int($upload) && $upload !== false)
                                     if(in_array($upload,[-1,-2,-4,-5]))
-                                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure! Try again later.','script'=>'image'];
+                                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>'image'];
                                     else if($upload === -3)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types : .jpeg, .jpg, .png','script'=>'image'];
+                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>'image'];
                                     else if($upload === -6)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size ='.MAX_FILE_SIZE,'script'=>'image'];
+                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size =','ex'=>MAX_FILE_SIZE,'script'=>'image'];
                                 if(!isset($this->object['msg'])){
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);
                                     if($res){
-                                        $_SESSION['form_info']='';
+                                        $this->object['form_info']='';
                                         $this->object['msg']=['style'=>'success','text'=>'Submission successful!'];
                                     }
                                     else
@@ -81,7 +81,6 @@ class AddPhoneNumbers extends Backend{
                 $_SESSION['token'] = bin2hex(random_bytes(35));
                 $this->object['csrf_token'] = $_SESSION['token'];
             }
-            $this->object['form_info'] = $_SESSION['form_info']??'';
             return $this->Render('add',$this->object);
         } catch (\Throwable $th) {
             return $this->error($th);

@@ -64,14 +64,26 @@ $lang = [
 
     //Alert Message:
     "Signed out successfully."=>"با موفقیت خارج شدید.",
-    "Username is empty."=>"نام کاربری خالی‌ است.",
-    "Password is empty."=>"رمز عبور خالی است.",
-    "User is not valid."=>"کاربر معتبر نیست.",
+    "Please enter username."=>"نام کاربری را وارد کنید.",
+    "Please enter password."=>"رمز عبور را وارد کنید.",
+    "The user is not valid."=>"کاربر معتبر نیست.",
 
-    "Current password is empty."=>"رمز عبور جاری خالی است.",
-    "New password is empty."=>"رمز عبور تازه خالی است.",
-    "Confirm new password is empty."=>"تکرار رمز عبور تازه خالی است.",
-    "New and confirm password dos'nt matched."=>"رمز عبور تازه با تکرارش، برابر نیست.",
+    "Error! Try again later."=>"خطا! دوباره سعی کنید.",
+    "File Upload Failure!"=>"آپلود فایل انجام نشد.",
+    "The file extension is not allowed. Allowable file types="=>"فایل انتخاب شده تایید نشد. فایل‌های قابل قبول:",
+    "The file is too large. Max file size="=>"سایز فایل انتخاب شده تایید نشد. حداکثر سایز قابل قبول:",
+
+    "Please enter current password."=>"رمز عبور جاری را وارد کنید.",
+    "Current password is wrong."=>"رمز عبور جاری اشتباه است.",
+    "Please enter new password."=>"رمز عبور تازه را وارد کنید.",
+    "Please enter new password confirmation."=>"تکرار رمز عبور تازه را وارد کنید.",
+    "New password and confirmation do not match."=>"رمز عبور تازه با تکرارش، برابر نیست.",
+    "New password is easy. Please set a strong password."=>"رمز عبور تازه ساده است. رمز عبور قوی وارد کنید.",
+    "Must be 8 to 16 characters."=>"باید ۸ تا ۱۶ کاراکتر باشد.",
+    "Must contain at least 2 number."=>"حداقل دو عدد داشته باشد.",
+    "Must contain at least 1 in Capital Case."=>"حداقل یک حرف کوچک انگلیسی داشته باشد.",
+    "Must contain at least 1 Letter in Small Case."=>"حداقل یک حرف بزرگ انگلیسی داشته باشد.",
+    "Must contain at least 2 Special Character."=>"حداقل دو کاراکتر ویژه داشته باشد.",
 
     "Please enter nickname."=>"نام مستعار را وارد کنید.",
     "Please enter a valid phone number."=>"شماره‌تلفن صحیح را وارد کنید.",

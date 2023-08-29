@@ -41,15 +41,15 @@ final class Bootstrap{
     private function initSession(){
        try {
             if(isset($_COOKIE[SESSION_NAME])){
-                if(!preg_match('/^[a-zA-Z0-9]{1,40}$/',$_COOKIE[SESSION_NAME]))
+                if(!preg_match('/^[a-zA-Z0-9]{22,40}$/',$_COOKIE[SESSION_NAME]))
                     die('Security error!');
             }
             if(!isset($_SESSION)){
                 ini_set('session.cookie_samesite','Strict');
                 ini_set('session.cookie_httponly',1);
+                ini_set('session.use_only_cookies', 1);
                 ini_set('session.hash_function','sha1');
-                if(SSL)
-                    ini_set('session.cookie_secure',1);
+                ini_set('session.cookie_secure',1);
                 ini_set('session.name',SESSION_NAME);
                 session_start();
             }

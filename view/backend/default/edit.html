@@ -56,7 +56,7 @@ function invalidElement(id){
                     <div class="d-grid gap-2 flex-fill faDigits">
                         <div class="flex-fill position-relative">
                             <input type="tel" pattern="{{constant('PHONE_NUMBER_PATTERN')}}" name="phone_numbers[]" class="form-control numberFiled fs-5" id="phoneNumbers0" value="{{edit_form_info.phone_numbers[0] ?? row_info.phone_numbers[0]}}" style="padding-{% if 'Direction'|lang =='rtl' %}left{% else %}right{% endif %}: 40px !important;" required>
-                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-light text-secondary rounded-circle px-2 firstNumber {% if edit_form_info.phone_numbers??row_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
+                            <div class="position-absolute end-0 top-0 mt-2 me-2 bg-magic-light text-secondary rounded-circle px-2 firstNumber {% if edit_form_info.phone_numbers??row_info.phone_numbers|length<=1 %}d-none{% endif %}">1</div>
                             <div class="invalid-feedback">
                                 {{'Please enter a valid phone number.'|lang}} {{'Ex.'|lang}} 09121234567
                             </div>

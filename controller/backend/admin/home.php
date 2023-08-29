@@ -21,10 +21,10 @@ class Admin extends Backend{
                 $username= $this->Utils->encode($this->Utils->post('username'));
                 $password= $this->Utils->encode($this->Utils->post('password'));
                 if($username=='')
-                    $this->object['msg']=['status'=>'1','style'=>'danger','text'=>'Username is empty.'];
+                    $this->object['msg']=['status'=>'1','style'=>'danger','text'=>'Please enter username.'];
                 else
                 if($password=='')
-                    $this->object['msg']=['status'=>'2','style'=>'danger','text'=>'Password is empty.'];
+                    $this->object['msg']=['status'=>'2','style'=>'danger','text'=>'Please enter password.'];
                 else{
                     $object = ['tableName'=>'admins','selector'=>['id'],'where'=>['username'=>$username,'password'=>$this->encrypt($password)]];
                     $resultSignin = $this->model->signin($object);
@@ -36,7 +36,7 @@ class Admin extends Backend{
                             $this->Utils->redirect(PROJECT_URL."admin");
                     }
                     else
-                        $this->object['msg']=['status'=>'3','style'=>'danger','text'=>'User is not valid.'];
+                        $this->object['msg']=['status'=>'3','style'=>'danger','text'=>'The user is not valid.'];
                  }
                  $this->object['username'] = $this->Utils->decode($username);
              }

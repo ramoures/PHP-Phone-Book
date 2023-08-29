@@ -1,5 +1,10 @@
 import { COOKIE_NAME_FOR_BACKEND_LANG,MAX_PHONE_NUMBER_TO_BE_ADD } from "./config.js";
-import { setCookie } from "./Utils.js";
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict;secure";
+}
 if (window.history.replaceState) 
     window.history.replaceState( null, null, window.location.href );
 const forms = document.querySelectorAll('.needs-validation')
@@ -12,7 +17,6 @@ Array.from(forms).forEach(form => {
     form.classList.add('was-validated')
     }, false)
 })
-
 var stored = {};
 var inputs = $('.numberFiled');
 $.each(inputs,function(k,v){
@@ -42,8 +46,6 @@ function filedNumber(){
         $('.numberFiled').eq(i).attr('id','phoneNumbers'+i);
     }
 }
-
-
 $('.formReset').on('click',function(){
     $(this).closest('form').find('input').removeClass('border-danger').val('');
     $(this).closest('form').find('textarea').val('');
@@ -67,7 +69,6 @@ $('.addField').on('click',function(){
     }
     else
         $(this).fadeOut(1);
-    
     removeFiled()
 });
 function removeFiled(){
@@ -79,8 +80,6 @@ function removeFiled(){
     });
 }
 removeFiled();
-
-
 $('.changeLanguage button').on('click',function(){
     try {
         let thisLang = $(this).attr('id').toLowerCase();
@@ -114,7 +113,6 @@ addEventListener("resize", () => {
     $('.toMoreInfo i').removeClass('bi-caret-up-fill').addClass('bi-caret-down-fill');
 
 });
-
 $('.toMoreInfo').on('click',function(){
     const toggle = parseInt($(this).attr('data-toggle'));
     if(toggle){
@@ -135,14 +133,11 @@ $('.toMoreInfo').on('click',function(){
         let address = addressBd?`<strong>${addressTtl}</strong> : ${addressBd}<br>`:'';
         let datetimeBd = $(this).closest('tr').find('.datetimeBd').html();
         let html = `
-      
             ${fullName}${address}
             <strong>${datetimeTtl}</strong> : ${datetimeBd}
-       
         `;
         $(this).parent().parent().parent().next().removeClass('d-none').prop('hidden',false).find('td').html(html)
     }
-    
 });
 $('.toConfirmModal').on('click',function(){
     let thisId = $(this).attr('data-id');
@@ -176,17 +171,45 @@ $('#newPassCheckBox').on('change',function(){
     if(this.checked)
         $('.newPass').removeClass('d-none').find('input').prop('disabled',false);
 });
-    $('.showPass').on('click',function(){
-        const type = $(this).parent().find('input').attr('type')
-        if(type==='password')
-        {
-            $(this).parent().find('input').attr('type','text');
-            $(this).find('i').removeAttr('class').addClass('bi bi-eye-slash fs-4 opacity-75')
-        }
-        else
-        {
-            $(this).parent().find('input').attr('type','password');
-            $(this).find('i').removeAttr('class').addClass('bi bi-eye fs-4 opacity-75')
-        }
-    });
+$('.showPass').on('click',function(){
+    const type = $(this).parent().find('input').attr('type')
+    if(type==='password')
+    {
+        $(this).parent().find('input').attr('type','text');
+        $(this).find('i').removeAttr('class').addClass('bi bi-eye-slash fs-4 opacity-75')
+    }
+    else
+    {
+        $(this).parent().find('input').attr('type','password');
+        $(this).find('i').removeAttr('class').addClass('bi bi-eye fs-4 opacity-75')
+    }
+});
+$('#newPassword').on('keyup',function(){
+    // Pattern information: find define('PASSWORD_PATTERN') in config.php file.
+    const thisVal = $(this).val();
+    if(thisVal.length >= 8 && thisVal.length <= 16)
+        $('.passValid').find('span').eq(0).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+    if(thisVal.length < 8 || thisVal.length > 16 )
+        $('.passValid').find('span').eq(0).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');  
+
+    if(thisVal.search(/(?=(.*[0-9]){2,})/g) !== -1 )
+        $('.passValid').find('span').eq(1).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+    if(thisVal.search(/(?=(.*[0-9]){2,})/g) === -1 )
+        $('.passValid').find('span').eq(1).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+    if(thisVal.search(/(?=(.*[a-z]){1,})/g) !== -1 )
+        $('.passValid').find('span').eq(2).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+    if(thisVal.search(/(?=(.*[a-z]){1,})/g) === -1 )
+        $('.passValid').find('span').eq(2).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+    if(thisVal.search(/(?=(.*[A-Z]){1,})/g) !== -1 )
+        $('.passValid').find('span').eq(3).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+    if(thisVal.search(/(?=(.*[A-Z]){1,})/g) === -1 )
+        $('.passValid').find('span').eq(3).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+    if(thisVal.search(/(?=(.*[!@#$%^&*_=+\-]){2,})/g) !== -1 )
+        $('.passValid').find('span').eq(4).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+    if(thisVal.search(/(?=(.*[!@#$%^&*_=+\-]){2,})/g) === -1 )
+        $('.passValid').find('span').eq(4).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+})
 

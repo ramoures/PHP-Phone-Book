@@ -56,7 +56,6 @@ function invalidElement(id){
                     <div class="d-none">
                         <input type="file" name="avatar" class="form-control fs-5 ms-2" id="image" autocomplete="off" disabled>
                     </div>
-                  
                     <button type="button" class="btn btn-sm clearImage btn-link text-secondary text-decoration-none border-bottom rounded-0 d-flex gap-1"><i class="bi bi-x-octagon"></i>{{'Clear'|lang}}</button>
                     <button type="button" class="btn btn-sm reloadImage d-none btn-secondary text-white ms-2"><i class="bi bi-arrow-clockwise"></i></button>
                 </div>
@@ -72,41 +71,54 @@ function invalidElement(id){
             </div>
             <div class="mb-3 newPass {% if changePass==false %}d-none{% endif %}">
                 <label for="currentPassword" class="form-label">{{'Current password'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <div dir="{{'Direction|lang'}}" class="d-flex gap-1">
-                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" name="currentPassword" autocomplete="off" class="form-control fs-5" id="currentPassword" value="{{profile_form_info.currentPassword}}">
-                    <button type="button" class="btn btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
+                <div dir="{{'Direction|lang'}}" class="d-flex flex-wrap gap-1">
+                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" name="currentPassword" autocomplete="off" class="form-control col fs-5" id="currentPassword" value="{{profile_form_info.currentPassword}}" required>
+                    <button type="button" class="btn col-auto btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
                         <i class="bi bi-eye fs-4 opacity-75"></i>
                     </button>
+                    <div class="invalid-feedback">
+                        {{'Please enter current password.'|lang}}
+                    </div>
                 </div>
-                <div class="invalid-feedback">
-                    {{'Please enter a valid current password.'|lang}}
-                </div>
+               
             </div>
             
             <div class="mb-3 newPass {% if changePass==false %}d-none{% endif %}">
                 <label for="newPassword" class="form-label">{{'New password'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <div dir="{{'Direction|lang'}}" class="d-flex gap-1">
-                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" autocomplete="off" name="newPassword" class="form-control fs-5" id="newPassword" value="{{profile_form_info.newPassword}}">
-                    <button type="button" class="btn btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
+                <div dir="{{'Direction|lang'}}" class="d-flex flex-wrap gap-1">
+                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" autocomplete="off" name="newPassword" class="form-control col fs-5" id="newPassword" value="{{profile_form_info.newPassword}}" {% if constant('PASSWORD_PATTERN')%}pattern="{{constant('PASSWORD_PATTERN')}}"{% endif %} required>
+                    <button type="button" class="btn col-auto btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
                         <i class="bi bi-eye fs-4 opacity-75"></i>
                     </button>
+                    <div class="invalid-feedback">
+                        {{'Please enter new password.'|lang}}
+                        {% if constant('PASSWORD_PATTERN')%}
+                        <!--Please find $('#newPassword') keyup function, in /view/assets/js/backend.js-->
+                            <div class="text-secondary d-grid passValid">
+                                <span><i></i>{{'Must be 8 to 16 characters.'|lang}}</span>
+                                <span><i></i>{{'Must contain at least 2 number.'|lang}}</span>
+                                <span><i></i>{{'Must contain at least 1 in Capital Case.'|lang}}</span>
+                                <span><i></i>{{'Must contain at least 1 Letter in Small Case.'|lang}}</span>
+                                <span><i></i>{{'Must contain at least 2 Special Character.'|lang}}</span>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="invalid-feedback">
-                    {{'Please enter a valid new password.'|lang}}
-                </div>
+               
                
             </div>
             <div class="mb-3 newPass {% if changePass==false %}d-none{% endif %}">
                 <label for="cnfNewPassword" class="form-label">{{'Confirm new password'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <div dir="{{'Direction|lang'}}" class="d-flex gap-1">
-                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" autocomplete="off" name="cnfNewPassword" class="form-control fs-5" id="cnfNewPassword" value="{{profile_form_info.cnfNewPassword}}">
-                    <button type="button" class="btn btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
+                <div dir="{{'Direction|lang'}}" class="d-flex flex-wrap gap-1">
+                    <input dir="ltr" {% if changePass==false %}disabled{% endif %} type="password" autocomplete="off" name="cnfNewPassword" class="form-control col fs-5" id="cnfNewPassword" value="{{profile_form_info.cnfNewPassword}}" required>
+                    <button type="button" class="btn col-auto btn-lg ps-3 pe-4 lh-1 border rounded text-body showPass user-select-none">
                         <i class="bi bi-eye fs-4 opacity-75"></i>
                     </button>
+                    <div class="invalid-feedback">
+                        {{'Please enter new password confirmation.'|lang}}
+                    </div>
                 </div>
-                <div class="invalid-feedback">
-                    {{'Please enter a valid confirm new password.'|lang}}
-                </div>
+            
             </div>
            
             <div class="d-flex align-items-center gap-2">
