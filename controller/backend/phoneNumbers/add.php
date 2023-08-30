@@ -5,7 +5,7 @@ class AddPhoneNumbers extends Backend{
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new AddPhoneNumbersModel();
-        $this->object['admin_info'] = $this->model->adminInfo($this->Utils->safeInt($_SESSION['admin_id']));
+        $this->object['admin_info'] = $this->adminInfo($this->Utils->safeInt($_SESSION['admin_id']),$this->model);
     }
     public function addPhoneNumbers() {
         try {
@@ -22,8 +22,8 @@ class AddPhoneNumbers extends Backend{
                         $phone_numbers = array_filter($this->Utils->encode($_POST['phone_numbers']));
                         $address = $this->Utils->encode($this->Utils->post('address'));
                         $this->object['form_info'] = ["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,'address'=>$address];
-                        $data = ["tableName"=>"phone_numbers","where"=>["nickname"=>$nickname],'issetCheck'=>true];
-                        $issetnickName = $this->model->issetData($data);
+                        $obj = ['tableName'=>'phone_numbers','selector'=>['id'],'where'=>['nickname'=>$nickname],'issetCheck'=>true];
+                        $issetnickName = $this->model->getData($obj);
                         if($nickname==='')
                             $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter nickname.','script'=>'nickname'];
                         else
@@ -31,38 +31,25 @@ class AddPhoneNumbers extends Backend{
                             $this->object['msg']=['status'=>2,'style'=>'danger','text'=>'Please enter a valid phone number.','script'=>'phoneNumbers0'];
                         else
                         if($issetnickName)
-                            $this->object['msg']=['status'=>4,'style'=>'danger','text'=>'The nickname is already exists.','script'=>'nickname'];
+                            $this->object['msg']=['status'=>4,'style'=>'danger','name'=>$nickname,'text'=>'The nickname is already exists.','script'=>'nickname'];
                         else{
                             if(count($phone_numbers) !== count(array_unique($phone_numbers)))
                                 $this->object['msg']=['status'=>5,'style'=>'danger','text'=>'Some of the phone numbers are duplicates.'];
                             else
                             foreach($phone_numbers as $key=>$value){
-                                $where['phone_numbers'] = '%'.$phone_numbers[$key].'%';
-                                if($this->model->search('phone_numbers',$where))
+                                $obj = ['tableName'=>'phone_numbers','selector'=>['id'],"where"=>['phone_numbers'=>'%'.$phone_numbers[$key].'%'],'issetCheck'=>true];
+                                if($this->model->search($obj))
                                     $this->object['msg']=['status'=>6,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'The phone number is already exists.','script'=>'phoneNumbers'.$key];
                                 else
                                 if(!preg_match($phoneNumbersPattenr,$phone_numbers[$key]))
                                     $this->object['msg']=['status'=>7,'style'=>'danger','name'=>$phone_numbers[$key],'text'=>'Please enter a valid phone number.','ex'=>'09121234567','script'=>'phoneNumbers'.$key];
                             }
-                            $uploadToDb = null;
+                            $imageId = null;
                             if(!isset($this->object['msg'])){
-                                $upload = $this->uploader('image',IMAGES_DIR_NAME);
-                                if(!is_int($upload) && $upload !== false){
-                                    $data = ['tableName'=>'upload','data'=>['folder'=>IMAGES_DIR_NAME,'name'=>$upload,'alt'=>$nickname]];
-                                    $uploadToDb = $this->model->insertData($data);
-                                    if(!$uploadToDb)
-                                        $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-                                }
-                                else
-                                if(is_int($upload) && $upload !== false)
-                                    if(in_array($upload,[-1,-2,-4,-5]))
-                                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>'image'];
-                                    else if($upload === -3)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>'image'];
-                                    else if($upload === -6)
-                                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size =','ex'=>MAX_FILE_SIZE,'script'=>'image'];
+                                $imageId = $this->uploader('image',IMAGES_DIR_NAME,$this->model,$nickname);
                                 if(!isset($this->object['msg'])){
-                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$uploadToDb,'created_at'=>date("Y-m-d H:i:s")]];
+                                    $phone_numbers = $phone_numbers?implode('~~',$phone_numbers):'';
+                                    $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);
                                     if($res){
                                         $this->object['form_info']='';

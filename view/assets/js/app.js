@@ -1,16 +1,39 @@
 import { COOKIE_NAME_FOR_FRONTEND_LANG } from "./config.js";
-import { setCookie } from "./Utils.js";
-
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Strict;secure";
+}
+function serach(){
+    const text = $('.searcher').parent().find('input').val();
+    const baseUrl = $('.searcher').attr('data-base-target');
+    location.href = baseUrl+"&s="+text;
+}
+$('.searcher').on('click',function(){
+    serach();
+});
+$('.searcher').parent().find('input').on('keypress',function(e){
+    var key = e.which;
+    if(key == 13){
+        serach();
+        return false;  
+     }
+});
+$('.showSearchBox, .closeSearchBox').on('click',function(){
+    const toggle = parseInt($('.showSearchBox').attr('data-toggle'));
+    if(toggle){
+        $('.searchBox').removeClass('d-flex').addClass('d-none');
+        $('.showSearchBox').removeClass('active').attr('data-toggle',0);
+    }else{
+        $('.searchBox').removeClass('d-none').addClass('d-flex');
+        $('.showSearchBox').addClass('active').attr('data-toggle',1);
+    }
+});
 $('.sorting').on('change',function(){
-  let value = parseInt($(this).val());
-    if(value===1)
-        window.location.href = '?page=1&asc=0&nameSort=0';
-    else if(value===2)
-        window.location.href = '?page=1&asc=1&nameSort=0';
-    else if(value===3)
-        window.location.href = '?page=1&asc=1&nameSort=1';
-    else 
-        window.location.href = '?page=1&asc=0&nameSort=1';
+    let value = $(this).val();
+    window.location.href = value;
+   
 });
 $('.changeLanguage button').on('click',function(){
     try {

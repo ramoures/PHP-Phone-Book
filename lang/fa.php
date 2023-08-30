@@ -13,6 +13,9 @@ $lang = [
     "Dark"=>"شب",
     "Auto"=>"پیش‌فرض",
 
+    "More"=>"بیش‌تر",
+    "Less"=>"کم‌تر",
+
     "Please sign in"=>"وارد شوید",
     "Email address"=>"آدرس ایمیل",
     "Username"=>"نام کاربری",
@@ -20,10 +23,13 @@ $lang = [
     "Sign in"=>"ورود",
     
     "All"=>"همه",
-    "All Phone Numbers"=>"همه‌ی شماره‌تلفن‌ها",
+    "All Phone numbers"=>"همه‌ی شماره‌تلفن‌ها",
 
+    "Go"=>"بگرد",
     "Search"=>"جست‌وجو",
+    "Name, Address, Phone number,..."=>"نام، آدرس، شماره‌تلفن،...",
     "Latest"=>"آخرین",
+    "Earliest"=>"نخستین",
     "A to Z"=>"آ تا ی",
     "Z to A"=>"ی تا آ",
     
@@ -43,7 +49,7 @@ $lang = [
     "Operation"=>"عملیات",
     "Date & Time"=>"زمان",
     "Address"=>"آدرس",
-    "Phone Numbers"=>"شماره‌تلفن‌ها",
+    "Phone numbers"=>"شماره‌تلفن‌ها",
     "Phone number"=>"شماره‌تلفن",
     "Full name"=>"نام کامل",
     "Nickname"=>"نام مستعار",
@@ -63,6 +69,7 @@ $lang = [
     "Updated at"=>"وبرایش",
 
     //Alert Message:
+    "No data."=>"چیزی وجود ندارد.",
     "Signed out successfully."=>"با موفقیت خارج شدید.",
     "Please enter username."=>"نام کاربری را وارد کنید.",
     "Please enter password."=>"رمز عبور را وارد کنید.",
@@ -94,6 +101,8 @@ $lang = [
 
     "CSRF Token is not valid!"=>"CSRF Token اشتباه است!",
     "Submission successful!"=>"با موفقیت ثبت شد.",
+    "Successfully deleted."=>"با موفقیت حذف شد.",
+    "Delete failed. Try again later."=>"حذف ناموفق بود. دوباره سعی کنید.",
 
 
 

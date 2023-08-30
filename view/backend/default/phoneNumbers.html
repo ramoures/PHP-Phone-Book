@@ -1,9 +1,23 @@
 {% extends "layouts/structure.html" %}
-{% block title %}{{'Phone Numbers'|lang}}{% endblock %}
+{% block title %}{{'Phone numbers'|lang}}{% endblock %}
 {% block content %}
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
     <div class="d-flex flex-wrap  justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <div class="col-12 col-md-auto"><h1 class="h2">{{'Phone Numbers'|lang}}</h1></div>
+            <div class="col-12 d-flex align-items-center gap-3 col-md-auto">
+                <h1 class="h2">{{'Phone numbers'|lang}}</h1>
+                {% if search %}
+                    <div class="d-flex gap-2 align-items-center lh-i">
+                        |
+                        <span class="h5 m-0">{{'Search'|lang}}: </span>
+                        <div class="btn-group dropstart">
+                            <button class="btn btn-secondary de_cu">{{search}}</button>
+                            <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-danger px-2">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
             <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-between mt-2 mt-sm-0">
                 <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn btn-success d-flex gap-2 fw-bold">
                     <i class="bi bi-plus-lg"></i>
@@ -21,11 +35,11 @@
 {% if msg %}
     <div class="alert alert-{% if msg=='deleted' %}success{% else %}danger{% endif %} d-flex align-items-center">
     {% if msg=='deleted' %}
-    <i class="{% if msg=='deleted' %}bg-success{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
-    {{'Item is successfully deleted.'|lang}}
+        <i class="{% if msg=='deleted' %}bg-success{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
+        {{'Successfully deleted.'|lang}}
     {% else %}
-    <i class="{% if msg=='deleted' %}bg-info{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
-    {{'Item failed to be deleted. Try again later.'|lang}}
+        <i class="{% if msg=='deleted' %}bg-info{% else %}bg-danger{% endif %} me-2 p-2 rounded"></i>
+        {{'Delete failed. Try again later.'|lang}}
     {% endif %}
     </div>
 {% endif %}
@@ -59,7 +73,6 @@
             <tbody>
                 {% set rowId = rowNumber %}
                 {% for key,row in rows %}
-                {% set numb = row.phone_numbers|split('+') %}
                 <tr class="text-nowrap">
                     <th class="text-center" scope="row">
                         {% if ascChanged %}
@@ -81,7 +94,7 @@
                     </td>
                     <td><a class="text-body" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}">{{row.nickname}}</a></td>
                     <td class="d-none d-lg-table-cell fullNameBd">{{row.full_name}}</td>
-                    <td>{{numb|join('<br>')|raw}}</td>
+                    <td>{{row.phone_numbers|join('<br>')|raw}}</td>
                     <td class="d-none d-lg-table-cell addressBd">{{row.address}}</td>
                     <td class="small d-none d-lg-table-cell datetimeBd">
                         <div>{{'Created at'|lang}}: <span dir="ltr">{{row.created_at}}</span></div>
@@ -104,7 +117,6 @@
                             </button>
                         </div>
                     </td>
-                    
                 </tr>
                 <tr class="moreInfo" hidden>
                     <td colspan="5">
@@ -113,10 +125,9 @@
                 {% endfor %}
             </tbody>
         </table>
-       
     </div>
     {% else %}
-        <i class="fs-4 text-secondary">data not found!</i>
+        <i class="fs-4 text-secondary">{{'No data.'|lang}}</i>
     {% endif %}
     {% include "layouts/pagination.html" %}
 </main>

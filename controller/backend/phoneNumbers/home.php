@@ -5,10 +5,11 @@ class PhoneNumbers extends Backend{
     public function __construct($param) {
         parent::__construct($param);
         $this->model = new PhoneNumbersModel();
-        $this->object['admin_info'] = $this->model->adminInfo($this->Utils->safeInt($_SESSION['admin_id']));
+        $this->object['admin_info'] = $this->adminInfo($this->Utils->safeInt($_SESSION['admin_id']),$this->model);
     }
     public function phoneNumbers(){
         try {
+            $seprator = preg_split('/\w/i',DATE_FORMAT_TO_DISPLAY)[1];
             if($this->Utils->safeInt($this->Utils->post('confirm_btn'))){
                 $id = $this->Utils->safeInt($this->Utils->post('id'));
                 if($id){
@@ -34,15 +35,14 @@ class PhoneNumbers extends Backend{
             $search=null;
             if($this->Utils->get('s')){
                 $search = $this->Utils->encode($this->Utils->get('s'));
-     
-                $total = $this->model->searchData(['tableName'=>'phone_numbers','where'=>['nickname'=>"%$search%",'full_name'=>"%$search%",'phone_numbers'=>"%$search%",'address'=>"%$search%"],'count'=>true]);
+                $total = $this->model->search(['tableName'=>'phone_numbers','where'=>['nickname'=>"%$search%",'full_name'=>"%$search%",'phone_numbers'=>"%$search%",'address'=>"%$search%"],'count'=>true]);
                 $obj = ['tableName'=>'phone_numbers','limit'=>B_LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc,'where'=>['nickname'=>"%$search%",'full_name'=>"%$search%",'phone_numbers'=>"%$search%",'address'=>"%$search%"]];
-                $this->object['rows'] = $this->Utils->decode($this->model->searchData($obj));
+                $this->object['rows'] = $this->Utils->decode($this->model->search($obj));
                 $search = $this->Utils->decode($search);
 
             }
             else{
-                $total = $this->model->searchData(['tableName'=>'phone_numbers','count'=>true]);
+                $total = $this->model->getData(['tableName'=>'phone_numbers','selector'=>['id'],'count'=>true]);
                 $obj = ['tableName'=>'phone_numbers','limit'=>B_LIMIT,'offset'=>$offset,'orderBy'=>$getOrder,'asc'=>$asc];
                 $this->object['rows'] = $this->Utils->decode($this->model->getData($obj));
             }
@@ -51,16 +51,29 @@ class PhoneNumbers extends Backend{
                 $this->Utils->redirect(PROJECT_URL."admin/phone_numbers?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
             if($this->object['rows'])
                 foreach($this->object['rows'] as $key=>$value){
+                    $this->object['rows'][$key]['phone_numbers'] = isset($this->object['rows'][$key]['phone_numbers'])?explode('~~',$this->object['rows'][$key]['phone_numbers']):null;
                     $image = $this->model->getData(['tableName'=>'upload','where'=>['id'=>$this->object['rows'][$key]['image_id']]]);
                     $this->object['rows'][$key]['image'] = $image?$image[0]:false;
+                    
                     $dt = new DateTime($this->object['rows'][$key]['created_at']);
                     $dt->setTimezone(new DateTimeZone(TIMEZONE_TO_DISPLAY));
-                    $this->object['rows'][$key]['created_at'] = $dt->format("Y-m-d ".TIME_FORMAT_TO_DISPLAY);
+                    $this->object['rows'][$key]['created_at'] = $dt->format(DATE_FORMAT_TO_DISPLAY." - ".TIME_FORMAT_TO_DISPLAY);
+
+                    $dt = new DateTime($this->object['rows'][$key]['updated_at']);
+                    $dt->setTimezone(new DateTimeZone(TIMEZONE_TO_DISPLAY));
+                    $this->object['rows'][$key]['updated_at'] = $dt->format(DATE_FORMAT_TO_DISPLAY." - ".TIME_FORMAT_TO_DISPLAY);
+                    
                     if(JALALI_CALENDAR){
+                      
                         $gy = date("Y",strtotime($this->object['rows'][$key]['created_at']));
                         $gm = date("m",strtotime($this->object['rows'][$key]['created_at']));
                         $gd = date("d",strtotime($this->object['rows'][$key]['created_at']));
-                        $this->object['rows'][$key]['created_at'] = gregorian_to_jalali($gy,$gm,$gd,'/')." - ".date(TIME_FORMAT_TO_DISPLAY,strtotime($this->object['rows'][$key]['created_at']));
+                        $this->object['rows'][$key]['created_at'] = gregorian_to_jalali($gy,$gm,$gd,$seprator)." - ".date(TIME_FORMAT_TO_DISPLAY,strtotime($this->object['rows'][$key]['created_at']));
+
+                        $gy = date("Y",strtotime($this->object['rows'][$key]['updated_at']));
+                        $gm = date("m",strtotime($this->object['rows'][$key]['updated_at']));
+                        $gd = date("d",strtotime($this->object['rows'][$key]['updated_at']));
+                        $this->object['rows'][$key]['updated_at'] = gregorian_to_jalali($gy,$gm,$gd,$seprator)." - ".date(TIME_FORMAT_TO_DISPLAY,strtotime($this->object['rows'][$key]['updated_at']));
                     }
                 }
             $this->object['disabledNext'] = (int)$pagePerTotal === $page?true:false;

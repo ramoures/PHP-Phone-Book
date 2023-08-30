@@ -1,7 +1,7 @@
 <?php
 final class Utils{
     use errors;
-    private static $instance = null;
+    private static $instance;
     private function __construct() {}
     static function getInstance(){
         if(self::$instance==null)
@@ -52,13 +52,13 @@ final class Utils{
             return null;
         }
     }
-    public function safeString($str):string{
-        try {
-            return $str ? htmlentities(addslashes($str), ENT_QUOTES, 'UTF-8') : '';
-        } catch (\Throwable $th) {
-            return null;
-        }
-    }
+    // public function safeString($str):string{
+    //     try {
+    //         return $str ? htmlentities(addslashes($str), ENT_QUOTES, 'UTF-8') : '';
+    //     } catch (\Throwable $th) {
+    //         return null;
+    //     }
+    // }
 
     public function safeInt($int):int{
         try {

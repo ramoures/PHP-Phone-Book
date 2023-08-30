@@ -1,10 +1,12 @@
 <header class="d-flex align-items-center justify-content-between p-1 p-sm-3 my-3 text-white bg-primary rounded shadow-sm">
-  <a href="{{constant('PROJECT_URL')}}" class="flex-fill d-flex gap-2 text-white align-items-center ms-2 ms-md-0">
-      <i class="bi fs-2 bi-person-rolodex"></i>
-      <h1 class="h2 mb-0 lh-1">{{'Phone Book'|lang}}</h1>
-  </a>
-  <div class="d-flex">
-    <button class="btn btn-primary d-flex gap-2">
+    <div class="flex-fill d-flex ms-2 ms-md-0">
+        <a class="text-white col-auto d-flex gap-2 align-items-center" href="{{constant('PROJECT_URL')}}">
+            <i class="bi fs-2 bi-person-rolodex"></i>
+            <h1 class="h2 mb-0 lh-1">{{'Phone Book'|lang}}</h1>
+        </a>
+    </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary d-flex gap-2 showSearchBox {% if search %}active{% endif %}" {% if search %}data-toggle="1"{% endif %}>
         <i class="bi bi-search"></i>
         <span class="d-none d-md-block">{{'Search'|lang}}</span>
     </button>
@@ -36,3 +38,13 @@
       </button>
   </div>
 </header>
+<section class="container p-0 justify-content-center searchBox user-select-none {% if search %}d-flex{% else %}d-none{% endif %}">
+    <div class="col-12 col-md-6 bg-body border rounded p-2 d-flex justify-content-between align-items-center ">
+        <button type="button" class="btn-close closeSearchBox"></button>
+        <div class="flex-fill justify-content-center ps-3 align-items-center gap-2 d-flex">
+            <span>{{'Search'|lang}}:</span>
+            <input placeholder="{{'Name, Address, Phone number,...'|lang}}" class="form-control form-control-lg" value="{{search}}">
+            <button class="btn btn-lg btn-primary searcher" data-base-target="{{constant('PROJECT_URL')}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Go'|lang}}</button>
+        </div>
+    </div>
+</section>

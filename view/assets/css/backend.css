@@ -7,6 +7,9 @@
 .po_cu{
     cursor: pointer;
 }
+.de_cu{
+    cursor: default !important;
+}
 
 .table{
   --bs-table-bg:transparent !important;

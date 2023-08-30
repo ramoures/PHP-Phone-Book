@@ -42,17 +42,17 @@ function invalidElement(id){
             <input type="hidden" name="token" value="{{csrf_token}}">
             <div class="mb-3">
                 <label for="username" class="form-label">{{'Username'|lang}}<sup class="text-danger ms-1">*</sup></label>
-                <input dir="ltr" type="text" name="username" class="form-control fs-5" id="username" value="{{profile_form_info.username ?? row_info.username}}" >
+                <input dir="ltr" type="text" name="username" class="form-control fs-5" id="username" value="{{profile_form_info.username ?? admin_info.username}}" >
                 <div class="invalid-feedback">
                     {{'Please enter username.'|lang}}
                 </div>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">{{'Avatar'|lang}}</label>
-                {% if row_info.image.name %}
+                {% if admin_info.avatar.name %}
                 <div class="d-flex gap-2 align-items-center border py-2 rounded">
-                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{row_info.image.folder}}/{{row_info.image.name}}" alt="{{row_info.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
-                    <input type="hidden" value="{{row_info.image.id}}" name="avatar_id">
+                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{admin_info.avatar.folder}}/{{admin_info.avatar.name}}" alt="{{admin_info.avatar.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                    <input type="hidden" value="{{admin_info.avatar.id}}" name="avatar_id">
                     <div class="d-none">
                         <input type="file" name="avatar" class="form-control fs-5 ms-2" id="image" autocomplete="off" disabled>
                     </div>

@@ -2,28 +2,60 @@
 abstract class Models{
     use errors;
     protected $db;
-    protected $adminInfo;
     public function __construct() {
         $this->db = database::getInstance();
     }
-    public function adminInfo($id) {
+    public function getData($obj){
         try {
-            $admin = $this->db->read(['tableName'=>'admins','selector'=>['avatar_id','username'],'where'=>['id'=>$id]]);
-            $this->adminInfo['username'] = $admin?$admin[0]['username']:null;
-            $avatarId = $admin?$admin[0]['avatar_id']:false;
-            if($avatarId){
-                $avatar = $this->db->read(['tableName'=>'upload','selector'=>['name','alt','folder'],'where'=>['id'=>$avatarId]]);
-                $avatar = $avatar?$avatar[0]:false;
-                if($avatar)
-                     $this->adminInfo['avatar'] = $avatar;
-            }
-            return $this->adminInfo;
-
+            $result = $this->db->read($obj);
+            if($result)
+                return $result;
+            return false;
         } catch (\Throwable $th) {
-            return 0;
+            return false;
         }
     }
-   
+    public function insertData($obj){
+        try {
+            $result = $this->db->create($obj);
+            if($result)
+                return $result;
+            return false;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }  
+    public function updateData($obj){
+        try {
+            $result = $this->db->update($obj);
+            if($result)
+                return $result;
+                return false;
+        } catch (\Throwable $th) {
+        return false;
+        }
+    }
+    public function search($obj) {
+        try {
+            $obj['search'] = true;
+            $result = $this->db->read($obj);
+            if($result)
+                return $result;
+            return false;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+    public function removeData($obj) {
+        try {
+            $result = $this->db->delete($obj);
+            if($result)
+                return $result;
+            return false;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }
 
 ?>

@@ -1,31 +1,39 @@
 {% extends "layouts/structure.html" %}
-{% block title %}{{'All Phone Numbers'|lang}}{% endblock %}
+{% block title %}{{'All Phone numbers'|lang}}{% endblock %}
 {% block content %}
 <main class="row-cols-2 d-flex gap-4 my-3 bg-body rounded border shadow-sm">
   <section id="content" class="col flex-fill px-3 ">
     <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4 mt-3">
-        <div class="d-flex gap-2 flex-fill">
-            <h4 class="p-0 m-0 mt-1">{{'Last Phone Numbers'|lang}}</h4>
-            <a class="d-block d-md-none p-0 m-0 btn btn-link rounded-1"><i class="bi fs-3 lh-sm text-primary bi-funnel"></i></a>
+        <div class="d-flex align-items-center gap-2 flex-fill">
+            <h4 class="p-0 m-0 mt-1">{{'Phone numbers'|lang}}</h4>
+            {% if search %}
+            <div class="d-flex gap-2 align-items-center lh-i border-start ps-2 ">
+                
+                <span class="h5 m-0">{{'Search'|lang}}: </span>
+                <div class="btn-group dropstart">
+                    <button class="btn btn-secondary opacity-75 de_cu">{{search}}</button>
+                    <a href="{{constant('PROJECT_URL')}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-secondary px-2">
+                        <i class="bi bi-x-lg"></i>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
         </div>
         <div class="col-auto">
-            <select class="d-none d-md-block form-select sorting">
-                <option value="1" {% if orderChanged==false and ascChanged %}selected{% endif %}>{{'Latest'|lang}}</option>
-                <option value="2" {% if orderChanged==false and ascChanged==false %}selected{% endif %}>{{'Earliest'|lang}}</option>
-                <option value="3" {% if orderChanged and ascChanged==false %}selected{% endif %}>{{'A to Z'|lang}}</option>
-                <option value="4" {% if orderChanged and ascChanged %}selected{% endif %}>{{'Z to A'|lang}}</option>
+            <select class="form-select sorting">
+                <option value="?page=1&asc=0&nameSort=0&s={{search}}" {% if orderChanged==false and ascChanged %}selected{% endif %}>{{'Latest'|lang}}</option>
+                <option value="?page=1&asc=1&nameSort=0&s={{search}}" {% if orderChanged==false and ascChanged==false %}selected{% endif %}>{{'Earliest'|lang}}</option>
+                <option value="?page=1&asc=1&nameSort=1&s={{search}}" {% if orderChanged and ascChanged==false %}selected{% endif %}>{{'A to Z'|lang}}</option>
+                <option value="?page=1&asc=0&nameSort=1&s={{search}}" {% if orderChanged and ascChanged %}selected{% endif %}>{{'Z to A'|lang}}</option>
             </select>
         </div>
-        <a class="d-block d-md-none p-0 m-0 btn btn-primary rounded-1"><i class="bi fs-1 text-white lh-1 bi-list"></i></a>
     </div>
     {% if rows %}
     <div class="row row-cols-1 row-cols-lg-2 align-items-stretch justify-content-between flex-wrap g-2 g-lg-3 px-0 px-lg-2 mb-4">
         {% set colors = ['#fd7e14','#6f42c1','#e83e8c','#20c997','#6c757d','#0dcaf0'] %}
         {% set n = 0 %}
-
         {% for key,row in rows %}
-
-            {% set numb = row.phone_numbers|split('+') %}
+            {% set numbers = row.phone_numbers %}
             {% set first = row.nickname|split("") %}
                 <div class="col">
                     <div class="bg-body-secondary rounded rounded-1 text-body-secondary d-flex w-100 p-4 h-100 align-items-center ">
@@ -45,25 +53,24 @@
                                 <strong class="d-block text-gray-dark">{{row.nickname}}</strong>
                                 <div>{{row.full_name}}</div>
                                 <div class="fw-normal h4 p-0 m-0 mt-1">
-                                    {% for nmb in numb|slice(0,2) %}
-                                        {{nmb}}
+                                    {% for numbers in numbers|slice(0,2) %}
+                                        {{numbers}}
                                     {% endfor %}
                                 </div>
                                 <div class="fw-normal h4 p-0 m-0 moreNumbers d-none">
-                                    {% for nmb in numb|slice(2,20) %}
-                                        {{nmb}}
+                                    {% for numbers in numbers|slice(2,20) %}
+                                        {{numbers}}
                                     {% endfor %}
                                     <a class="lessMoreNumbers po_cu">
-                                        ...Less
+                                        ...{{'Less'|lang}}
                                     </a>
                                 </div>
-                                {% if numb|length > 2 %}
+                                {% if numbers|length > 2 %}
                                     <a class="toMoreNumbers po_cu">
-                                        More...
+                                        {{'More'|lang}}...
                                     </a>
                                 {% endif %}
                             </div>
-                        
                         </div>
                         <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
                             {% if row.address %}
@@ -79,7 +86,7 @@
     </div>
     {% else %}
         <div class="d-flex justify-content-center mb-4">
-            <i class="fs-4 text-secondary">data not found!</i>
+            <i class="fs-4 text-secondary">{{'No data.'|lang}}</i>
         </div>
     {% endif %}
     {% include "layouts/pagination.html" %}

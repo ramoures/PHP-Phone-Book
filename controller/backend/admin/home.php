@@ -26,12 +26,13 @@ class Admin extends Backend{
                 if($password=='')
                     $this->object['msg']=['status'=>'2','style'=>'danger','text'=>'Please enter password.'];
                 else{
-                    $object = ['tableName'=>'admins','selector'=>['id'],'where'=>['username'=>$username,'password'=>$this->encrypt($password)]];
-                    $resultSignin = $this->model->signin($object);
+                    $obj = ['tableName'=>'admins','selector'=>['id'],'where'=>['username'=>$username,'password'=>$this->encrypt($password)]];
+                    $resultSignin = $this->model->getData($obj);
+                    $resultSignin = $resultSignin?$resultSignin[0]:false;
                     if($resultSignin){
                         $_SESSION['admin_id'] = $resultSignin['id'];
                         $obj = ['tableName'=>'admins','data'=>['last_signed_at'=>date('Y-m-d H:i:s')],'where'=>['id'=>$resultSignin['id']]];
-                        $this->model->setLastSigned($obj);
+                        $this->model->updateData($obj);
                         if($this->adminIsSigned())
                             $this->Utils->redirect(PROJECT_URL."admin");
                     }
