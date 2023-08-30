@@ -47,7 +47,7 @@ class AddPhoneNumbers extends Backend{
                             $imageId = null;
                             if(!isset($this->object['msg'])){
                                 $imageId = $this->uploader('image',IMAGES_DIR_NAME,$this->model,$nickname);
-                                if(!isset($this->object['msg'])){
+                                if(!isset($this->object['msg']) && $imageId){
                                     $phone_numbers = $phone_numbers?implode('~~',$phone_numbers):'';
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'created_at'=>date("Y-m-d H:i:s")]];
                                     $res = $this->model->insertData($obj);

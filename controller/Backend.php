@@ -4,7 +4,6 @@ abstract class Backend extends Base{
         parent::__construct($param);
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
-            
     }
     protected function adminIsSigned(){
         try {
@@ -18,10 +17,8 @@ abstract class Backend extends Base{
     }
     protected function encrypt($str){
        try {
-            $secretSault = SECRET_SAULT??[];
-            $saultOrder = SAULT_ORDER??[];
-            $sault = $secretSault[$saultOrder[0]].$str.SECRET_KEY.$secretSault[$saultOrder[1]].SECRET_KEY.SECRET_KEY.$secretSault[$saultOrder[2]].$str.$secretSault[$saultOrder[3]].SECRET_KEY;
-            return hash('sha256',$sault);
+            $result = SECRET_KEY.$str."67H8fgp)@sd8u*ac".$str.SECRET_KEY."546DFsG%^dfA";
+            return hash('sha256',$result);
        } catch (\Throwable $th) {
             return $this->error($th);
        }
@@ -65,7 +62,7 @@ abstract class Backend extends Base{
     protected function toUpload($fieldName,$path){
         try {
             if(isset($_FILES[$fieldName])){
-                if(in_array($path,VALID_DIR_NAMES_TO_UPLOAD)){
+                if(in_array($path,[AVATARS_DIR_NAME,IMAGES_DIR_NAME])){
                     $fileField= $this->Utils->encode($_FILES[$fieldName]['tmp_name']);
                     if($fileField)
                         return $this->uploadImage($fieldName,UPLOAD_PATH."$path");
@@ -85,39 +82,53 @@ abstract class Backend extends Base{
        try {
             $id=null;
             if(isset($_FILES[$fieldName])){
-                $prevId = $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
-                if($prevId){
-                    $image = $model->getData(['tableName'=>'upload','selector'=>['name'],'where'=>['id'=>$prevId]]);
-                    $image = $image?$image[0]:false;
-                    if($image['name']){
-                            $unlink = unlink(UPLOAD_PATH.$path."/".$image['name']);
-                            if($unlink)
-                                $model->removeData(['tableName'=>'upload','id'=>$prevId]);
-                    }
-                    else
-                        return $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-                }
                 $upload = $this->toUpload($fieldName,$path);
                 if(!is_int($upload) && $upload !== false){
                     $data = ['tableName'=>'upload','data'=>['folder'=>$path,'name'=>$upload,'alt'=>$alt,'created_at'=>date("Y-m-d H:i:s")]];
                     $id = $model->insertData($data);
-                    if(!$id)
-                        return $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
+                    if(!$id){
+                         $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
+                         return false;
+                    }
                 }
                 else
                 if(is_int($upload) && $upload !== false)
-                    if(in_array($upload,[-1,-2,-4,-5]))
-                        return $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>$fieldName];
-                    else if($upload === -3)
-                        return $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>$fieldName];
-                    else if($upload === -6)
-                        return $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size=','ex'=>MAX_FILE_SIZE,'script'=>$fieldName];
+                    if(in_array($upload,[-1,-2,-4,-5])){
+                        $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>$fieldName];
+                        return false;
+                    }
+                    else if($upload === -3){
+                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>$fieldName];
+                        return false;
+                    }
+                    else if($upload === -6){
+                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size=','ex'=>MAX_FILE_SIZE,'script'=>$fieldName];
+                        return false;
+                    }
+                    else{
+                        $prevId = $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
+                        if($prevId){
+                            $image = $model->getData(['tableName'=>'upload','selector'=>['name'],'where'=>['id'=>$prevId]]);
+                            $image = $image?$image[0]:false;
+                            if($image['name']){
+                                    $unlink = unlink(UPLOAD_PATH.$path."/".$image['name']);
+                                    if($unlink)
+                                        $model->removeData(['tableName'=>'upload','id'=>$prevId]);
+                            }
+                            else{
+                                $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
+                                return false;
+                            }
+                            
+                        }
+                    }
             }
             else
                 $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
             return $id;
        } catch (\Throwable $th) {
-            return $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
+            $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
+            return false;
        }
     }
     protected function adminInfo($id,$model) {

@@ -2,6 +2,7 @@
 /**
  * (MYSQL - PDO - PREPARED STATEMENT) C.R.U.D
  * @Author: ramin moradi . github.com/ramoures
+ * @Version: 1.0
  * @Email: ramoures@gmail.com
  * @License: MIT
 */

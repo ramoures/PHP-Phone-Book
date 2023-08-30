@@ -52,7 +52,7 @@ class Profile extends Backend{
                         $avatarId = null;
                         if(!isset($this->object['msg'])){
                             $avatarId = $this->uploader('avatar',AVATARS_DIR_NAME,$this->model,$userName);
-                            if(!isset($this->object['msg'])){
+                            if($avatarId){
                                 if($changePass && $cnfNewPassword!=='')
                                     $obj = ['tableName'=>'admins','data'=>["username"=>$userName,'password'=>$this->encrypt($cnfNewPassword),'avatar_id'=>$avatarId,'updated_at'=>date("Y-m-d H:i:s")],'where'=>['id'=>$id]];
                                 else

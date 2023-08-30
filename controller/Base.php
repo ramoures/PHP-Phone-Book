@@ -21,7 +21,8 @@ abstract class Base{
     }
     protected function initTwig($mode) {
         try {
-            $this->templatePath = ROOT_PATH.'view/'.$mode.'/default/';
+            $themeDir = $mode==='frontend'?FRONTEND_THEME_DIR_NAME:BACKEND_THEME_DIR_NAME;
+            $this->templatePath = ROOT_PATH.'view/'.$mode.'/'.$themeDir.'/';
             $this->twigLoader = new \Twig\Loader\FilesystemLoader($this->templatePath);
             $this->twig = new \Twig\Environment($this->twigLoader);
             $filter = new \Twig\TwigFilter('lang', function ($string) {
