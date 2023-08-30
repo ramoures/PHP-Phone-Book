@@ -52,14 +52,6 @@ final class Utils{
             return null;
         }
     }
-    // public function safeString($str):string{
-    //     try {
-    //         return $str ? htmlentities(addslashes($str), ENT_QUOTES, 'UTF-8') : '';
-    //     } catch (\Throwable $th) {
-    //         return null;
-    //     }
-    // }
-
     public function safeInt($int):int{
         try {
             return (!is_numeric($int) || is_nan($int) || $int<=0)?0:(int)$int;

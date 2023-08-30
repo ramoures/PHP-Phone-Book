@@ -81,12 +81,6 @@ final class Bootstrap{
             return $this->error($th);
         }
     }
-    private function convertString($str) : string {
-        $str = explode('_',$str);
-        $str = array_map(function ($str){return ucwords($str); }, array_values($str));
-        $str = implode($str);
-        return lcfirst($str);
-    }
     private function dispatcher($type,$route){
         try {
             if($type==='backend'){
@@ -132,6 +126,12 @@ final class Bootstrap{
         } catch (\Throwable $th) {
             return $this->error($th);
         }
+    }
+    private function convertString($str) : string {
+        $str = explode('_',$str);
+        $str = array_map(function ($str){return ucwords($str); }, array_values($str));
+        $str = implode($str);
+        return lcfirst($str);
     }
 }
 
