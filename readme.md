@@ -1,6 +1,6 @@
 # PHP-Phone-Book
-[<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
-[<img src="screenshot2.png">](https://awaweb.ir/projects/free/php_phone_book/admin)
+<a target="_blank" href="https://awaweb.ir/projects/free/php_phone_book"><img src="screenshot.png"><a>
+<img target="_blank" href="https://awaweb.ir/projects/free/php_phone_book/admin" src="screenshot2.png">
 
 ___
 ### Demo
