@@ -37,11 +37,11 @@ ___
 1. Add your language file in the `lang` folder.
 For example. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
 2. Add your new language for frontend pages.<br>
-Ex. `
+Ex. ```
 <button id="fr" class="dropdown-item {% if language =='FR' %}active{% endif %} d-flex gap-2 align-items-center">
      <span class="bg-light p-1 border rounded-1 lh-1 text-dark">FR</span>
      {{'France'|lang}}
-</button>`
+</button>```
 ____
 
 ### ``** Ready to develop for other your pure PHP projects **``
