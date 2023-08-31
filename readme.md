@@ -12,7 +12,7 @@ ___
 
 1. Create MySQL database.
 2. Set the database information in `config.php`.
-2. Browse `setup.php` to create the required tables.
+2. Browse `setup.php` to create the required tables and  admin signup.
 
 ___
 #### This is my first public project on github. 
