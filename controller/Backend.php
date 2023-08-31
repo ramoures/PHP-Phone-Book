@@ -86,25 +86,17 @@ abstract class Backend extends Base{
                 if(!is_int($upload) && $upload !== false){
                     $data = ['tableName'=>'upload','data'=>['folder'=>$path,'name'=>$upload,'alt'=>$alt,'created_at'=>date("Y-m-d H:i:s")]];
                     $id = $model->insertData($data);
-                    if(!$id){
-                         $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-                         return false;
-                    }
+                    if(!$id)
+                        $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
                 }
                 else
                 if(is_int($upload) && $upload !== false)
-                    if(in_array($upload,[-1,-2,-4,-5])){
+                    if(in_array($upload,[-1,-2,-4,-5]))
                         $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>$fieldName];
-                        return false;
-                    }
-                    else if($upload === -3){
+                    else if($upload === -3)
                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>$fieldName];
-                        return false;
-                    }
-                    else if($upload === -6){
+                    else if($upload === -6)
                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file is too large. Max file size=','ex'=>MAX_FILE_SIZE,'script'=>$fieldName];
-                        return false;
-                    }
                     else{
                         $prevId = $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
                         if($prevId){
@@ -115,11 +107,8 @@ abstract class Backend extends Base{
                                     if($unlink)
                                         $model->removeData(['tableName'=>'upload','id'=>$prevId]);
                             }
-                            else{
+                            else
                                 $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-                                return false;
-                            }
-                            
                         }
                     }
             }
@@ -128,7 +117,7 @@ abstract class Backend extends Base{
             return $id;
        } catch (\Throwable $th) {
             $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
-            return false;
+            return null;
        }
     }
     protected function adminInfo($id,$model) {

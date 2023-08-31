@@ -6,7 +6,7 @@
  * @Email: ramoures@gmail.com
  * @License: MIT
 */
-//Database Information
+//MySQL Information
     define("DB_HOST","localhost");
     define("DB_USER","root");
     define("DB_PASWORD","");

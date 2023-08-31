@@ -48,7 +48,7 @@ class EditPhoneNumbers extends Backend{
                             $imageId = null;
                             if(!isset($this->object['msg'])){
                                 $imageId = $this->uploader('image',IMAGES_DIR_NAME,$this->model,$nickname);
-                                if(!isset($this->object['msg']) && $imageId){
+                                if(!isset($this->object['msg'])){
                                     $phone_numbers = $phone_numbers?implode('~~',$phone_numbers):'';
                                     $obj = ['tableName'=>'phone_numbers','data'=>["nickname"=>$nickname,"full_name"=>$fullName,"phone_numbers"=>$phone_numbers,"address"=>$address,'image_id'=>$imageId,'updated_at'=>date("Y-m-d H:i:s")],'where'=>['id'=>$id]];
                                     $res = $this->model->updateData($obj);
