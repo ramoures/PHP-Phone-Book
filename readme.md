@@ -3,6 +3,18 @@
 <img src="screenshot2.png">
 
 ___
+### Demo
+1. [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
+     * **username:** admin **password:** 123  
+2. [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
+
+### Setup
+
+1. Create MySQL database.
+2. Set the database information in `config.php`.
+2. Browse `setup.php` to create the required tables.
+
+
 This is my first public project on github.<br>
 + [Apache](https://httpd.apache.org/) HTTP Server
 + Language: [PHP](https://www.php.net/) 8.2.4
@@ -15,14 +27,10 @@ This is my first public project on github.<br>
 
 + Errors Handling method.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
-+ Many *options* for configuration. *(`config.php`)*
++ Many *options* for configuration. *`config.php`*
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system.
 
-### Demo:
-1. [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
-     * **username:** admin **password:** 123  
-2. [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 
 
