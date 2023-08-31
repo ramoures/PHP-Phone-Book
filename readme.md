@@ -25,8 +25,11 @@ ___
 + Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
 #### I Usesd:
++ Multi language suppourt.
+    1. Add your language file in the `lang` folder.
+For example. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
+     2. Set your language file name on `config.php` file.
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
-
 + Errors Handling method.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
