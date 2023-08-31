@@ -4,13 +4,13 @@
 
 ___
 ### Demo
-1. [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
++ [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
      * **username:** admin **password:** 123  
-2. [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
++ [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
 
-1. Create MySQL database.
+1. Create a new MySQL database.
 2. Set the database information in `config.php`.
 2. Browse `setup.php` to create the required tables and  admin signup.
 
