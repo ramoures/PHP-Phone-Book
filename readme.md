@@ -33,10 +33,10 @@ ___
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (setup files will be deleted after setup.)
 ___
-## HELP
-#### Add language
-1. Add your language file in the `lang` folder.
-For example. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
+### HELP
+#### Add new language
+1. Create your language file in the `lang` folder.
+>Ex. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
 2. Add your new language for frontend pages.<br>
 ```
 <!-- Example: -->
