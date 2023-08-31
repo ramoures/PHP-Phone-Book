@@ -31,7 +31,7 @@ ___
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
-+ Setup system.
++ Setup system. (setup files will be deleted after setup.)
 
 ### ``** Ready to develop for any other PHP projects **``
 
