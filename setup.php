@@ -13,6 +13,8 @@ $success3 = false;
 $step = (int)$_GET['step'];
 $step = $step<=0?1:$step;
 $step = $step>2?2:$step;
+$passwordPattenr = "/".PASSWORD_PATTERN."/";
+
 function encrypt($str){
     try {
         $result = SECRET_KEY.$str."67H8fgp)@sd8u*ac".$str.SECRET_KEY."546DFsG%^dfA";
@@ -84,9 +86,9 @@ try {
         if($stmp){
             $res = $stmp->fetchAll();
             if(count($res)>0){
-                unlink('setup.php');
-                unlink('setup_html.php');
-                unlink('setup.png');
+                // unlink('setup.php');
+                // unlink('setup_html.php');
+                // unlink('setup.png');
                 $u->redirect('admin/signin');
                 die;
             }
@@ -108,13 +110,25 @@ try {
                 else
                 if($password !== $confirm)
                     $alert = "Passwords do not match.";
+                else
+                if(!preg_match($passwordPattenr,$confirm)){
+                    $alert = '
+                    Your password is not strong enough.
+                    <div class="text-secondary d-grid passValid">
+                        <span><i></i>Must be 8 to 16 characters.</span>
+                        <span><i></i>Must contain at least 2 number.</span>
+                        <span><i></i>Must contain at least 1 in Capital Case.</span>
+                        <span><i></i>Must contain at least 1 Letter in Small Case.</span>
+                        <span><i></i>Must contain at least 2 Special Character.</span>
+                    </div>';
+                }
                 else{
                     $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",'admins','username','password','created_at');
                     $stmp = $pdo->prepare($sql);
                     $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
-                    unlink('setup.php');
-                    unlink('setup_html.php');
-                    unlink('setup.png');
+                    // unlink('setup.php');
+                    // unlink('setup_html.php');
+                    // unlink('setup.png');
                     $u->redirect('admin/signin');
                 }
 

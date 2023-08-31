@@ -10,7 +10,9 @@
 <body class="my-4">
     <div class="container col-12 col-md-9 col-lg-6 col-xl-5">
     <header class="bg-secondary rounded-2 rounded-bottom-0 p-2 text-white">
-        <h1 class="p-0 m-0 h2 px-1">PHP Phone Book Setup</h1>
+        <h1 class="p-0 m-0 h2 px-1">
+            <a class="text-decoration-none text-white" href="setup.php">PHP Phone Book Setup</a>
+        </h1>
     </header>
     <main class="border border-secondary border-end border-start p-4 pb-4 d-grid gap-3">
         
@@ -118,6 +120,34 @@
                 $(this).parent().find('input').attr('type','password');
                 $(this).find('i').removeAttr('class').addClass('bi bi-eye fs-4 opacity-75')
             }
+        });
+        $('#password').on('keyup',function(){
+            // Pattern information: find define('PASSWORD_PATTERN') in config.php file.
+            const thisVal = $(this).val();
+            if(thisVal.length >= 8 && thisVal.length <= 16)
+                $('.passValid').find('span').eq(0).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+            if(thisVal.length < 8 || thisVal.length > 16 )
+                $('.passValid').find('span').eq(0).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');  
+
+            if(thisVal.search(/(?=(.*[0-9]){2,})/g) !== -1 )
+                $('.passValid').find('span').eq(1).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+            if(thisVal.search(/(?=(.*[0-9]){2,})/g) === -1 )
+                $('.passValid').find('span').eq(1).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+            if(thisVal.search(/(?=(.*[a-z]){1,})/g) !== -1 )
+                $('.passValid').find('span').eq(2).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+            if(thisVal.search(/(?=(.*[a-z]){1,})/g) === -1 )
+                $('.passValid').find('span').eq(2).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+            if(thisVal.search(/(?=(.*[A-Z]){1,})/g) !== -1 )
+                $('.passValid').find('span').eq(3).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+            if(thisVal.search(/(?=(.*[A-Z]){1,})/g) === -1 )
+                $('.passValid').find('span').eq(3).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+
+            if(thisVal.search(/(?=(.*[!@#$%^&*_=+\-]){2,})/g) !== -1 )
+                $('.passValid').find('span').eq(4).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
+            if(thisVal.search(/(?=(.*[!@#$%^&*_=+\-]){2,})/g) === -1 )
+                $('.passValid').find('span').eq(4).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
         });
     </script>
 </body>
