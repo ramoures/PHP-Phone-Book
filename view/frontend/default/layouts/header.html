@@ -15,18 +15,19 @@
             <i class="bi bi-translate"></i>{{language}}
         </button>
         <ul class="dropdown-menu changeLanguage user-select-none">
-            <li class="">
+            <li>
                 <button id="en" class="dropdown-item {% if language =='EN' %}active{% endif %} d-flex gap-2 align-items-center">
                     <span class="bg-light p-1 border rounded-1 lh-1 text-dark">EN</span>
                     {{'English'|lang}}
                 </button>
             </li>   
-            <li class="">
+            <li>
                 <button id="fa" class="dropdown-item {% if language =='FA' %}active{% endif %} d-flex gap-2 align-items-center">
                     <span class="bg-light p-1 border rounded-1 lh-1 text-dark">FA</span>
                     {{'Farsi'|lang}}
                 </button>
             </li>
+          
         </ul>
     </div>
   </div>
