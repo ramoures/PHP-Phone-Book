@@ -14,14 +14,16 @@ ___
 2. Set the database information in `config.php`.
 2. Browse `setup.php` to create the required tables.
 
-
-This is my first public project on github.<br>
+___
+#### This is my first public project on github. 
 + [Apache](https://httpd.apache.org/) HTTP Server
 + Language: [PHP](https://www.php.net/) 8.2.4
 + Paradime: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 + Architectural patterns: [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 + Template Engine: [TWIG](https://twig.symfony.com/) 3.0
 + Database: [MySQL](https://www.mysql.com/)
++ Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
+
 #### I Usesd:
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
 
