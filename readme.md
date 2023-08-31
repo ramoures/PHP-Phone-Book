@@ -1,6 +1,6 @@
 # PHP-Phone-Book
-<a target="_blank" href="https://awaweb.ir/projects/free/php_phone_book"><img src="screenshot.png"><a>
-<img target="_blank" href="https://awaweb.ir/projects/free/php_phone_book/admin" src="screenshot2.png">
+[<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
+[<img src="screenshot2.png">](https://awaweb.ir/projects/free/php_phone_book/admin)
 
 ___
 ### Demo
@@ -11,8 +11,8 @@ ___
 ### Setup
 
 1. Create a new MySQL database.
-2. Set the database information in `config.php`.
-2. Browse `setup.php` to create the required tables and  admin signup.
+2. Set the database information and your `PROJECT_URL` in `config.php`.
+2. Browse `setup.php` to create the required tables and admin signup.
 
 ___
 #### This is my first public project on github. 

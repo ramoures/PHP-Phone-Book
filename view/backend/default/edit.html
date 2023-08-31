@@ -40,6 +40,16 @@ function invalidElement(id){
         
         <form method="post" autocomplete="off" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
             <input type="hidden" name="token" value="{{csrf_token}}">
+            <div class="mb-3 d-grid border py-2 gap-2 faDigits">
+                <div>
+                    {{'Created at'|lang}}: <span dir="ltr">{{row_info.created_at}}</span>
+                </div>
+                {% if row_info.updated_at %}
+                    <div>
+                        {{'Updated at'|lang}}: <span dir="ltr">{{row_info.updated_at}}</span>
+                    </div>
+                {% endif %}
+            </div>
             <div class="mb-3">
                 <label for="nickname" class="form-label">{{'Nickname'|lang}}<sup class="text-danger ms-1">*</sup></label>
                 <input type="text" name="nickname" class="form-control fs-5" id="nickname" value="{{edit_form_info.nickname ?? row_info.nickname}}" required>

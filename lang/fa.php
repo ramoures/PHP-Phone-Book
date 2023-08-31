@@ -67,6 +67,7 @@ $lang = [
 
     "Created at"=>"ایجاد",
     "Updated at"=>"وبرایش",
+    "Last signed at"=>"آخرین ورود",
 
     //Alert Message:
     "No data."=>"چیزی وجود ندارد.",

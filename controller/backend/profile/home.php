@@ -76,11 +76,14 @@ class Profile extends Backend{
             }
             $this->object['changePass'] = $changePass??0;
             $this->object['admin_info'] = $this->adminInfo($this->Utils->safeInt($_SESSION['admin_id']),$this->model);
+            //Date and Time
+            $this->object['admin_info'] = $this->dateTime($this->object['admin_info']);
+            
             return $this->Render('profile',$this->object);
         } catch (\Throwable $th) {
              return $this->error($th);
         }
-     }
-    
+    }
+   
 }
 ?>
