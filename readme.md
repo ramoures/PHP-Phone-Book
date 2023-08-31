@@ -16,13 +16,13 @@ ___
 
 ___
 #### This is my first public project on github. 
-+ [Apache](https://httpd.apache.org/) HTTP Server
++ HTTP Server: [Apache](https://httpd.apache.org/) 
 + Language: [PHP](https://www.php.net/) 8.2.4
 + Paradime: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 + Architectural patterns: [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 + Template Engine: [TWIG](https://twig.symfony.com/) 3.0
 + Database: [MySQL](https://www.mysql.com/)
-+ Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
+* Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
 #### I Usesd:
 + Multi language suppourt.
@@ -33,12 +33,13 @@ ___
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (setup files will be deleted after setup.)
 ___
-###### Add language:
+## HELP
+#### Add language
 1. Add your language file in the `lang` folder.
 For example. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
 2. Add your new language for frontend pages.<br>
-###### Example:
 ```
+<!-- Example: -->
 <button id="fr" class="dropdown-item {% if language =='FR' %}active{% endif %} d-flex gap-2 align-items-center">
      <span class="bg-light p-1 border rounded-1 lh-1 text-dark">FR</span>
      {{'France'|lang}}
