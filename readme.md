@@ -1,4 +1,6 @@
 # PHP-Phone-Book
+#### This is my first public project on github. 
+
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
 [<img src="screenshot2.png">](https://awaweb.ir/projects/free/php_phone_book/admin)
 
@@ -17,7 +19,6 @@ ___
    > Ex. `https://example.com/phone_book/setup.php`
 
 ___
-#### This is my first public project on github. 
 + HTTP Server: [Apache](https://httpd.apache.org/) 
 + Language: [PHP](https://www.php.net/) 8.2.4
 + Paradime: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
