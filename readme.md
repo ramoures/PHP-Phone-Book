@@ -34,7 +34,7 @@ ___
 + Errors Handling method.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
-+ Sorting and Pagination items.
++ Sorting and Pagination of items.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (setup files will be deleted after setup.)
 ___
