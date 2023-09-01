@@ -11,7 +11,7 @@ ___
 ### Setup
 
 1. Create a new MySQL database.
-2. Set the database information and your `PROJECT_URL` in `config.php`.
+2. Set your database information and your `PROJECT_URL` in `config.php`.
 2. Browse `setup.php` to create the required tables and admin signup.
 
 ___
