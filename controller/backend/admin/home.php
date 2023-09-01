@@ -18,25 +18,13 @@ class Admin extends Backend{
                 if($signout)
                     $this->object['msg']=['style'=>'success','text'=>'Signed out successfully.'];   
                 if(isset($_POST['btn_signin'])){
-                    $captcha=$_POST['cf-turnstile-response'];
+                    $captcha=$this->Utils->post('cf-turnstile-response');
                     if (!$captcha) 
                         $this->object['msg']=['status'=>'-1','style'=>'danger','text'=>'Please check the the captcha form.'];
                     else{
-                        $ip = $this->getIp();
-                        $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-                        $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => $captcha, 'remoteip' => $ip);
-                        $options = array(
-                            'http' => array(
-                            'method' => 'POST',
-                            'content' => http_build_query($data))
-                        );
-                        $stream = stream_context_create($options);
-                        $result = file_get_contents($url, false, $stream);
-                        $response =  $result;
-                        $responseKeys = json_decode($response,true);
-                        if((int)$responseKeys["success"] !== 1) 
+                        if(!$this->captchaCheck($captcha)) 
                             $this->object['msg']=['status'=>'-2','style'=>'danger','text'=>'Security error!'];
-                        else {
+                        else { 
                             $username= $this->Utils->encode($this->Utils->post('username'));
                             $password= $this->Utils->encode($this->Utils->post('password'));
                             if($username=='')

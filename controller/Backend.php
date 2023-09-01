@@ -5,7 +5,7 @@ abstract class Backend extends Base{
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
     }
-    protected function getIp(){
+    private function getIp(){
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
             $ip = filter_var($_SERVER['HTTP_CLIENT_IP']??0, FILTER_VALIDATE_IP)??0;
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -13,6 +13,22 @@ abstract class Backend extends Base{
         else 
             $ip = filter_var($_SERVER['REMOTE_ADDR']??0, FILTER_VALIDATE_IP)??0;
         return $ip;
+    }
+    protected function captchaCheck($captcha){
+        $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+        $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => urlencode($captcha), 'remoteip' => $this->getIp());
+        $options = array(
+            'http' => array(
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data))
+        );
+        $stream = stream_context_create($options);
+        $result = file_get_contents($url, false, $stream)??array();
+        $responseKeys = json_decode($result,true)??array();
+        if($responseKeys["success"])
+            return true;
+        return false;
     }
     protected function adminIsSigned(){
         try {
