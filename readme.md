@@ -12,7 +12,8 @@ ___
 
 1. Create a new MySQL database.
 2. Set your database information and your `PROJECT_URL` in `config.php`.
-2. Browse `setup.php` to create the required tables and admin signup.
+3. Browse `setup.php` to create the required tables and admin signup.
+   > Ex. https://example.com/phone_book/setup.php
 
 ___
 #### This is my first public project on github. 
