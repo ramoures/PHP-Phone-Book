@@ -56,5 +56,5 @@ ____
 
 
 
-### My Email:
+### Connect with me:
 ramoures@gmail.com
