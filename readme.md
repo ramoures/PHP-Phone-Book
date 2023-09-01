@@ -5,7 +5,8 @@
 ___
 ### Demo
 + [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
-     * **username:** admin **password:** 123  
+     > **username:** admin<br> 
+     > **password:** 123  
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
