@@ -1,15 +1,11 @@
 # PHP-Phone-Book
 #### This is my first public project on github. 
 
-[<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
-[<img src="screenshot2.png">](https://awaweb.ir/projects/free/php_phone_book/admin)
+<img src="screenshot.png">
+<img src="screenshot2.png">
 
 ___
-### Demo
-+ [Admin panel demo](https://awaweb.ir/projects/free/php_phone_book/admin) &#8628;
-     > **username:** admin<br> 
-     > **password:** 123  
-+ [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
+
 
 ### Setup
 
