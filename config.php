@@ -11,10 +11,10 @@
     define("DB_USER","root");
     define("DB_PASWORD","");
     define("DB_NAME","phone_book");
-    
+
     define("TABLE_PREFIX","pb_");
 //Project Informations
-    define("PROJECT_URL","https://localhost/phone_book/");
+    define("PROJECT_URL","https://localhost/phone_book".DS);
 
 //Project Setting
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
