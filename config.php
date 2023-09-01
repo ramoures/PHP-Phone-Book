@@ -17,6 +17,8 @@
     define("PROJECT_URL","https://localhost/phone_book".DS);
 
 //Project Setting
+    define('CAPTCHA_SITE_KEY','1x00000000000000000000AA'); #https://developers.cloudflare.com/turnstile/get-started/
+    define('CAPTCHA_SECRET_KEY','1x0000000000000000000000000000000AA'); #https://developers.cloudflare.com/turnstile/get-started/
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Default Directories
         define("ADMIN_DIR_NAME","admin");

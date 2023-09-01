@@ -18,6 +18,30 @@
     <link href="{{asset_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
     <link href="{{asset_url}}/css/app.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
+   
+    <style>
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+}
+.recaptchaDiv {
+    width: 304px;
+    height: 76px;
+    border-radius: 10px;
+}
+.g-recaptcha {
+    z-index: 2;
+    border:0
+    
+}
+.rc-anchor-normal {
+    width: 295px !important;
+}
+
+    </style>
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary" dir="{{'Direction'|lang}}">
    {% include('layouts/color.html') %}
@@ -56,8 +80,15 @@
         <input dir="ltr" name="password" id="password" autocomplete="off" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">{{'Password'|lang}}</label>
       </div>
-   
-      <button class="btn btn-primary w-100 py-2 mt-2" name="btn_signin" value="1" type="submit">{{'Sign in'|lang}}</button>
+      <div class="d-flex text-start bg-body position-relative recaptchaDiv">
+        <div class="loader col-auto">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="cf-turnstile" data-sitekey="{{constant('CAPTCHA_SITE_KEY')}}" data-theme="auto" data-callback="cfcb"></div>
+        </div>
+      <button disabled class="btn btn-primary w-100 py-2 mt-2" name="btn_signin" value="1" type="submit">{{'Sign in'|lang}}</button>
       <div dir="ltr" class="mt-4 small text-body-secondary text-center">© 2023.</div>
   </form>
   <div class="dropstart mt-3 d-flex justify-content-center">
@@ -85,5 +116,12 @@
 <script src="{{asset_url}}/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset_url}}/js/jquery-3.7.0.min.js"></script>
 <script src="{{asset_url}}/js/backend.js" type="module"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+    function cfcb(){
+        document.querySelector('[name="btn_signin"]').disabled = false;
+        document.querySelector('.loader').classList.add('d-none');
+    }
+</script>
 </body>
 </html>

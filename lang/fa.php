@@ -101,6 +101,8 @@ $lang = [
     "Some of the phone numbers are duplicates."=>"تعدادی از شماره‌تلفن‌های وارد شده تکراری است.",
 
     "CSRF Token is not valid!"=>"CSRF Token اشتباه است!",
+    "Please check the the captcha form."=>"ری‌کپچا را تایید کنید.",
+    "Security error!"=>"خطای امنیتی!",
     "Submission successful!"=>"با موفقیت ثبت شد.",
     "Successfully deleted."=>"با موفقیت حذف شد.",
     "Delete failed. Try again later."=>"حذف ناموفق بود. دوباره سعی کنید.",
