@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="fa" data-bs-theme="auto">
 <head>
-    <script src="{{media_url}}/js/color.min.js"></script>
+    <script src="{{asset_url}}/js/color.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -10,13 +10,13 @@
     <meta name="generator" content="PHP Phone Book - github.com/ramoures/phone_book">
     <title>{{'Phone Book'|lang}}</title>
         {% if 'Direction'|lang == 'rtl' %}
-          <link href="{{media_url}}/css/bootstrap.rtl.min.css" rel="stylesheet">
-          <link href="{{media_url}}/css/font.farsi.css" rel="stylesheet">
+          <link href="{{asset_url}}/css/bootstrap.rtl.min.css" rel="stylesheet">
+          <link href="{{asset_url}}/css/font.farsi.css" rel="stylesheet">
         {% else %}
-          <link href="{{media_url}}/css/bootstrap.min.css" rel="stylesheet">
+          <link href="{{asset_url}}/css/bootstrap.min.css" rel="stylesheet">
         {% endif %}
-    <link href="{{media_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="{{media_url}}/css/app.css" rel="stylesheet">
+    <link href="{{asset_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{asset_url}}/css/app.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary" dir="{{'Direction'|lang}}">
@@ -82,8 +82,8 @@
 
 </main>
 
-<script src="{{media_url}}/js/bootstrap.bundle.min.js"></script>
-<script src="{{media_url}}/js/jquery-3.7.0.min.js"></script>
-<script src="{{media_url}}/js/backend.js" type="module"></script>
+<script src="{{asset_url}}/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset_url}}/js/jquery-3.7.0.min.js"></script>
+<script src="{{asset_url}}/js/backend.js" type="module"></script>
 </body>
 </html>
