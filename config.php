@@ -37,12 +37,12 @@
                                     # Mime types list: https://www.iana.org/assignments/media-types/media-types.xhtml
         define('MAX_FILE_SIZE','3000000'); # 3 Megabytes = 3000000 Byte
     // Date and Time
-        define('TIMEZONE_TO_DISPLAY','ASIA/TEHRAN'); # Set ASIA/TEHRAN for Tehran timezone
+        define('TIMEZONE_TO_DISPLAY','UTC'); # Set ASIA/TEHRAN for Tehran timezone
                                              # List of Supported Timezones : https://www.php.net/manual/en/timezones.php
-        define('DATE_FORMAT_TO_DISPLAY',"Y/m/d");
+        define('DATE_FORMAT_TO_DISPLAY',"Y-m-d");
         define('TIME_FORMAT_TO_DISPLAY',"H:i:s");
         
-        define('JALALI_CALENDAR',true); # true or false
+        define('JALALI_CALENDAR',false); # true or false
     // Security
         define("DEBUG",false); # true or false
         define('SESSION_NAME',"Phone-Book");
