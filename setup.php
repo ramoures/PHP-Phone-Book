@@ -14,6 +14,7 @@ $step = (int)$_GET['step'];
 $step = $step<=0?1:$step;
 $step = $step>2?2:$step;
 $passwordPattenr = "/".PASSWORD_PATTERN."/";
+$tablePrefix = TABLE_PREFIX;
 
 function encrypt($str){
     try {
@@ -30,7 +31,7 @@ try {
     if($pdo){
         $pdo->exec("set names utf8mb4");
         $dbConnected = true;
-        $sql1 = "CREATE TABLE IF NOT EXISTS `admins` (
+        $sql1 = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX."admins` (
             `id` int(10) UNSIGNED NOT NULL,
             `username` varchar(100) NOT NULL,
             `password` varchar(64) NOT NULL,
@@ -39,16 +40,16 @@ try {
             `updated_at` timestamp NULL DEFAULT NULL,
             `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
           ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-        ALTER TABLE `admins`
+        ALTER TABLE `".TABLE_PREFIX."admins`
             ADD PRIMARY KEY (`id`),
             ADD UNIQUE KEY `id` (`id`),
             ADD UNIQUE KEY `unique_usersname` (`username`) USING BTREE;
-        ALTER TABLE `admins`
+        ALTER TABLE `".TABLE_PREFIX."admins`
             MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;";
         $stmt1 = $pdo->prepare($sql1)->execute();
         if($stmt1)
             $success1 = true;
-        $sql2 = "CREATE TABLE IF NOT EXISTS `phone_numbers` (
+        $sql2 = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX."phone_numbers` (
             `id` int(11) UNSIGNED NOT NULL,
             `nickname` varchar(100) NOT NULL,
             `full_name` varchar(255) DEFAULT NULL,
@@ -58,37 +59,37 @@ try {
             `updated_at` timestamp NULL DEFAULT NULL,
             `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
           ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-        ALTER TABLE `phone_numbers`
+        ALTER TABLE `".TABLE_PREFIX."phone_numbers`
             ADD PRIMARY KEY (`id`),
             ADD UNIQUE KEY `unique_nickname` (`nickname`),
             ADD UNIQUE KEY `unique_phone_numbers` (`phone_numbers`) USING HASH;
-        ALTER TABLE `phone_numbers`
+        ALTER TABLE `".TABLE_PREFIX."phone_numbers`
             MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
         $stmt2 = $pdo->prepare($sql2)->execute();
         if($stmt2)
             $success2 = true;
-        $sql3 = "CREATE TABLE IF NOT EXISTS `upload` (
+        $sql3 = "CREATE TABLE IF NOT EXISTS `".TABLE_PREFIX."upload` (
             `id` int(11) UNSIGNED NOT NULL,
             `folder` varchar(100) NOT NULL,
             `name` varchar(255) NOT NULL,
             `alt` varchar(255) DEFAULT NULL,
             `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
           ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-        ALTER TABLE `upload`
+        ALTER TABLE `".TABLE_PREFIX."upload`
             ADD PRIMARY KEY (`id`);
-        ALTER TABLE `upload`
+        ALTER TABLE `".TABLE_PREFIX."upload`
             MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
         $stmt3 = $pdo->prepare($sql3)->execute();
         if($stmt3)
             $success3 = true;
-        $sql = sprintf("SELECT %s FROM %s",'id','admins');
-        $stmp = $pdo->query("SELECT * FROM `admins`");
+        $sql = sprintf("SELECT %s FROM %s",'id',TABLE_PREFIX.'admins');
+        $stmp = $pdo->query($sql);
         if($stmp){
             $res = $stmp->fetchAll();
             if(count($res)>0){
-                // unlink('setup.php');
-                // unlink('setup_html.php');
-                // unlink('setup.png');
+                unlink('setup.php');
+                unlink('setup_html.php');
+                unlink('setup.png');
                 $u->redirect('admin/signin');
                 die;
             }
@@ -123,12 +124,12 @@ try {
                     </div>';
                 }
                 else{
-                    $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",'admins','username','password','created_at');
+                    $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",TABLE_PREFIX.'admins','username','password','created_at');
                     $stmp = $pdo->prepare($sql);
                     $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
-                    // unlink('setup.php');
-                    // unlink('setup_html.php');
-                    // unlink('setup.png');
+                    unlink('setup.php');
+                    unlink('setup_html.php');
+                    unlink('setup.png');
                     $u->redirect('admin/signin');
                 }
 

@@ -11,6 +11,8 @@
     define("DB_USER","root");
     define("DB_PASWORD","");
     define("DB_NAME","phone_book");
+    
+    define("TABLE_PREFIX","pb_");
 //Project Informations
     define("PROJECT_URL","https://localhost/phone_book/");
 

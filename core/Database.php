@@ -44,7 +44,7 @@ final class Database{
             $columns = array_map(function ($column){return ":".$column; }, array_keys($object['data']));
             $columnsStr = implode(", ",$columns);
             $rows = implode(",",array_keys($object['data']));
-            $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",$object['tableName'],$rows,$columnsStr);
+            $sql = sprintf("INSERT INTO %s (%s) VALUES (%s)",TABLE_PREFIX.$object['tableName'],$rows,$columnsStr);
             $stmt = $this->pdo->prepare($sql);
             $stmt = $stmt->execute($object['data']);
             if($stmt)
@@ -65,7 +65,7 @@ final class Database{
             $search = isset($object['search']) && $object['search']?true:false;
             if($search)
                 $andOr = " OR ";
-            $sql = sprintf("SELECT $selector FROM %s",$object['tableName']);
+            $sql = sprintf("SELECT $selector FROM %s",TABLE_PREFIX.$object['tableName']);
             if(isset($object['where'])){
                 if($search)
                     $columns = array_map(function ($column){return $column." LIKE ?"; }, array_keys($object['where']));
@@ -129,7 +129,7 @@ final class Database{
             $whereColumns = array_map(function ($column){return $column."=:".$column; }, array_keys($object['where']));
             $whereStr = implode(" AND ",$whereColumns);
             $exe = array_merge($object['data'],$object['where']);
-            $sql = sprintf("UPDATE %s SET %s WHERE %s",$object['tableName'],$columnsStr,$whereStr);
+            $sql = sprintf("UPDATE %s SET %s WHERE %s",TABLE_PREFIX.$object['tableName'],$columnsStr,$whereStr);
             $stmt = $this->pdo->prepare($sql);
             $stmt = $stmt->execute($exe);
             if($stmt)
@@ -143,7 +143,7 @@ final class Database{
      try {
         if(!isset($object) || !isset($object['tableName']))
                 return $this->error('"tableName" is not defined.');
-        $sql = sprintf("DELETE FROM %s WHERE id = ?",$object['tableName']);
+        $sql = sprintf("DELETE FROM %s WHERE id = ?",TABLE_PREFIX.$object['tableName']);
         $stmt = $this->pdo->prepare($sql);
         if($stmt){
             $stmt->execute([$object['id']]);

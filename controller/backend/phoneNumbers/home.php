@@ -29,6 +29,7 @@ class PhoneNumbers extends Backend{
             $getOrder = $order?'nickname':'created_at';
             $page = $page<=0?1:$page;
             $offset = (int)B_LIMIT * $page - (int)B_LIMIT;
+
             $search=null;
             if($this->Utils->get('s')){
                 $search = $this->Utils->encode($this->Utils->get('s'));
