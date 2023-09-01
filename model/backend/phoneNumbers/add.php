@@ -1,5 +1,5 @@
 <?php
 class AddPhoneNumbersModel extends Models{
-    //ready for your developement.
+    // Ready for development
 }
 ?>
