@@ -5,6 +5,15 @@ abstract class Backend extends Base{
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect(PROJECT_URL."admin/signin");
     }
+    protected function getIp(){
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
+            $ip = filter_var($_SERVER['HTTP_CLIENT_IP']??0, FILTER_VALIDATE_IP)??0;
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR']??0, FILTER_VALIDATE_IP)??0;
+        else 
+            $ip = filter_var($_SERVER['REMOTE_ADDR']??0, FILTER_VALIDATE_IP)??0;
+        return $ip;
+    }
     protected function adminIsSigned(){
         try {
             if(isset($_SESSION['admin_id']))

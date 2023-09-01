@@ -18,29 +18,21 @@
     <link href="{{asset_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
     <link href="{{asset_url}}/css/app.css" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
-   
+    <link rel="icon" href="{{constant('PROJECT_URL')}}icon.png">
+    <link rel="apple-touch-icon" href="{{constant('PROJECT_URL')}}icon.png">
     <style>
-.loader{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #666;
-}
-.recaptchaDiv {
-    width: 304px;
-    height: 76px;
-    border-radius: 10px;
-}
-.g-recaptcha {
-    z-index: 2;
-    border:0
-    
-}
-.rc-anchor-normal {
-    width: 295px !important;
-}
-
+        .loader{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #666;
+        }
+        .recaptchaDiv {
+            width: 304px;
+            height: 76px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary" dir="{{'Direction'|lang}}">

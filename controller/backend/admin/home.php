@@ -18,14 +18,13 @@ class Admin extends Backend{
                 if($signout)
                     $this->object['msg']=['style'=>'success','text'=>'Signed out successfully.'];   
                 if(isset($_POST['btn_signin'])){
-                    $captcha=$this->Utils->encode($this->Utils->post('cf-turnstile-response'));
+                    $captcha=$_POST['cf-turnstile-response'];
                     if (!$captcha) 
                         $this->object['msg']=['status'=>'-1','style'=>'danger','text'=>'Please check the the captcha form.'];
-                    if($this->object['msg']['status']!=='-1'){
-                        $secretKey = CAPTCHA_SECRET_KEY;
-                        $ip = isset($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:'';
+                    else{
+                        $ip = $this->getIp();
                         $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-                        $data = array('secret' => $secretKey, 'response' => $captcha, 'remoteip' => $ip);
+                        $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => $captcha, 'remoteip' => $ip);
                         $options = array(
                             'http' => array(
                             'method' => 'POST',
@@ -35,9 +34,9 @@ class Admin extends Backend{
                         $result = file_get_contents($url, false, $stream);
                         $response =  $result;
                         $responseKeys = json_decode($response,true);
-                        if(intval($responseKeys["success"]) !== 1) 
+                        if((int)$responseKeys["success"] !== 1) 
                             $this->object['msg']=['status'=>'-2','style'=>'danger','text'=>'Security error!'];
-                        else { 
+                        else {
                             $username= $this->Utils->encode($this->Utils->post('username'));
                             $password= $this->Utils->encode($this->Utils->post('password'));
                             if($username=='')
