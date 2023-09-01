@@ -1,5 +1,5 @@
 # PHP-Phone-Book
-#### This is my first public project on github. 
+#### This is my first public repository on github. 
 
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
 [<img src="screenshot2.png">](https://awaweb.ir/projects/free/php_phone_book/admin)
