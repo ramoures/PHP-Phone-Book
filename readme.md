@@ -49,7 +49,7 @@ ___
 ```
 ____
 
-### ``** Ready to develop for other your pure PHP projects **``
+### ``** Ready to develop for other pure PHP projects **``
 
 
 
