@@ -1,22 +1,24 @@
 <!doctype html>
 <html lang="fa" data-bs-theme="auto">
 <head>
-  <script src="{{media_url}}/js/color.min.js"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="PHP Phone Book">
-  <meta name="author" content="github.com/ramoures">
-  <meta name="generator" content="PHP Phone Book - github.com/ramoures/phone_book">
-  <title>{{'PHP Phone Book'|lang}} - {% block title %}{% endblock %}</title>
-  {% if 'Direction'|lang == 'rtl' %}
-      <link href="{{media_url}}/css/bootstrap.rtl.min.css" rel="stylesheet">
-      <link href="{{media_url}}/css/font.farsi.css" rel="stylesheet">
-  {% else %}
-      <link href="{{media_url}}/css/bootstrap.min.css" rel="stylesheet">
-  {% endif %}
-  <link href="{{media_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="{{media_url}}/css/backend.css" rel="stylesheet">
-  <meta name="theme-color" content="#0d6efd">
+    <script src="{{media_url}}/js/color.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PHP Phone Book">
+    <meta name="author" content="github.com/ramoures">
+    <meta name="generator" content="PHP Phone Book - github.com/ramoures/phone_book">
+    <title>{{'PHP Phone Book'|lang}} - {% block title %}{% endblock %}</title>
+    {% if 'Direction'|lang == 'rtl' %}
+        <link href="{{media_url}}/css/bootstrap.rtl.min.css" rel="stylesheet">
+        <link href="{{media_url}}/css/font.farsi.css" rel="stylesheet">
+    {% else %}
+        <link href="{{media_url}}/css/bootstrap.min.css" rel="stylesheet">
+    {% endif %}
+    <link href="{{media_url}}/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{media_url}}/css/backend.css" rel="stylesheet">
+    <link rel="icon" href="{{constant('PROJECT_URL')}}icon.png">
+    <link rel="apple-touch-icon" href="{{constant('PROJECT_URL')}}icon.png">
+    <meta name="theme-color" content="#0d6efd">
 </head>
 <body dir="{{'Direction'|lang}}">
     <div class="cover d-none"></div>
