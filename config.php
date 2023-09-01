@@ -46,7 +46,7 @@
     // Security
         define("DEBUG",false); # true or false
         define('SESSION_NAME',"Phone-Book");
-        #important: please change values for your project:
+        #important: please change this value for your project:
         define('SECRET_KEY','D96B2B6A02850F2BF085DC39632E6A'); 
     // Backend Pages Setting
         define("B_DEFAULT_LANG",'en'); # cookie set before
