@@ -15,7 +15,7 @@ abstract class Backend extends Base{
         return $ip;
     }
     protected function captchaCheck($captcha){
-        $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+        $url = CAPTCHA_API_URL;
         $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => urlencode($captcha), 'remoteip' => $this->getIp());
         $options = array(
             'http' => array(

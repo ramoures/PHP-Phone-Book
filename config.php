@@ -17,10 +17,16 @@
     define("PROJECT_URL","https://localhost/phone_book".DS);
 
 //Project Setting
-    define('CAPTCHA_SITE_KEY','1x00000000000000000000AA'); # https://developers.cloudflare.com/turnstile/get-started/
-    define('CAPTCHA_SECRET_KEY','1x0000000000000000000000000000000AA'); # https://developers.cloudflare.com/turnstile/get-started/
-    
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
+    // Captcha
+    # Cloudflare: https://developers.cloudflare.com/turnstile/get-started/
+    # Google: https://developers.google.com/recaptcha/docs/display
+        define('CAPTCHA_API_URL','https://challenges.cloudflare.com/turnstile/v0/siteverify');
+        #Google recaptcha api url = https://www.google.com/recaptcha/api/siteverify
+        define('CAPTCHA_JS_URL','https://challenges.cloudflare.com/turnstile/v0/api.js');
+        #Google recaptcha js url = https://www.google.com/recaptcha/api.js
+        define('CAPTCHA_SITE_KEY','1x00000000000000000000AA'); 
+        define('CAPTCHA_SECRET_KEY','1x0000000000000000000000000000000AA');
     // Default Directories
         define("ADMIN_DIR_NAME","admin");
         define("FRONTEND_THEME_DIR_NAME", "default");

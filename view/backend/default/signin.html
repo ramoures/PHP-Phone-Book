@@ -33,6 +33,9 @@
             height: 76px;
             border-radius: 10px;
         }
+        .cf-turnstile, .g-recaptcha{
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary" dir="{{'Direction'|lang}}">
@@ -78,7 +81,7 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-        <div class="cf-turnstile" data-sitekey="{{constant('CAPTCHA_SITE_KEY')}}" data-theme="auto" data-callback="cfcb"></div>
+        <div class="cf-turnstile g-recaptcha" data-language="{{language}}" data-sitekey="{{constant('CAPTCHA_SITE_KEY')}}" data-theme="auto" data-callback="cfcb"></div>
         </div>
       <button disabled class="btn btn-primary w-100 py-2 mt-2" name="btn_signin" value="1" type="submit">{{'Sign in'|lang}}</button>
       <div dir="ltr" class="mt-4 small text-body-secondary text-center">© 2023.</div>
@@ -108,7 +111,7 @@
 <script src="{{asset_url}}/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset_url}}/js/jquery-3.7.0.min.js"></script>
 <script src="{{asset_url}}/js/backend.js" type="module"></script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="{{constant('CAPTCHA_JS_URL')}}" async defer></script>
 <script>
     function cfcb(){
         document.querySelector('[name="btn_signin"]').disabled = false;

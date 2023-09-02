@@ -30,9 +30,9 @@ abstract class Models{
             $result = $this->db->update($obj);
             if($result)
                 return $result;
-                return false;
+            return false;
         } catch (\Throwable $th) {
-        return false;
+            return false;
         }
     }
     public function search($obj) {
