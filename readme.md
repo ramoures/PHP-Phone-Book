@@ -47,9 +47,11 @@ ___
 2. Add your new language for frontend pages.<br>
 ```
 <!-- Example: -->
-<button id="fr">
-     Fr
-</button>
+<div class="changeLanguage">
+     <button id="fr">
+          Fr
+     </button>
+</div>
 ```
 ____
 
