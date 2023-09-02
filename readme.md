@@ -48,9 +48,8 @@ ___
 ```
 <!-- Example: -->
 <div class="changeLanguage">
-     <button id="fr">
-          Fr
-     </button>
+     <button id="fr">Fr</button>
+     <button id="en">En</button>
 </div>
 <!-- Look at: .changeLanguage click function on view/assets/js/app.js or backend.js  -->
 
