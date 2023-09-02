@@ -58,7 +58,7 @@
         
         define('JALALI_CALENDAR',false); # true or false
     // Security
-        define("DEBUG",true); # true or false
+        define("DEBUG",false); # true or false
         define('SESSION_NAME',"Phone-Book");
         #important: please change this value for your project:
         define('SECRET_KEY','D96B2B6A02850F2BF085DC39632E6A'); 
