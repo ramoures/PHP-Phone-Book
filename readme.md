@@ -47,9 +47,8 @@ ___
 2. Add your new language for frontend pages.<br>
 ```
 <!-- Example: -->
-<button id="fr" class="dropdown-item {% if language =='FR' %}active{% endif %} d-flex gap-2 align-items-center">
-     <span class="bg-light p-1 border rounded-1 lh-1 text-dark">FR</span>
-     {{'France'|lang}}
+<button id="fr">
+     Fr
 </button>
 ```
 ____
