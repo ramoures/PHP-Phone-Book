@@ -25,16 +25,16 @@
                 <?php if($dbConnected): ?>
                     <ul class="fs-5 d-grid gap-2">
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        1. <i>Create <?php print $tablePrefix ?>admins</i> table.<?php if($success1) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        1. <i>Create table: <?php print $tablePrefix ?>admins</i> .<?php if($success1) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php if($success1):?>
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        2. <i>Create <?php print $tablePrefix ?>phone_numbers</i> table.<?php if($success2) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        2. <i>Create table: <?php print $tablePrefix ?>phone_numbers</i> .<?php if($success2) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php endif ?>
                         <?php if($success1 && $success2): ?>
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        3. <i>Create <?php print $tablePrefix ?>upload</i> table.<?php if($success3) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        3. <i>Create table: <?php print $tablePrefix ?>upload</i> .<?php if($success3) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php endif ?>
                     </ul>
