@@ -35,7 +35,7 @@ ___
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
 + Sorting and Pagination of items.
-+ Client and server side **captach** for signin form.
++ Client and server side **captcha** for signin form.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (setup files will be deleted after setup.)
 ___
