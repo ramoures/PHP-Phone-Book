@@ -13,10 +13,10 @@
     define("DB_NAME","phone_book");
 
     define("TABLE_PREFIX","phbk_");
-//Project Informations
-    define("PROJECT_URL","https://localhost/phone_book".DS);
 
 //Project Setting
+    define("PROJECT_URL","https://localhost/phone_book".DS);
+    define('SESSION_NAME',"Phone-Book");
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Captcha
         #Please get your api keys from:
@@ -59,7 +59,6 @@
         define('JALALI_CALENDAR',false); # true or false
     // Security
         define("DEBUG",false); # true or false
-        define('SESSION_NAME',"Phone-Book");
         #important: please change this value for your project:
         define('SECRET_KEY','D96B2B6A02850F2BF085DC39632E6A'); 
     // Backend Pages Setting
