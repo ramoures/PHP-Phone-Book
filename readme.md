@@ -52,7 +52,7 @@ ___
           Fr
      </button>
 </div>
-<!-- Look at: .changeLanguage click function on app.js  -->
+<!-- Look at: .changeLanguage click function on view/assets/js/app.js or backend.js  -->
 
 ```
 ____
