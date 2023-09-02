@@ -15,9 +15,9 @@ ___
 ### Setup
 
 1. Create a new MySQL database.
-2. Set your database information and your `PROJECT_URL` in `config.php`.
-3. Browse `setup.php` to create the required tables and admin signup.
-   > Ex. `https://example.com/phone_book/setup.php`
+2. Set your **database information** and your `PROJECT_URL` in `config.php`.
+3. Browse `/setup` to create the required tables and admin signup.
+   > Ex. `https://example.com/PHP-Phone-Book/setup/`
 
 ___
 ### Information
@@ -38,7 +38,7 @@ ___
 + Sorting and Pagination of items.
 + Client and server side **captcha** for signin form.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
-+ Setup system. (setup files will be deleted after setup.)
++ Setup system. (Setup files will be deleted after setup.)
 ___
 ### HELP
 #### Add new language
@@ -56,6 +56,6 @@ ____
 ### ``** Ready to develop for other pure PHP projects **``
 
 
-
 ### Connect with me:
-ramoures@gmail.com
+Linkedin: [ramoures](https://www.linkedin.com/in/ramoures/)<br>
+email: ramoures@gmail.com
