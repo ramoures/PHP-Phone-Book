@@ -62,7 +62,7 @@ abstract class Backend extends Base{
                     $isImg = getimagesize($tmp_name);
                     if(is_array($isImg) && count($isImg) > 0 ){
                         if($fileSize > MAX_FILE_SIZE)
-                            return -6; //file is too large
+                            return -6; //File is too large
                         $newFileName = $fileName;
                         $newFileName .= ".".ALLOW_FILES_TYPE[$mime];
                         $move = move_uploaded_file($tmp_name,"$path/$newFileName");
