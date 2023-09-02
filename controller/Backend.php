@@ -2,8 +2,9 @@
 abstract class Backend extends Base{
     public function __construct($param) {
         parent::__construct($param);
+
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
-            $this->Utils->redirect(PROJECT_URL."admin/signin");
+            $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME."/signin");
     }
     private function getIp(){
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
@@ -62,23 +63,23 @@ abstract class Backend extends Base{
                     $isImg = getimagesize($tmp_name);
                     if(is_array($isImg) && count($isImg) > 0 ){
                         if($fileSize > MAX_FILE_SIZE)
-                            return -6; //File is too large
+                            return -6; // File is too large
                         $newFileName = $fileName;
                         $newFileName .= ".".ALLOW_FILES_TYPE[$mime];
                         $move = move_uploaded_file($tmp_name,"$path/$newFileName");
                         if($move)
                             return $newFileName;
                         else
-                            return -5; //move uploaded file failed
+                            return -5; // Move uploaded file failed
                     }
                     else
-                        return -4;//file is not valid
+                        return -4;// File is not valid
                 }
                 else
-                    return -3;//file type is not allow
+                    return -3;// File type is not allow
             }
             else
-                return -2; //upload failed
+                return -2; // Upload failed
            
         } catch (\Throwable $th) {
             return -2;
@@ -92,13 +93,13 @@ abstract class Backend extends Base{
                     if($fileField)
                         return $this->uploadImage($fieldName,UPLOAD_PATH."$path");
                     else
-                        return false; // file temp is not isset
+                        return false; // File temp is not isset
                 }
                 else
                     return -2;
             }
             else
-                return false; // file field is not isset
+                return false; // File field is not isset
         } catch (\Throwable $th) {
             return false;
         }

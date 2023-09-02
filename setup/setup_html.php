@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="view/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="view/assets/css/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Setup PHP Phone Book</title>
+    <link href="../view/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../view/assets/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="icon" href="../icon.png">
+    <link rel="apple-touch-icon" href="../icon.png">
 </head>
 <body class="my-4">
     <div class="container col-12 col-md-9 col-lg-6 col-xl-5">
@@ -23,16 +25,16 @@
                 <?php if($dbConnected): ?>
                     <ul class="fs-5 d-grid gap-2">
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        1. <i><?php print $tablePrefix ?>admins</i> table created.<?php if($success1) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        1. <i>Create <?php print $tablePrefix ?>admins</i> table.<?php if($success1) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php if($success1):?>
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        2. <i><?php print $tablePrefix ?>phone_numbers</i> table created.<?php if($success2) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        2. <i>Create <?php print $tablePrefix ?>phone_numbers</i> table.<?php if($success2) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php endif ?>
                         <?php if($success1 && $success2): ?>
                         <div class="d-flex lh-1 align-items-center gap-2">
-                        3. <i><?php print $tablePrefix ?>upload</i> table created.<?php if($success3) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
+                        3. <i>Create <?php print $tablePrefix ?>upload</i> table.<?php if($success3) print '<i class="border rounded pe-2 bi bi-check-lg fs-4 bg-success text-white">Success</i>'; else  print '<i class="border rounded pe-2 bi bi-x-lg fs-4 bg-danger text-white">Error!</i>' ?>
                         </div>
                         <?php endif ?>
                     </ul>
@@ -106,7 +108,7 @@
     <span class="align-items-center d-flex gap-1">PHP Phone Book 1.0 . Licensed MIT  . <a class="text-white" href="https://github.com/ramoures">{github}</a>
     </footer>
     </div>
-    <script src="view/assets/js/jquery-3.7.0.min.js"></script>
+    <script src="../view/assets/js/jquery-3.7.0.min.js"></script>
     <script>
         $('.showPass').on('click',function(){
             const type = $(this).parent().find('input').attr('type')

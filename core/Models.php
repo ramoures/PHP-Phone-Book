@@ -52,7 +52,6 @@ abstract class Models{
             if($result)
                 return $result;
             return false;
-            
         } catch (\Throwable $th) {
             return false;
         }

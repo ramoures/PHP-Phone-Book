@@ -5,9 +5,6 @@ Deny from all
 <FilesMatch "config.php">
     Deny from all
 </fileSMatch>
-<FilesMatch "setup_html.php">
-    Deny from all
-</fileSMatch>
 <FilesMatch "init.php">
     Deny from all
 </fileSMatch>

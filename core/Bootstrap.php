@@ -69,6 +69,7 @@ final class Bootstrap{
                 //Backend
                 $this->initSession();
                 $type='backend';
+                $requestPathArray[0] = 'admin';
                 $routeName = $requestPathArray;
             }
             else{
@@ -98,7 +99,7 @@ final class Bootstrap{
                 require_once($routeFile);
                 $method = $this->convertString(count($route)===3?$route[count($route)-1]."_".$route[count($route)-2]:$route[count($route)-1]);
                 $className = ucwords($method);
-                $className = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'Admin':$className;
+                $className = $route[count($route)-1]==='signin'||$route[count($route)-1]==='signout'?'admin':$className;
                 $instanceController = new $className(['type'=>'backend','method'=>$method]);
                 $isCallableMethod = array($instanceController,$method);
                 if(!is_callable($isCallableMethod))

@@ -12,25 +12,28 @@
     define("DB_PASWORD","");
     define("DB_NAME","phone_book");
 
-    define("TABLE_PREFIX","pb_");
+    define("TABLE_PREFIX","phbk_");
 //Project Informations
     define("PROJECT_URL","https://localhost/phone_book".DS);
 
 //Project Setting
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Captcha
-        # Cloudflare: https://developers.cloudflare.com/turnstile/get-started/
-        # Google: https://developers.google.com/recaptcha/docs/display
+        #Please get your api keys from:
+            # Cloudflare: https://developers.cloudflare.com/turnstile/get-started/
+            # or
+            # Google: https://developers.google.com/recaptcha/docs/display
 
         define('CAPTCHA_API_URL','https://challenges.cloudflare.com/turnstile/v0/siteverify');
         #Google recaptcha api url = https://www.google.com/recaptcha/api/siteverify
         define('CAPTCHA_JS_URL','https://challenges.cloudflare.com/turnstile/v0/api.js');
         #Google recaptcha js url = https://www.google.com/recaptcha/api.js
+        
         define('CAPTCHA_SITE_KEY','1x00000000000000000000AA'); 
         define('CAPTCHA_SECRET_KEY','1x0000000000000000000000000000000AA');
 
     // Default Directories
-        define("ADMIN_DIR_NAME","admin");
+        define("ADMIN_DIR_NAME","admin2023");
         define("FRONTEND_THEME_DIR_NAME", "default");
         define("BACKEND_THEME_DIR_NAME", "default");
         define('UPLOAD_PATH',ROOT_PATH.'media'.DS);
@@ -55,7 +58,7 @@
         
         define('JALALI_CALENDAR',false); # true or false
     // Security
-        define("DEBUG",false); # true or false
+        define("DEBUG",true); # true or false
         define('SESSION_NAME',"Phone-Book");
         #important: please change this value for your project:
         define('SECRET_KEY','D96B2B6A02850F2BF085DC39632E6A'); 
