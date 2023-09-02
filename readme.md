@@ -52,6 +52,8 @@ ___
           Fr
      </button>
 </div>
+<!-- Look at: .changeLanguage click function on app.js  -->
+
 ```
 ____
 
