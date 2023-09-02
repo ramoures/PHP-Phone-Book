@@ -41,8 +41,8 @@
         define('IMAGES_DIR_NAME','images');
     // Password validation
         define('PASSWORD_PATTERN','(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){2,})(?=(.*[!@#$%^&*_=+\-]){2,}).{8,16}'); 
-        # 8 minimum character, [a-z]=(1 min char.), [A-Z]=(1 min char.), [0-9]=(2 min number.), [!@#$%^&*_=+\-]=(2 min char.)
-        # If you changed the pattern: Please find $('#newPassword') keyup function, in /view/assets/js/backend.js (validation UI)
+        # 8-16 min-max character, [a-z]=(1 min char.), [A-Z]=(1 min char.), [0-9]=(2 min number.), [!@#$%^&*_=+\-]=(2 min char.)
+        # If you changed the pattern: Please find #newPassword keyup function, in /view/assets/js/backend.js (UI validation)
 
         // define('PASSWORD_PATTERN',false); # Uncomment this define and delete previous define, to disable strong password.
 
