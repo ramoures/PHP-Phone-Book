@@ -1,1 +1,4 @@
 Options -Indexes
+<FilesMatch "setup_html.php">
+    Deny from all
+</fileSMatch>
