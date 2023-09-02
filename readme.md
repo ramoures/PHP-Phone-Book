@@ -29,7 +29,7 @@ ___
 + Database: [MySQL](https://www.mysql.com/)
 * Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
-#### I Usesd:
+#### I used:
 + Multi language suppourt.
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
 + Errors Handling method.
