@@ -21,21 +21,21 @@ ___
 
 ___
 ### Information
-+ HTTP Server: [Apache](https://httpd.apache.org/) 
++ HTTP server: [Apache](https://httpd.apache.org/) 
 + Language: [PHP](https://www.php.net/) 8.2.4
-+ Programming Paradigm: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
++ Programming paradigm: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 + Architectural patterns: [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
-+ Template Engine: [TWIG](https://twig.symfony.com/) 3.0
++ Template engine: [TWIG](https://twig.symfony.com/) 3.0
 + Database: [MySQL](https://www.mysql.com/)
 * Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
 #### I used:
 + Multi language suppourt.
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
-+ Errors Handling method.
++ Errors handling method.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
-+ Sorting and Pagination of items.
++ Sorting and pagination of items.
 + Client and server side **captcha** for sign in form.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (Setup files will be deleted after setup.)
@@ -61,4 +61,4 @@ ____
 
 ### Connect with me:
 Linkedin: [ramoures](https://www.linkedin.com/in/ramoures/)<br>
-email: ramoures@gmail.com
+E-mail: ramoures@gmail.com
