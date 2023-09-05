@@ -23,7 +23,7 @@ ___
 ### Information
 + HTTP Server: [Apache](https://httpd.apache.org/) 
 + Language: [PHP](https://www.php.net/) 8.2.4
-+ Paradime: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
++ Programming Paradigm: [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 + Architectural patterns: [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 + Template Engine: [TWIG](https://twig.symfony.com/) 3.0
 + Database: [MySQL](https://www.mysql.com/)
