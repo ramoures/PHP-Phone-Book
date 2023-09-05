@@ -16,7 +16,7 @@ ___
 
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
-3. Browse `/setup` to create the required tables and admin signup.
+3. Browse `/setup` to create the required tables and admin sign up.
    > Ex. `https://example.com/PHP-Phone-Book/setup/`
 
 ___
@@ -36,7 +36,7 @@ ___
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
 + Many *options* for configuration. *`config.php`*
 + Sorting and Pagination of items.
-+ Client and server side **captcha** for signin form.
++ Client and server side **captcha** for sign in form.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 + Setup system. (Setup files will be deleted after setup.)
 ___
