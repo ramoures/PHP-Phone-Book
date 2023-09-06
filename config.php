@@ -15,7 +15,7 @@
     define("TABLE_PREFIX","phbk_");
 
 //Project Setting
-    define("PROJECT_URL","https://localhost/phone_book".DS);
+    define("PROJECT_URL","https://localhost/phone_book");
     define('SESSION_NAME',"Phone-Book");
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Captcha
@@ -36,7 +36,7 @@
         define("ADMIN_DIR_NAME","admin2023");
         define("FRONTEND_THEME_DIR_NAME", "default");
         define("BACKEND_THEME_DIR_NAME", "default");
-        define('UPLOAD_PATH',ROOT_PATH.'media'.DS);
+        define('UPLOAD_DIR_NAME','media');
         define('AVATARS_DIR_NAME',"avatars");
         define('IMAGES_DIR_NAME','images');
 

@@ -4,11 +4,11 @@
     <div class="d-flex justify-content-end">
         <ul class="pagination justify-content-end user-select-none">
             <li class="page-item {% if page<=1 %}disabled{% endif %}">
-                <a class="page-link" href="{{constant('PROJECT_URL')}}?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Previous'|lang}}</a>
+                <a class="page-link" href="{{project_url}}?page={{page-1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Previous'|lang}}</a>
             </li>
             {% if t>=5 %}
                 {% for key,row in ta|slice(1,2) %}
-                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
+                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{project_url}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                 {% endfor %}
                 {% if page == t or page == t-1 or page == 1 or page == 2%}
                     <li class="page-item"><span class="page-link text-secondary">---</span></li>
@@ -18,15 +18,15 @@
                     {% endif %}
                     {% if page != 3 %}
                         {% for key,row in ta|slice(page-2,1,2) %}
-                            <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
+                            <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{project_url}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                         {% endfor %}
                 {% endif %}
                 <li class="page-item active">
-                    <a class="page-link " href="{{constant('PROJECT_URL')}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{page}}</a>
+                    <a class="page-link " href="{{project_url}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{page}}</a>
                 </li>
                 {% if page != t-2 %}
                     {% for key,row in ta|slice(page,1,2) %}
-                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
+                        <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{project_url}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                     {% endfor %}
                 {% endif %}
                 {% if page != t-2 and page != t-3 %}
@@ -34,15 +34,15 @@
                 {% endif %}
                 {% endif %}
                 {% for key,row in ta|slice(t-2,t,t) %}
-                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
+                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{project_url}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                 {% endfor %}
             {% else %}
                 {% for key,row in ta %}
-                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{constant('PROJECT_URL')}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
+                    <li class="page-item {% if page==key+1 %}active{% endif %}"><a class="page-link" href="{{project_url}}?page={{key+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{key+1}}</a></li>
                 {% endfor %}
             {% endif %}
                 <li class="page-item {% if page>=t %}disabled{% endif %}">
-                    <a class="page-link" href="{{constant('PROJECT_URL')}}?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Next'|lang}}</a>
+                    <a class="page-link" href="{{project_url}}?page={{page+1}}&asc={{asc}}&nameSort={{orderChanged}}&s={{search}}">{{'Next'|lang}}</a>
                 </li>
             </li>
         </ul>

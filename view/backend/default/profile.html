@@ -64,7 +64,7 @@ function invalidElement(id){
                 <label for="image" class="form-label">{{'Avatar'|lang}}</label>
                 {% if admin_info.avatar.name %}
                 <div class="d-flex gap-2 align-items-center border py-2 rounded">
-                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{admin_info.avatar.folder}}/{{admin_info.avatar.name}}" alt="{{admin_info.avatar.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                    <img class="rounded-circle border border-2 ms-2" src="{{project_url}}media/{{admin_info.avatar.folder}}/{{admin_info.avatar.name}}" alt="{{admin_info.avatar.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
                     <input type="hidden" value="{{admin_info.avatar.id}}" name="avatar_id">
                     <div class="d-none">
                         <input type="file" name="avatar" class="form-control fs-5 ms-2" id="image" autocomplete="off" disabled>

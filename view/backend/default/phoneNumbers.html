@@ -11,7 +11,7 @@
                         <span class="h5 m-0">{{'Search'|lang}}: </span>
                         <div class="btn-group dropstart">
                             <button class="btn btn-secondary de_cu">{{search}}</button>
-                            <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-danger px-2">
+                            <a href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-danger px-2">
                                 <i class="bi bi-x-lg"></i>
                             </a>
                         </div>
@@ -19,13 +19,13 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-auto d-flex gap-3 align-items-center justify-content-between mt-2 mt-sm-0">
-                <a href="{{constant('PROJECT_URL')~'admin/phoneNumbers/add'}}" class="btn btn-success d-flex gap-2 fw-bold">
+                <a href="{{project_url~'admin/phoneNumbers/add'}}" class="btn btn-success d-flex gap-2 fw-bold">
                     <i class="bi bi-plus-lg"></i>
                     {{'Add'|lang}} 
                 </a>
                 <div dir="{{'Direction'|lang}}" class="d-flex">
                     <input dir="{{'Direction'|lang}}" class="form-control" id="searchText" placeholder="{{'Search'|lang}}" value="{{search}}" style="width:220px">
-                    <button class="btn btn-link lh-1 searcher" data-base-target="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">
+                    <button class="btn btn-link lh-1 searcher" data-base-target="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">
                         <i class="bi bi-search" ></i>
                     </button>
           
@@ -53,7 +53,7 @@
                 </th>
                 <th class="text-center " scope="col">{{'Image'|lang}}</th>
                 <th scope="col">
-                    <a {% if orderChanged==false %}class="text-reset"{% endif %} href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=1&s={{search}}">
+                    <a {% if orderChanged==false %}class="text-reset"{% endif %} href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=1&s={{search}}">
                         {{'Nickname'|lang}}
                         <i class="bi bi-caret-{%if orderChanged and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
@@ -62,7 +62,7 @@
                 <th scope="col">{{'Phone numbers'|lang}}</th>
                 <th scope="col" class="d-none d-lg-table-cell addressTtl">{{'Address'|lang}}</th>
                 <th scope="col" class="d-none d-lg-table-cell datetimeTtl">
-                    <a {% if orderChanged %}class="text-reset"{% endif %} href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=0&s={{search}}">
+                    <a {% if orderChanged %}class="text-reset"{% endif %} href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers?page={{page}}&asc={{ascChanged}}&nameSort=0&s={{search}}">
                         {{'Date & Time'|lang}}
                         <i class="bi bi-caret-{%if orderChanged == false and ascChanged%}up{% else %}down{% endif %}-fill"></i>
                     </a>
@@ -84,15 +84,15 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             {% if row.image.name %}
-                                <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}"><img class="rounded-circle border border-2 homeTableImg" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="45px" height="45px"></a>
+                                <a href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}"><img class="rounded-circle border border-2 homeTableImg" src="{{project_url}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="45px" height="45px"></a>
                             {% else %}
-                                <a href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}" class="img-thumbnail text-body opacity-50 homeTableImg rounded-circle d-flex lh-1 justify-content-center align-items-center">
+                                <a href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}" class="img-thumbnail text-body opacity-50 homeTableImg rounded-circle d-flex lh-1 justify-content-center align-items-center">
                                     <i class="bi fs-6 bi-image"></i>
                                 </a>
                             {% endif %}
                         </div>
                     </td>
-                    <td><a class="text-body" href="{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}">{{row.nickname}}</a></td>
+                    <td><a class="text-body" href="{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}">{{row.nickname}}</a></td>
                     <td class="d-none d-lg-table-cell fullNameBd">{{row.full_name}}</td>
                     <td>{{row.phone_numbers|join('<br>')|raw}}</td>
                     <td class="d-none d-lg-table-cell addressBd">{{row.address}}</td>
@@ -105,7 +105,7 @@
                     <td>
                         <div class="d-flex operations justify-content-between align-items-center">
                             <div class="d-flex gap-1 gap-sm-4">  
-                                <button onclick="location.href = '{{constant('PROJECT_URL') ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}'" class="text-primary btn btn-link p-0 m-0">
+                                <button onclick="location.href = '{{project_url ~ constant('ADMIN_DIR_NAME')}}/phone_numbers/edit?id={{row.id}}'" class="text-primary btn btn-link p-0 m-0">
                                     <i class="bi fs-4 bi-pencil-square"></i>
                                 </button>
                                 <button class="btn btn-link p-0 m-0 text-danger toConfirmModal" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id="{{row.id}}">

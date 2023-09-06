@@ -9,7 +9,7 @@ class Admin extends Backend{
     public function admin(){ 
         //admin dashboard page:
 
-        return $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME."/phone_numbers");
+        return $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME."/phone_numbers");
         // For enable dashboard page: 1.delete previous line and 2.uncomment next line.
         // return $this->Render('dashboard',$this->object);
     }
@@ -17,7 +17,7 @@ class Admin extends Backend{
     public function signin(){
         try {
             if($this->adminIsSigned())
-                 $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME);
+                 $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME);
             $signout = $this->Utils->safeInt($this->Utils->get('signout'));
                 if($signout)
                     $this->object['msg']=['style'=>'success','text'=>'Signed out successfully.'];   
@@ -45,7 +45,7 @@ class Admin extends Backend{
                                     $obj = ['tableName'=>'admins','data'=>['last_signed_at'=>date('Y-m-d H:i:s')],'where'=>['id'=>$resultSignin['id']]];
                                     $this->model->updateData($obj);
                                     if($this->adminIsSigned())
-                                        $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME);
+                                        $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME);
                                 }
                                 else
                                     $this->object['msg']=['status'=>'3','style'=>'danger','text'=>'The user is not valid.'];
@@ -66,7 +66,7 @@ class Admin extends Backend{
      public function signout(){
         try {
             unset($_SESSION['admin_id']);
-            $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME."/signin?signout=1");
+            $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME."/signin?signout=1");
         } catch (\Throwable $th) {
             if(isset($_SESSION['admin_id']))
                 unset($_SESSION['admin_id']);

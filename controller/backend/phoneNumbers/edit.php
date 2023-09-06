@@ -71,7 +71,7 @@ class EditPhoneNumbers extends Backend{
             }
             $rowInfo = $this->model->getData(['tableName'=>'phone_numbers','where'=>['id'=>$id]]);
             if(!$rowInfo)
-                $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME."/phone_numbers?page=1");
+                $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME."/phone_numbers?page=1");
             $this->object['row_info'] = $rowInfo && is_array($rowInfo)?$this->Utils->decode($rowInfo[0]):null;
             $this->object['row_info']['phone_numbers'] = isset($rowInfo[0]['phone_numbers'])?explode('~~',$rowInfo[0]['phone_numbers']):null;
             if(isset($rowInfo[0]['image_id'])){

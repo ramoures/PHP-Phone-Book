@@ -105,7 +105,7 @@ function invalidElement(id){
                 <label for="image" class="form-label">{{'Image'|lang}}</label>
                 {% if row_info.image.name %}
                 <div class="d-flex gap-2 align-items-center border py-2 rounded">
-                    <img class="rounded-circle border border-2 ms-2" src="{{constant('PROJECT_URL')}}media/{{row_info.image.folder}}/{{row_info.image.name}}" alt="{{row_info.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
+                    <img class="rounded-circle border border-2 ms-2" src="{{project_url}}media/{{row_info.image.folder}}/{{row_info.image.name}}" alt="{{row_info.image.alt}}" width="45px" height="45px" style="object-fit: cover;width: 45px;height: 45px;">
                     <input type="hidden" value="{{row_info.image.id}}" name="image_id">
                     <div class="d-none">
                         <input type="file" name="image" class="form-control fs-5 ms-2" id="image" autocomplete="off" disabled>

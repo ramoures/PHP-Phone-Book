@@ -2,12 +2,14 @@ Options -Indexes
 <FilesMatch "\.(log)">
 Deny from all
 </fileSMatch>
+
 <FilesMatch "config.php">
     Deny from all
 </fileSMatch>
 <FilesMatch "init.php">
     Deny from all
 </fileSMatch>
+
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -17,3 +19,6 @@ RewriteRule (.*) index.php/$1 [QSA]
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Content-Type-Options "nosniff"
 </IfModule>
+
+RewriteCond %{REQUEST_FILENAME} -s
+RewriteRule ^media/(.*)$ file-loader.php?file=$1 [QSA,L]

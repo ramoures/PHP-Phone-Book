@@ -1,9 +1,14 @@
 <?php
+if (!version_compare(PHP_VERSION, '8.0.0', '>=')) { 
+    print "Please update your PHP version to ^8.0.0. your PHP version:".PHP_VERSION;
+    die;
+}
 define('DS',DIRECTORY_SEPARATOR);
 define('ROOT_PATH',dirname(__DIR__).DS);
 require_once ROOT_PATH.'config.php';
 try {
-    $setupLink = PROJECT_URL."setup/";
+    $projectUrl = str_ends_with(PROJECT_URL,"/")?PROJECT_URL:PROJECT_URL."/";
+    $setupLink = $projectUrl."setup/";
     $actualLink = strtok((empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",'?');
     //Check 'PROJECT_URL':
     if($setupLink !== $actualLink)

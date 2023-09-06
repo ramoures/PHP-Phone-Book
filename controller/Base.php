@@ -9,9 +9,12 @@ abstract class Base{
     protected $lang;
     protected $object;
     public function __construct($param) {
+
         $this->Utils = Utils::getInstance();
+        $this->object['project_url'] = str_ends_with(PROJECT_URL,"/")?PROJECT_URL:PROJECT_URL."/";
+  
         $this->object['method'] = $param['method'];
-        $this->object['asset_url'] = PROJECT_URL."view/assets";
+        $this->object['asset_url'] = $this->object['project_url']."view/assets";
         $this->language = $this->Utils->getLang($param['type'])??B_DEFAULT_LANG;
         if(file_exists(ROOT_PATH.'lang/'. $this->language .'.php'))
             require_once(ROOT_PATH.'lang/'. $this->language .'.php');

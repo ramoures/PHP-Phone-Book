@@ -12,7 +12,7 @@
                 <span class="h5 m-0">{{'Search'|lang}}: </span>
                 <div class="btn-group dropstart">
                     <button class="btn btn-secondary opacity-75 de_cu">{{search}}</button>
-                    <a href="{{constant('PROJECT_URL')}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-secondary px-2">
+                    <a href="{{project_url}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}" class="btn btn-secondary px-2">
                         <i class="bi bi-x-lg"></i>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                                 {% set n = n+1 %}
                                 {% if n>=6 %}{% set n = 0 %}{% endif %}
                                 {% if row.image.name %}
-                                    <img class="rounded-circle border border-2" src="{{constant('PROJECT_URL')}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="85px" height="85px" style="object-fit: cover;width: 85px;height: 85px;">
+                                    <img class="rounded-circle border border-2" src="{{project_url}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="85px" height="85px" style="object-fit: cover;width: 85px;height: 85px;">
                                 {% else %}
                                     <span class="rounded-circle fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center" style="width:85px;height:85px;">{{first[0]|join('')|upper}}</span>
                                 {% endif %}

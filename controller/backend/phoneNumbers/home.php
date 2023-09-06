@@ -46,7 +46,7 @@ class PhoneNumbers extends Backend{
             }
             $pagePerTotal = ceil($total / (int)B_LIMIT);
             if($pagePerTotal && $pagePerTotal<$page)
-                $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME."/phone_numbers?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
+                $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME."/phone_numbers?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
             if($this->object['rows'])
                 foreach($this->object['rows'] as $key=>$value){
                     $this->object['rows'][$key]['phone_numbers'] = isset($this->object['rows'][$key]['phone_numbers'])?explode('~~',$this->object['rows'][$key]['phone_numbers']):null;

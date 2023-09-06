@@ -1,6 +1,6 @@
 <header class="d-flex align-items-center justify-content-between p-1 p-sm-3 my-3 text-white bg-primary rounded shadow-sm">
     <div class="flex-fill d-flex ms-2 ms-md-0">
-        <a class="text-white col-auto d-flex gap-2 align-items-center" href="{{constant('PROJECT_URL')}}">
+        <a class="text-white col-auto d-flex gap-2 align-items-center" href="{{project_url}}">
             <i class="bi fs-2 bi-person-rolodex"></i>
             <h1 class="h2 mb-0 lh-1">{{'Phone Book'|lang}}</h1>
         </a>
@@ -45,7 +45,7 @@
         <div class="flex-fill justify-content-center ps-3 align-items-center gap-2 d-flex">
             <span>{{'Search'|lang}}:</span>
             <input placeholder="{{'Name, Address, Phone number,...'|lang}}" class="form-control form-control-lg" value="{{search}}">
-            <button class="btn btn-lg btn-primary searcher" data-base-target="{{constant('PROJECT_URL')}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Go'|lang}}</button>
+            <button class="btn btn-lg btn-primary searcher" data-base-target="{{project_url}}?page={{page}}&asc={{asc}}&nameSort={{orderChanged}}">{{'Go'|lang}}</button>
         </div>
     </div>
 </section>
