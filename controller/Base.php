@@ -12,7 +12,6 @@ abstract class Base{
 
         $this->Utils = Utils::getInstance();
         $this->object['project_url'] = str_ends_with(PROJECT_URL,"/")?PROJECT_URL:PROJECT_URL."/";
-  
         $this->object['method'] = $param['method'];
         $this->object['asset_url'] = $this->object['project_url']."view/assets";
         $this->language = $this->Utils->getLang($param['type'])??B_DEFAULT_LANG;
@@ -20,6 +19,8 @@ abstract class Base{
             require_once(ROOT_PATH.'lang/'. $this->language .'.php');
         $this->lang = $lang??'';
         $this->object['language'] = strtoupper($this->language);
+        if(is_dir('setup'))
+                $this->object['setup']=true;
         $this->initTwig($param['type']);
     }
     protected function initTwig($mode) {

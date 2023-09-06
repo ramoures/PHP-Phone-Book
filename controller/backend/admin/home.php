@@ -55,8 +55,7 @@ class Admin extends Backend{
                     }  
                     
                 }
-            if(is_dir('setup'))
-                $this->object['setup']=true;
+            
              return $this->Render('signin',$this->object);
         } catch (\Throwable $th) {
              return $this->error($th);
