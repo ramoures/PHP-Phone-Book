@@ -18,7 +18,7 @@ ___
 2. Create a new MySQL database.
 3. Set your **database information** and your `PROJECT_URL` in `config.php`.
 4. Browse `/setup` to create the required tables and admin sign up.
-   > Ex. `https://example.com/PHP-Phone-Book/setup/`
+   > Ex. `https://localhost/PHP-Phone-Book/setup/`
 5. Remove `/setup` directory.
 ___
 ### Information
