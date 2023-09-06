@@ -25,7 +25,8 @@ try {
         $step = (int)$_GET['step'];
         $step = $step<=0?1:$step;
         $step = $step>2?2:$step;
-        $passwordPattenr = "/".PASSWORD_PATTERN."/";
+        $PASSWORD_PATTERN = PASSWORD_PATTERN;
+        $forRegex = "/".$PASSWORD_PATTERN."/";
         $tablePrefix = TABLE_PREFIX;
 
         function encrypt($str){
@@ -120,7 +121,7 @@ try {
                             if($password !== $confirm)
                                 $alert = "Passwords do not match.";
                             else
-                            if(!preg_match($passwordPattenr,$confirm)){
+                            if(!preg_match($forRegex,$confirm)){
                                 $alert = '
                                 Your password is not strong enough.
                                 <div class="text-secondary d-grid passValid">

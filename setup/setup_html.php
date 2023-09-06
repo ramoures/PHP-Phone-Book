@@ -62,7 +62,7 @@
                 <h3 class="h4"> Admin Signup</h3>
                 <small class="text-secondary">You can change later.</small>
                 </div>
-                <form method="post">
+                <form class="row g-3 needs-validation" method="post" autocomplete="off" novalidate>
                 <div class="d-flex justify-content-center mb-5">
                     
                     <div class="col-11 col-md-9 col-lg-7 col-xl-6 d-grid gap-2">
@@ -72,18 +72,38 @@
                         </div>
                     <?php endif ?>
                         <label for="username">Username</label>
-                        <input name="username" id="username" value="<?php print $username ?>" class="form-control form-control-lg">
+                        <input name="username" id="username" value="<?php print $username ?>" class="form-control form-control-lg" required>
+                        <div class="invalid-feedback">
+                            Please enter username.
+                        </div>
                         <label for="password">Password</label>
                         <div class="d-flex flex-wrap gap-1">
-                            <input type="password" name="password" value="<?php print $password ?>" id="password" class="form-control form-control-lg col">
+                            <input type="password" name="password" value="<?php print $password ?>" id="password" class="form-control form-control-lg col" <?php if($PASSWORD_PATTERN): ?>pattern="<?php print $PASSWORD_PATTERN ?>"<?php endif ?> autocomplete="off" required>
                             <button type="button" class="btn col-auto btn-lg lh-1 border rounded text-body showPass user-select-none">
-                            <i class="bi bi-eye fs-4 opacity-75"></i>
+                                <i class="bi bi-eye fs-4 opacity-75"></i>
+                            </button>
+                            <div class="invalid-feedback">
+                                Please enter password.
+                                <?php if($PASSWORD_PATTERN): ?>
+                                    <div class="text-secondary d-grid passValid">
+                                        <span><i></i>Must be 8 to 16 characters.'</span>
+                                        <span><i></i>Must contain at least 2 number.</span>
+                                        <span><i></i>Must contain at least 1 in Capital Case.</span>
+                                        <span><i></i>Must contain at least 1 Letter in Small Case.</span>
+                                        <span><i></i>Must contain at least 2 Special Character.</span>
+                                    </div>
+                                <?php endif ?>
+                            </div>
                         </div>
-                        <label for="confirm">Confirm Password</label>
+                        <label for="confirm">Confirm password</label>
                         <div class="d-flex flex-wrap gap-1">
-                            <input type="password" name="confirm" id="confirm" class="form-control form-control-lg col">
+                            <input type="password" name="confirm" id="confirm" class="form-control form-control-lg col" autocomplete="off" required>
                             <button type="button" class="btn col-auto btn-lg lh-1 border rounded text-body showPass user-select-none">
-                            <i class="bi bi-eye fs-4 opacity-75"></i>
+                                <i class="bi bi-eye fs-4 opacity-75"></i>
+                            </button>
+                            <div class="invalid-feedback">
+                                Please enter confirm password.
+                            </div>
                         </div>
                     </button>
                     </div>
@@ -150,6 +170,16 @@
                 $('.passValid').find('span').eq(4).addClass('text-success fw-bold').find('i').addClass('bi bi-check');
             if(thisVal.search(/(?=(.*[!@#$%^&*_=+\-]){2,})/g) === -1 )
                 $('.passValid').find('span').eq(4).removeClass('text-success fw-bold').find('i').removeClass('bi bi-check');
+        });
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+            }, false)
         });
     </script>
 </body>
