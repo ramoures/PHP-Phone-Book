@@ -54,12 +54,12 @@
                                 <div>{{row.full_name}}</div>
                                 <div class="fw-normal h4 p-0 m-0 mt-1">
                                     {% for numbers in numbers|slice(0,2) %}
-                                        <a class="text-body" href="tel:{{number}}">{{numbers}}</a>
+                                        <a class="text-body" href="tel:{{numbers}}">{{numbers}}</a>
                                     {% endfor %}
                                 </div>
                                 <div class="fw-normal h4 p-0 m-0 moreNumbers d-none">
                                     {% for numbers in numbers|slice(2,20) %}
-                                        <a class="text-body" href="tel:{{number}}">{{numbers}}</a>
+                                        <a class="text-body" href="tel:{{numbers}}">{{numbers}}</a>
                                     {% endfor %}
                                     <a class="lessMoreNumbers po_cu">
                                         ...{{'Less'|lang}}
