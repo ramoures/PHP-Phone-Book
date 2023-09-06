@@ -16,8 +16,6 @@ class Admin extends Backend{
    
     public function signin(){
         try {
-            if(is_dir('setup'))
-                rmdir('setup');
             if($this->adminIsSigned())
                  $this->Utils->redirect(PROJECT_URL.ADMIN_DIR_NAME);
             $signout = $this->Utils->safeInt($this->Utils->get('signout'));
@@ -57,6 +55,8 @@ class Admin extends Backend{
                     }  
                     
                 }
+            if(is_dir('setup'))
+                $this->object['setup']=true;
              return $this->Render('signin',$this->object);
         } catch (\Throwable $th) {
              return $this->error($th);

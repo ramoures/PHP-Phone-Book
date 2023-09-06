@@ -13,12 +13,13 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
-
-1. Create a new MySQL database.
-2. Set your **database information** and your `PROJECT_URL` in `config.php`.
-3. Browse `/setup` to create the required tables and admin sign up.
+1. Change `media` directory permission to 777 
+   > Ex. `sudo chmod -R 777 /opt/lampp/htdocs/PHP-Phone-Book/media`
+2. Create a new MySQL database.
+3. Set your **database information** and your `PROJECT_URL` in `config.php`.
+4. Browse `/setup` to create the required tables and admin sign up.
    > Ex. `https://example.com/PHP-Phone-Book/setup/`
-
+5. Remove `/setup` directory.
 ___
 ### Information
 + HTTP server: [Apache](https://httpd.apache.org/) 
@@ -38,7 +39,6 @@ ___
 + Sorting and pagination of items.
 + Client and server side **captcha** for sign in form.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
-+ Setup system. (Setup files will be deleted after setup.)
 ___
 ### HELP
 #### Add new language

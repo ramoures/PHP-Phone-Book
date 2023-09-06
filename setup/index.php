@@ -93,58 +93,49 @@ try {
                 $stmp = $pdo->query($sql);
                 if($stmp){
                     $res = $stmp->fetchAll();
-                    if(count($res)>0){
-                        unlink('index.php');
-                        unlink('setup_html.php');
-                        unlink('setup.png');
-                        unlink('.htaccess');
+                    if(count($res)>0)
                         $u->redirect('../'.ADMIN_DIR_NAME.'/signin');
-                    }
+                    
                 }
                 if($u->post('btn_submit')){
-                try {
-                        $step=2;
-                        $username = $u->encode($u->post('username'));
-                        $password = $u->encode($u->post('password'));
-                        $confirm = $u->encode($u->post('confirm'));
-                        if($username ==='')
-                            $alert = "Please enter username.";
-                        else
-                        if($password === '')
-                            $alert = "Please enter password.";
-                        else
-                        if($confirm ==='')
-                            $alert = "Please enter confirm password.";
-                        else
-                        if($password !== $confirm)
-                            $alert = "Passwords do not match.";
-                        else
-                        if(!preg_match($passwordPattenr,$confirm)){
-                            $alert = '
-                            Your password is not strong enough.
-                            <div class="text-secondary d-grid passValid">
-                                <span><i></i>Must be 8 to 16 characters.</span>
-                                <span><i></i>Must contain at least 2 number.</span>
-                                <span><i></i>Must contain at least 1 in Capital Case.</span>
-                                <span><i></i>Must contain at least 1 Letter in Small Case.</span>
-                                <span><i></i>Must contain at least 2 Special Character.</span>
-                            </div>';
-                        }
-                        else{
-                            $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",TABLE_PREFIX.'admins','username','password','created_at');
-                            $stmp = $pdo->prepare($sql);
-                            $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
-                            unlink('index.php');
-                            unlink('setup_html.php');
-                            unlink('setup.png');
-                            unlink('.htaccess');
-                            $u->redirect('../'.ADMIN_DIR_NAME.'/signin');
-                        }
+                    try {
+                            $step=2;
+                            $username = $u->encode($u->post('username'));
+                            $password = $u->encode($u->post('password'));
+                            $confirm = $u->encode($u->post('confirm'));
+                            if($username ==='')
+                                $alert = "Please enter username.";
+                            else
+                            if($password === '')
+                                $alert = "Please enter password.";
+                            else
+                            if($confirm ==='')
+                                $alert = "Please enter confirm password.";
+                            else
+                            if($password !== $confirm)
+                                $alert = "Passwords do not match.";
+                            else
+                            if(!preg_match($passwordPattenr,$confirm)){
+                                $alert = '
+                                Your password is not strong enough.
+                                <div class="text-secondary d-grid passValid">
+                                    <span><i></i>Must be 8 to 16 characters.</span>
+                                    <span><i></i>Must contain at least 2 number.</span>
+                                    <span><i></i>Must contain at least 1 in Capital Case.</span>
+                                    <span><i></i>Must contain at least 1 Letter in Small Case.</span>
+                                    <span><i></i>Must contain at least 2 Special Character.</span>
+                                </div>';
+                            }
+                            else{
+                                $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",TABLE_PREFIX.'admins','username','password','created_at');
+                                $stmp = $pdo->prepare($sql);
+                                $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
+                                $u->redirect('../'.ADMIN_DIR_NAME.'/signin');
+                            }
 
-                } catch (Exception $e) {
+                    } catch (Exception $e) {
                         $msg = $e->getMessage();
-                }
-                
+                    }
                 }
             }
         } catch (Exception $e) {
