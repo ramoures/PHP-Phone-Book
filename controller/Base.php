@@ -9,7 +9,6 @@ abstract class Base{
     protected $lang;
     protected $object;
     public function __construct($param) {
-
         $this->Utils = Utils::getInstance();
         $this->object['project_url'] = str_ends_with(PROJECT_URL,"/")?PROJECT_URL:PROJECT_URL."/";
         $this->object['method'] = $param['method'];
@@ -20,7 +19,7 @@ abstract class Base{
         $this->lang = $lang??'';
         $this->object['language'] = strtoupper($this->language);
         if(is_dir('setup'))
-                $this->object['setup']=true;
+            $this->object['setup']=true;
         $this->initTwig($param['type']);
     }
     protected function initTwig($mode) {
