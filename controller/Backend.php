@@ -92,7 +92,7 @@ abstract class Backend extends Base{
                 if(in_array($path,[AVATARS_DIR_NAME,IMAGES_DIR_NAME])){
                     $fileField= $this->Utils->encode($_FILES[$fieldName]['tmp_name']);
                     if($fileField)
-                        return $this->uploadImage($fieldName,UPLOAD_PATH."$path");
+                        return $this->uploadImage($fieldName,'media/'.$path);
                     else
                         return false; // File temp is not isset
                 }
@@ -109,21 +109,22 @@ abstract class Backend extends Base{
        try {
             $id=null;
             if(isset($_FILES[$fieldName])){
+                $prevId = $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
+                if($prevId){
+                    $image = $model->getData(['tableName'=>'upload','selector'=>['name'],'where'=>['id'=>$prevId]]);
+                    $image = $image?$image[0]:false;
+                    if($image['name']){
+                        if(file_exists(ROOT_PATH.'media/'.$path."/".$image['name'])){
+                            $unlink = unlink(ROOT_PATH.'media/'.$path."/".$image['name']);
+                            if($unlink)
+                                $model->removeData(['tableName'=>'upload','id'=>$prevId]);
+                        }
+                        else $model->removeData(['tableName'=>'upload','id'=>$prevId]);
+                    }
+                }
                 $upload = $this->toUpload($fieldName,$path);
                 if(!is_int($upload) && $upload !== false){
-                    $prevId = $this->Utils->safeInt($this->Utils->post($fieldName."_id"));
-                    if($prevId){
-                        $image = $model->getData(['tableName'=>'upload','selector'=>['name'],'where'=>['id'=>$prevId]]);
-                        $image = $image?$image[0]:false;
-                        if($image['name']){
-                            if(file_exists(ROOT_PATH.UPLOAD_DIR_NAME.$path."/".$image['name'])){
-                                $unlink = unlink(ROOT_PATH.UPLOAD_DIR_NAME.$path."/".$image['name']);
-                                if($unlink)
-                                    $model->removeData(['tableName'=>'upload','id'=>$prevId]);
-                            }
-                            else $model->removeData(['tableName'=>'upload','id'=>$prevId]);
-                        }
-                    }
+                   
                     $data = ['tableName'=>'upload','data'=>['folder'=>$path,'name'=>$upload,'alt'=>$alt,'created_at'=>date("Y-m-d H:i:s")]];
                     $id = $model->insertData($data);
                     if(!$id)
@@ -140,8 +141,7 @@ abstract class Backend extends Base{
                     else
                         $this->object['msg']=['status'=>9,'style'=>'danger','text'=>'Error! Try again later.'];
                 }
-                else 
-                    $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));                    
+                                 
             }
             else
                 $id= $this->Utils->safeInt($this->Utils->post($fieldName."_id"));

@@ -36,7 +36,6 @@
         define("ADMIN_DIR_NAME","admin2023");
         define("FRONTEND_THEME_DIR_NAME", "default");
         define("BACKEND_THEME_DIR_NAME", "default");
-        define('UPLOAD_DIR_NAME','media');
         define('AVATARS_DIR_NAME',"avatars");
         define('IMAGES_DIR_NAME','images');
 
