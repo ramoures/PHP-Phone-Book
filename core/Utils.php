@@ -87,7 +87,7 @@ final class Utils{
         }
         return $data ? html_entity_decode(stripslashes($data),ENT_QUOTES,'UTF-8') : '';
     }
-    public function renderNumber($asc=1,$limit,$page,$total){
+    public function renderNumber($asc,$limit,$page,$total){
         try {
             if($asc)
                 $n = $total - ($limit * $page) + $limit + 1;                

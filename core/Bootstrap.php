@@ -6,6 +6,7 @@ final class Bootstrap{
         $this->init();
         $this->errorReporting();       
         $this->routing();
+      
     }
     static function run(){
         if(self::$instance==null)
@@ -19,6 +20,7 @@ final class Bootstrap{
                 ini_set("display_errors",1); //develop mode
             else{
                 //pro mode
+                ini_set('log_errors', 'off');
                 ini_set("display_errors",0);
                 $logFileName = date("Y-m-d").".log";
                 ini_set("error_log",ROOT_PATH."logs/$logFileName");
@@ -28,15 +30,15 @@ final class Bootstrap{
         }
     }
     private function init(){
-       try {
+        try {
             date_default_timezone_set('UTC');
             ob_start();
             header('X-Frame-Options: DENY');
             header('X-XSS-Protection: 1; mode=block');
-            header('X-Content-Type-Options: nosniff');
-       } catch (\Throwable $th) {
+        header('X-Content-Type-Options: nosniff');
+        } catch (\Throwable $th) {
             return $this->error($th);
-       }
+        }
     }
     private function initSession(){
        try {
