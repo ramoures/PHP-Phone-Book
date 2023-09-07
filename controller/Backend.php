@@ -8,27 +8,29 @@ abstract class Backend extends Base{
        
     }
     private function getIp(){
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) 
-            $ip = filter_var($_SERVER['HTTP_CLIENT_IP']??0, FILTER_VALIDATE_IP)??0;
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-            $ip = filter_var($_SERVER['HTTP_X_FORWARDED_FOR']??0, FILTER_VALIDATE_IP)??0;
-        else 
-            $ip = filter_var($_SERVER['REMOTE_ADDR']??0, FILTER_VALIDATE_IP)??0;
+        $headers = getallheaders();  
+        if($headers && !empty($headers['CF-Connecting-IP']))
+            $ip = $headers['CF-Connecting-IP'];
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])) 
+            $ip = $_SERVER['HTTP_CLIENT_IP'];  
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) 
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+        else
+            $ip = $_SERVER['REMOTE_ADDR'];  
         return $ip;
     }
     protected function captchaCheck($captcha){
-        $url = CAPTCHA_API_URL;
-        $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => urlencode($captcha), 'remoteip' => $this->getIp());
-        $options = array(
-            'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method' => 'POST',
-            'content' => http_build_query($data))
-        );
-        $stream = stream_context_create($options);
-        $result = file_get_contents($url, false, $stream)??array();
-        $responseKeys = json_decode($result,true)??array();
-        if($responseKeys["success"])
+        $data = array('secret' => CAPTCHA_SECRET_KEY, 'response' => urldecode($captcha), 'remoteip' => $this->getIp());
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, CAPTCHA_API_URL);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        $curlData = curl_exec($curl);
+        curl_close($curl);
+        $result = json_decode($curlData, true);
+        if(intval($result["success"]) == 1) 
             return true;
         return false;
     }
