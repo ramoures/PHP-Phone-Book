@@ -11,26 +11,26 @@ try {
 	$mime = mime_content_type($file);
 	$ext = pathinfo($file, PATHINFO_EXTENSION);
 	$allowTypes = array_values(ALLOW_FILES_TYPE);
-	$allowMime = array_keys(ALLOW_FILES_TYPE);
-	if(!in_array($ext,$allowTypes) && !in_array($mime,$allowMime)){
+	$allowMimes = array_keys(ALLOW_FILES_TYPE);
+	if(!in_array($ext,$allowTypes) && !in_array($mime,$allowMimes)){
 		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 		die('500 Internal Server Error!');
 	}
-	header( 'Content-Type: ' . $mime );
+	header('Content-Type: ' . $mime);
 	if (strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') === false)
-		header( 'Content-Length: ' . filesize( $file ) );
+		header('Content-Length: ' . filesize( $file ));
 	$last_modified = gmdate('D, d M Y H:i:s', filemtime($file));
 	$etag = '"' . md5( $last_modified ) . '"';
 	header("Last-Modified: $last_modified GMT" );
 	header('ETag: ' . $etag );
 	header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 100000000) . ' GMT' );
 	$client_etag = isset($_SERVER['HTTP_IF_NONE_MATCH']) ? stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) : false;
-	if(!isset( $_SERVER['HTTP_IF_MODIFIED_SINCE']))
+	if(!isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
 		$_SERVER['HTTP_IF_MODIFIED_SINCE'] = false;
 	$client_last_modified = trim($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 	$client_modified_timestamp = $client_last_modified ? strtotime($client_last_modified) : 0;
 	$modified_timestamp = strtotime($last_modified);
-	if (($client_last_modified && $client_etag)?(($client_modified_timestamp >= $modified_timestamp) && ($client_etag == $etag)):(($client_modified_timestamp >= $modified_timestamp) || ($client_etag == $etag))){
+	if(($client_last_modified && $client_etag)?(($client_modified_timestamp >= $modified_timestamp) && ($client_etag == $etag)):(($client_modified_timestamp >= $modified_timestamp) || ($client_etag == $etag))){
 		header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified!', true, 304);
 		die('304 Not Modified!');
 	}
