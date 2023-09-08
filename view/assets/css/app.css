@@ -146,6 +146,9 @@ a {
     .phcard{
         padding:1.5rem 
     }
+    .phinfo{
+        font-size: 9pt;
+    }
 }
 @media (max-width: 420px) {
     .phimg{
