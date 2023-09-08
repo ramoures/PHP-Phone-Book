@@ -36,43 +36,51 @@
             {% set numbers = row.phone_numbers %}
             {% set first = row.nickname|split("") %}
                 <div class="col">
-                    <div class="bg-body-secondary rounded rounded-1 text-body-secondary d-flex w-100 p-4 h-100 align-items-center ">
-                    <div class="d-grid d-md-flex gap-2 justify-content-between align-items-start ">
+                    <div class="phcard bg-body-secondary rounded rounded-1 text-body-secondary d-flex w-100 h-100 align-items-center ">
+                    <div class="d-grid d-md-flex gap-2 justify-content-between align-items-start flex-wrap flex-xl-nowrap">
                         <div class="d-flex gap-2 h-100">
-                            <div class="rounded-3 me-2 d-flex phoneImg justify-content-center align-self-center align-items-center text-white" style="background-color:{{colors[n]}}; min-width:135px;min-height:135px;max-width:135px;max-height:135px;">
+                            <div class="p-4 rounded-3 me-2 d-flex phoneImg justify-content-center align-self-center align-items-center text-white" style="background-color:{{colors[n]}};">
                                 {% set n = n+1 %}
                                 {% if n>=6 %}{% set n = 0 %}{% endif %}
                                 {% if row.image.name %}
-                                    <img class="rounded-circle border border-2" src="{{project_url}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" width="85px" height="85px" style="object-fit: cover;width: 85px;height: 85px;">
+                                    <img class="img-fluid phimg rounded-circle border border-2" src="{{project_url}}media/{{row.image.folder}}/{{row.image.name}}" alt="{{row.image.alt}}" style="object-fit: cover;">
                                 {% else %}
-                                    <span class="rounded-circle fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center" style="width:85px;height:85px;">{{first[0]|join('')|upper}}</span>
+                                    <span class="rounded-circle phimg fs-4 fw-bold bg-white text-secondary d-flex justify-content-center align-items-center">{{first[0]|join('')|upper}}</span>
                                 {% endif %}
                             </div>
                            
-                            <div class="fs-5 m-0 lh-sm pe-3 align-self-start faDigits position-relative">
+                            <div class="fs-4 m-0 lh-sm pe-3 align-self-start faDigits position-relative">
                                 <strong class="d-block text-gray-dark">{{row.nickname}}</strong>
                                 <div>{{row.full_name}}</div>
-                                <div class="fw-normal h4 p-0 m-0 mt-1">
-                                    {% for numbers in numbers|slice(0,2) %}
-                                        <a class="text-body" href="tel:{{numbers}}">{{numbers}}</a>
-                                    {% endfor %}
+                                <div>
+                                    <div class="fw-normal h5 p-0 m-0 mt-2 ">
+                                        {% for numbers in numbers|slice(0,2) %}
+                                            <a class="d-flex gap-1 phnumbers align-items-center text-body my-1" href="tel:{{numbers}}">
+                                                <span class="bg-body fs-6 rounded-circle text-success px-2 py-1"><i class="bi bi-telephone-fill"></i></span>
+                                                {{numbers}}
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="fw-normal h5 p-0 m-0 moreNumbers d-none">
+                                        {% for numbers in numbers|slice(2,20) %}
+                                            <a class="d-flex gap-1 phnumbers align-items-center text-body my-1" href="tel:{{numbers}}">
+                                                <span class="bg-body fs-6 rounded-circle text-success px-2 py-1"><i class="bi bi-telephone-fill"></i></span>
+                                                {{numbers}}
+                                            </a>
+                                        {% endfor %}
+                                        <a class="lessMoreNumbers po_cu fs-5">
+                                            ...{{'Less'|lang}}
+                                        </a>
+                                    </div>
+                                    {% if numbers|length > 2 %}
+                                        <a class="toMoreNumbers po_cu fs-5">
+                                            {{'More'|lang}}...
+                                        </a>
+                                    {% endif %}
                                 </div>
-                                <div class="fw-normal h4 p-0 m-0 moreNumbers d-none">
-                                    {% for numbers in numbers|slice(2,20) %}
-                                        <a class="text-body" href="tel:{{numbers}}">{{numbers}}</a>
-                                    {% endfor %}
-                                    <a class="lessMoreNumbers po_cu">
-                                        ...{{'Less'|lang}}
-                                    </a>
-                                </div>
-                                {% if numbers|length > 2 %}
-                                    <a class="toMoreNumbers po_cu">
-                                        {{'More'|lang}}...
-                                    </a>
-                                {% endif %}
                             </div>
                         </div>
-                        <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4">
+                        <div class="flex-fill col-12 ps-0 px-2 px-md-0 ps-md-4 fs-5">
                             {% if row.address %}
                                 <div class="fw-bold text-secondary"> {{'Address'|lang}}:</div>
                                 {{row.address}}
