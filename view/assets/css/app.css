@@ -147,10 +147,13 @@ a {
         padding:1.5rem 
     }
     .phinfo{
-        font-size: 9pt;
+        font-size: 8pt;
     }
 }
 @media (max-width: 420px) {
+    .phinfo{
+        font-size: 10pt;
+    }
     .phimg{
         min-height: 4rem;
         min-width: 4rem;
