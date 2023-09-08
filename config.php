@@ -15,7 +15,7 @@
     define("TABLE_PREFIX","phbk_");
 
 //Project Setting
-    define("PROJECT_URL","https://localhost/phone_book");
+    define("PROJECT_URL","https://localhost/phone_book/");
     define('SESSION_NAME',"Phone-Book");
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Captcha

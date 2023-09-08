@@ -71,15 +71,7 @@ a {
 .bd-mode-toggle {
     z-index: 1500;
 }
-.phimg{
-    min-height: 7rem;
-    min-width: 7rem;
-    max-height: 7rem;
-    max-width: 7rem;
-}
-.phcard{
-    padding:1rem 
-}
+
 .nav-scroller .nav {
     color: rgba(255, 255, 255, .75);
 }
@@ -131,6 +123,15 @@ a {
 }
 .phnumbers:hover span{
     opacity: 1;
+}
+.phimg{
+    min-height: 7rem;
+    min-width: 7rem;
+    max-height: 7rem;
+    max-width: 7rem;
+}
+.phcard{
+    padding:1.2rem 
 }
 /* MEDIAs */
 @media (min-width: 768px) {
