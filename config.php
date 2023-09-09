@@ -21,8 +21,9 @@
     // Captcha
         #Please get your api keys from:
             # Cloudflare: https://developers.cloudflare.com/turnstile/get-started/
-            # or
-            # Google: https://developers.google.com/recaptcha/docs/display
+            // or
+            # Google: https://www.google.com/recaptcha/
+              // required google reCaptcha type: v2 Checkbox
 
         define('CAPTCHA_API_URL','https://challenges.cloudflare.com/turnstile/v0/siteverify');
         #Google recaptcha api url = https://www.google.com/recaptcha/api/siteverify
@@ -61,12 +62,12 @@
 
     // Security
         define("DEBUG",false); # true or false
-        #important: please change this value for your project:
-        define('SECRET_KEY','D96B2B6A02850F2BF085DC39632E6A'); 
+        define('SECRET_KEY','D76B2B6FA02385F2B42085D3963E6A'); #important: please change this value for your project.
         
     // Backend Pages Setting
         define("B_DEFAULT_LANG",'en'); # cookie set before
         define("B_LIMIT",'10'); # Limit post per pages
+        
     // Frontend Pages Setting
         define("DEFAULT_LANG",'en'); # cookie set before
         define("LIMIT",'10'); # Limit post per pages
