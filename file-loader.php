@@ -18,12 +18,12 @@ try {
 	}
 	header('Content-Type: ' . $mime);
 	if (strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') === false)
-		header('Content-Length: ' . filesize( $file ));
+		header('Content-Length: ' . filesize($file));
 	$last_modified = gmdate('D, d M Y H:i:s', filemtime($file));
-	$etag = '"' . md5( $last_modified ) . '"';
+	$etag = '"' . sha1("ui*ok2JsAQi".$last_modified."sKi98^0cs3Fn".SECRET_KEY) . '"';
 	header("Last-Modified: $last_modified GMT" );
-	header('ETag: ' . $etag );
-	header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 100000000) . ' GMT' );
+	header('ETag: ' . $etag);
+	header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 100000000) . ' GMT');
 	$client_etag = isset($_SERVER['HTTP_IF_NONE_MATCH']) ? stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) : false;
 	if(!isset($_SERVER['HTTP_IF_MODIFIED_SINCE']))
 		$_SERVER['HTTP_IF_MODIFIED_SINCE'] = false;
@@ -34,7 +34,7 @@ try {
 		header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified!', true, 304);
 		die('304 Not Modified!');
 	}
-	readfile( $file );
+	print file_get_contents($file);
 	die;
 } catch (\Throwable $th) {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);

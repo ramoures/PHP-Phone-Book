@@ -22,3 +22,7 @@ RewriteRule (.*) index.php/$1 [QSA]
 
 RewriteCond %{REQUEST_FILENAME} -s
 RewriteRule ^media/(.*)$ file-loader.php?file=$1 [QSA,L]
+
+RewriteEngine on 
+RewriteCond %{HTTP_REFERER} !^/.*$ [NC] 
+RewriteRule \.(gif|jpg|png|jpeg)$ - [F]

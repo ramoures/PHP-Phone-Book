@@ -33,9 +33,6 @@ final class Bootstrap{
         try {
             date_default_timezone_set('UTC');
             ob_start();
-            header('X-Frame-Options: DENY');
-            header('X-XSS-Protection: 1; mode=block');
-            header('X-Content-Type-Options: nosniff');
         } catch (\Throwable $th) {
             return $this->error($th);
         }

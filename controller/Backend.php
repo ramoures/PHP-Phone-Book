@@ -2,10 +2,8 @@
 abstract class Backend extends Base{
     public function __construct($param) {
         parent::__construct($param);
-
         if($param['method'] !== 'signin' && !$this->adminIsSigned())
             $this->Utils->redirect($this->object['project_url'].ADMIN_DIR_NAME."/signin");
-       
     }
     private function getIp(){
         $headers = getallheaders();  
