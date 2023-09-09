@@ -36,6 +36,7 @@ ___
 + Many *options* for configuration. *`config.php`*
 + Sorting and pagination of items.
 + Client and server side **captcha** for sign in form.
+   >  Optional config: *Google reCaptcha* or *Cloudflare Turnstile*
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 ___
 ### HELP
