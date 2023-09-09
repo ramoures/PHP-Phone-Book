@@ -106,8 +106,5 @@ $lang = [
     "Submission successful!"=>"با موفقیت ثبت شد.",
     "Successfully deleted."=>"با موفقیت حذف شد.",
     "Delete failed. Try again later."=>"حذف ناموفق بود. دوباره سعی کنید.",
-
-
-
 ];
 ?>

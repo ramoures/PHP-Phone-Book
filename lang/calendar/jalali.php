@@ -33,5 +33,4 @@ function gregorian_to_jalali($gy, $gm, $gd, $mod = '') {
   }
   return ($mod == '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
 }
-
 ?>
