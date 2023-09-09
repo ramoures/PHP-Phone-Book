@@ -3,7 +3,7 @@ abstract class Models{
     use errors;
     protected $db;
     public function __construct() {
-        $this->db = database::getInstance();
+        $this->db = Database::getInstance();
     }
     public function getData($obj){
         try {

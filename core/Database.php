@@ -29,13 +29,9 @@ final class Database{
         }
     }
     static function getInstance(){
-        try {
-            if(self::$instance==null)
-                self::$instance = new Database();
-            return self::$instance;
-        } catch (\Throwable $th) {
-            self::error($th);
-        }
+        if(self::$instance==null)
+            self::$instance = new Database();
+        return self::$instance;
     }
     public function create($object){
        try {
