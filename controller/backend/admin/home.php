@@ -22,7 +22,9 @@ class Admin extends Backend{
                 if($signout)
                     $this->object['msg']=['style'=>'success','text'=>'Signed out successfully.'];   
                 if(isset($_POST['btn_signin'])){
-                    $captcha=$this->Utils->post('cf-turnstile-response');
+                    $captcha1=$this->Utils->post('cf-turnstile-response');
+                    $captcha2=$this->Utils->post('g-recaptcha-response');
+                    $captcha = $captcha1?$captcha1:$captcha2;
                     if (!$captcha) 
                         $this->object['msg']=['status'=>'-1','style'=>'danger','text'=>'Please check the the captcha form.'];
                     else{
