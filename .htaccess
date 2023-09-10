@@ -1,8 +1,7 @@
 Options -Indexes
 <FilesMatch "\.(log)">
-Deny from all
+    Deny from all
 </fileSMatch>
-
 <FilesMatch "config.php">
     Deny from all
 </fileSMatch>
