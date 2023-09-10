@@ -10,12 +10,12 @@
     define("DB_HOST","localhost");
     define("DB_USER","root");
     define("DB_PASWORD","");
-    define("DB_NAME","phone_book");
+    define("DB_NAME","php_phone_book");
 
     define("TABLE_PREFIX","phbk_");
 
 //Project Setting
-    define("PROJECT_URL","https://localhost/phone_book/");
+    define("PROJECT_URL","https://localhost/PHP-Phone-Book/");
     define('SESSION_NAME',"Phone-Book");
     define('PHONE_NUMBER_PATTERN','[0-9]{11}'); #Ex.09121234567
     // Captcha

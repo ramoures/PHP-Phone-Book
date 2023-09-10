@@ -31,6 +31,7 @@ try {
 
         function encrypt($str){
             try {
+                //See also: core/Utils.php
                 $result = SECRET_KEY.$str."67H8fgp)@sd8u*ac".$str.SECRET_KEY."546DFsG%^dfA";
                 return hash('sha256',$result);
             } catch (Exception $e) {
