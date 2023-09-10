@@ -58,11 +58,12 @@ abstract class Backend extends Base{
             $fileName = hash('sha256',date('YmdHis').mt_rand(1000000,9999999).date('YmdHis'));
             if($error === 0){
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                $mime = finfo_file($finfo, $tmp_name);
+                $mime = finfo_file($finfo, $tmp_name)?finfo_file($finfo, $tmp_name):'image/jpg';
                 $index = array_search($mime,array_keys(ALLOW_FILES_TYPE));
                 if($index !== false){
                     $isImg = getimagesize($tmp_name);
-                    if(is_array($isImg) && count($isImg) > 0 ){
+                    $pattern = "#^(image/)[^\s\n<]+$#i";
+                    if(is_array($isImg) && count($isImg) > 0 && preg_match($pattern, $isImg['mime'])){
                         if($fileSize > MAX_FILE_SIZE)
                             return -6; // File is too large
                         $newFileName = $fileName;
