@@ -18,7 +18,7 @@ ___
 4. Browse `/setup` to create the required tables and admin sign up.
    > Ex. `https://localhost/PHP-Phone-Book/setup/`
 5. Remove `/setup` directory.
-6. Set media directory permission to 777.
+6. Set `media` directory permission to 777.
    > sudo chmod -R 777 media
 ___
 ### Information
