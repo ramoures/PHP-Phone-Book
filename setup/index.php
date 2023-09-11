@@ -106,55 +106,52 @@ try {
                 }
                 if($u->post('btn_submit')){
                     try {
-                            $step=2;
-                            $username = $u->encode($u->post('username'));
-                            $password = $u->encode($u->post('password'));
-                            $confirm = $u->encode($u->post('confirm'));
-                            if($username ==='')
-                                $alert = "Please enter username.";
-                            else
-                            if($password === '')
-                                $alert = "Please enter password.";
-                            else
-                            if($confirm ==='')
-                                $alert = "Please enter confirm password.";
-                            else
-                            if($password !== $confirm)
-                                $alert = "Passwords do not match.";
-                            else
-                            if(!preg_match($forRegex,$confirm)){
-                                $alert = '
-                                Your password is not strong enough.
-                                <div class="text-secondary d-grid passValid">
-                                    <span><i></i>Must be 8 to 16 characters.</span>
-                                    <span><i></i>Must contain at least 2 number.</span>
-                                    <span><i></i>Must contain at least 1 in Capital Case.</span>
-                                    <span><i></i>Must contain at least 1 Letter in Small Case.</span>
-                                    <span><i></i>Must contain at least 2 Special Character.</span>
-                                </div>';
-                            }
-                            else{
-                                $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",TABLE_PREFIX.'admins','username','password','created_at');
-                                $stmp = $pdo->prepare($sql);
-                                $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
-                                $u->redirect('../'.ADMIN_DIR_NAME.'/signin');
-                            }
+                        $step=2;
+                        $username = $u->encode($u->post('username'));
+                        $password = $u->encode($u->post('password'));
+                        $confirm = $u->encode($u->post('confirm'));
+                        if($username ==='')
+                            $alert = "Please enter username.";
+                        else
+                        if($password === '')
+                            $alert = "Please enter password.";
+                        else
+                        if($confirm ==='')
+                            $alert = "Please enter confirm password.";
+                        else
+                        if($password !== $confirm)
+                            $alert = "Passwords do not match.";
+                        else
+                        if(!preg_match($forRegex,$confirm)){
+                            $alert = '
+                            Your password is not strong enough.
+                            <div class="text-secondary d-grid passValid">
+                                <span><i></i>Must be 8 to 16 characters.</span>
+                                <span><i></i>Must contain at least 2 number.</span>
+                                <span><i></i>Must contain at least 1 in Capital Case.</span>
+                                <span><i></i>Must contain at least 1 Letter in Small Case.</span>
+                                <span><i></i>Must contain at least 2 Special Character.</span>
+                            </div>';
+                        }
+                        else{
+                            $sql = sprintf("INSERT INTO %s (%s, %s, %s) VALUES (?,?,?)",TABLE_PREFIX.'admins','username','password','created_at');
+                            $stmp = $pdo->prepare($sql);
+                            $stmp->execute([$username,encrypt($confirm),date('Y-m-d H:i:s')]);
+                            $u->redirect('../'.ADMIN_DIR_NAME.'/signin');
+                        }
 
                     } catch (Exception $e) {
                         $msg = $e->getMessage();
                     }
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $th) {
             $msg = "Connect Error! Please set your valid MySQL information, in <b>config.php</b>.";
         }
         $step = (!$success1 || !$success2 || !$success3)?1:$step;
-
         require_once "setup_html.php";
     }
-} catch (Exception $e) {
-    die('Error: ' .$e->getMessage());
+} catch (\Throwable $th) {
+    die('Error: ' .$th->getMessage());
 }
-
-
 ?>
