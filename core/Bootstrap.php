@@ -6,7 +6,6 @@ final class Bootstrap{
         $this->init();
         $this->errorReporting();       
         $this->routing();
-      
     }
     static function run(){
         if(self::$instance==null)
@@ -122,7 +121,6 @@ final class Bootstrap{
                 if(!is_callable($isCallableMethod))
                     return $this->error();
                 else  call_user_func($isCallableMethod);
-                
             }
         } catch (\Throwable $th) {
             return $this->error($th);
