@@ -1,6 +1,6 @@
 <?php
 /**
- * (MYSQL - PDO - PREPARED STATEMENT) C.R.U.D
+ * MYSQL (PDO & PREPARED STATEMENT) Connection & C.R.U.D
  * @Author: ramin moradi . github.com/ramoures
  * @Version: 1.0
  * @Email: ramoures@gmail.com
@@ -33,6 +33,8 @@ final class Database{
             self::$instance = new Database();
         return self::$instance;
     }
+    
+    //C.R.U.D
     public function create($object){
        try {
             if(!isset($object) || !isset($object['tableName']))
