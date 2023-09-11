@@ -19,7 +19,7 @@ trait errors{
                 else
                     die('<h2 style="position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);font-weight:normal">404, Document not found!</h2>'); 
        } catch (\Throwable $th) {
-            die;
+            die('Error!, Try again later.');
        }
          
     }
