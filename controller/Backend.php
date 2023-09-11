@@ -52,14 +52,10 @@ abstract class Backend extends Base{
     }
     private function uploadImage($fieldName,$path){
         try {
-            $userFileName = $this->Utils->encode($_FILES[$fieldName]['name'])??'';
-            $afterDot = (strlen($userFileName)-strpos($userFileName,'.'))*-1;
-            if($userFileName && (strlen(substr($userFileName,0,$afterDot))>35 || preg_match('/[^a-zA-Z0-9-_.{1}]/i',$userFileName)))
-                return -1;
             $error = $this->Utils->safeInt($_FILES[$fieldName]['error']);
             $tmp_name = $this->Utils->encode($_FILES[$fieldName]['tmp_name']);
             $fileSize = $this->Utils->safeInt($_FILES[$fieldName]['size']);
-            $fileName = hash('sha256',date('YmdHis')."sO92mDs&#1".mt_rand(1000000,9999999).date('YmdHis'))."A9^d!83df@g";
+            $fileName = hash('sha256',date('YmdHis').mt_rand(1000000,9999999).date('YmdHis'));
             if($error === 0){
                 $finfo = finfo_open(FILEINFO_MIME_TYPE);
                 $mime = finfo_file($finfo, $tmp_name)?finfo_file($finfo, $tmp_name):'image/jpg';
@@ -137,10 +133,8 @@ abstract class Backend extends Base{
                 }
                 else
                 if(is_int($upload) && $upload !== false){
-                    if(in_array($upload,[-2,-4,-5]))
+                    if(in_array($upload,[-1,-2,-4,-5]))
                         $this->object['msg']=['status'=>$upload,'style'=>'danger','text'=>'File Upload Failure!','script'=>$fieldName];
-                    else if($upload === -1)
-                        $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file name is not valid or is too long.','script'=>$fieldName];
                     else if($upload === -3)
                         $this->object['msg']=['status'=>-3,'style'=>'danger','text'=>'The file extension is not allowed. Allowable file types=','ex'=>implode(", ",array_values(ALLOW_FILES_TYPE)),'script'=>$fieldName];
                     else if($upload === -6)
