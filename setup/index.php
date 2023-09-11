@@ -153,7 +153,7 @@ try {
         require_once "setup_html.php";
     }
 } catch (Exception $e) {
-    echo 'Error: ' .$e->getMessage();
+    die('Error: ' .$e->getMessage());
 }
 
 
