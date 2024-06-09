@@ -32,7 +32,7 @@ class Home extends Frontend{
             }
             $pagePerTotal = ceil($total / (int)B_LIMIT);
             if($pagePerTotal && $pagePerTotal<$page)
-                $this->Utils->redirect($this->object['project_url']."admin/phone_numbers?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
+                $this->Utils->redirect($this->object['project_url']."?page=".$pagePerTotal."&asc=".$getAsc."&nameSort=".$order."&s=".$search);
             if($this->object['rows'])
                 foreach($this->object['rows'] as $key=>$value){
                     $this->object['rows'][$key]['phone_numbers'] = isset($this->object['rows'][$key]['phone_numbers'])?explode('~~',$this->object['rows'][$key]['phone_numbers']):null;
