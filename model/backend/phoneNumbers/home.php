@@ -8,7 +8,7 @@ class PhoneNumbersModel extends Models{
                     $imageName = $this->db->read(['tableName'=>'upload','where'=>['id'=>$imageId]]);
                     $imageName = $imageName?$imageName[0]['name']:false;
                     if($imageName){
-                         $unlink = unlink(UPLOAD_PATH.IMAGES_DIR_NAME."/".$imageName);
+                         $unlink = unlink(ROOT_PATH . 'media/' . IMAGES_DIR_NAME."/".$imageName);
                          if($unlink)
                               $delUploadDb = $this->db->delete(['tableName'=>'upload','id'=>$imageId]);
                     }
