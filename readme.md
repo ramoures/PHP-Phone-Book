@@ -15,11 +15,19 @@ ___
 ### Setup
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
-3. Browse `/setup` to create the required tables and admin sign up.
-   > Ex. `https://localhost/PHP-Phone-Book/setup/`
-4. Remove `/setup` directory.
+
+> 3. Browse `/setup` to create the required tables and admin sign up.
+>     > Ex. `https://localhost/PHP-Phone-Book/setup/`
+> 4. Remove `/setup` directory.
+> #### OR
+> 3. Remove `/setup` directory.
+> 4. IMPORT php_phone_book.sql to your database table.
+>    > Added username after import: admin , password: 123
+
 5. Set `media` directory permission to 777.
    > sudo chmod -R 777 media
+
++ Browse your project url. `Ex. https://localhost/PHP-Phone-Book/ | Admin panel: https://localhost/PHP-Phone-Book/admin2023`
 ___
 ### Information
 + HTTP server: [Apache](https://httpd.apache.org/) 
