@@ -12,7 +12,7 @@
 > براساس زمان UTC است.
 
 - [پنل مدیریت](https://awaweb.ir/projects/free/php_phone_book/admin2023) &#8628;
-  > **username:** admin<br> > **password:** 123
+  > **username:** admin<br>  **password:** 123
 - [صفحه‌ی اصلی دفترچه تلفن](https://awaweb.ir/projects/free/php_phone_book)
 
 ### طریقه‌ی نصب
@@ -64,7 +64,7 @@ Admin panel: https://localhost/PHP-Phone-Book/admin2023
 - استفاده از _[PDO](https://www.php.net/manual/en/book.pdo.php) و [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)_ در ارتباط با mySQL.
 - خطاهای احتمالیِ مدیریت شده.
 - استفاده از [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [(**الگوی طراحی**)](https://en.wikipedia.org/wiki/Design_Patterns) برای برخی از class ها.
-- چندین _options_ برای کانفیک برنامه در _`config.php`_.
+- چندین _option_ برای کانفیک برنامه در _`config.php`_.
 - سیستم صفحه‌بندی و سیستم چیدمان دلخواه برای موارد اضافه شده.
 - سیستم **captcha** برای ورود (سمت کلاینت و سرور).
   > دو مورد : _Google reCaptcha_ یا _Cloudflare Turnstile_
