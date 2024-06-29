@@ -12,7 +12,7 @@
 > براساس زمان UTC است.
 
 - [پنل مدیریت](https://awaweb.ir/projects/free/php_phone_book/admin2023) &#8628;
-  > **username:** admin<br>  **password:** 123
+  > **نام کاربری:** admin<br>  **رمز عبور:** 123
 - [صفحه‌ی اصلی دفترچه تلفن](https://awaweb.ir/projects/free/php_phone_book)
 
 ### طریقه‌ی نصب
