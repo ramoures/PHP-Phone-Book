@@ -86,7 +86,8 @@
      <button id="fr">Fr</button>
      <button id="en">En</button>
 </div>
-<!-- و همچنین نگاه کنید به: .changeLanguage click function
+<!-- و همچنین نگاه کنید به:
+ .changeLanguage click function
  در:
  view/assets/js/app.js و backend.js  -->
 
@@ -94,9 +95,6 @@
 
 ---
 
-### `** این برنامه برای سایر پروژه‌های خام PHP شما آماده است. می‌توانید هر طور که خواستید تغییرش دهید و موارد و سیستم‌های دلخواه خود را اضافه کنید **`
-
-### ارتباط با من:
 
 Linkedin: [ramoures](https://www.linkedin.com/in/ramoures/)<br>
 E-mail: ramoures@gmail.com
