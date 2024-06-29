@@ -81,7 +81,7 @@
 2. در html صفحه‌های خود، زبان تازه را اضافه کنید.
 
 ```
-<!-- Example: -->
+<!-- مثال: -->
 <div class="changeLanguage">
      <button id="fr">Fr</button>
      <button id="en">En</button>
