@@ -58,7 +58,7 @@ Admin panel: https://localhost/PHP-Phone-Book/admin2023
 
 * لایسنس: [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
-#### موارد به کار رفته:
+#### موارد به‌کاررفته‌شده:
 
 - پشتیبانی از سیستم چندزبانه.
 - استفاده از _[PDO](https://www.php.net/manual/en/book.pdo.php) و [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)_ در ارتباط با mySQL.
