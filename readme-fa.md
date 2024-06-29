@@ -41,9 +41,9 @@
 
 حالا `PROJECT_URL` خود را اجرا کنید:
 
-https://localhost/PHP-Phone-Book/
+صفحه‌ی اصلی: https://localhost/PHP-Phone-Book/
 
-Admin panel: https://localhost/PHP-Phone-Book/admin2023
+پنل مدیریت: https://localhost/PHP-Phone-Book/admin2023
 
 ---
 
