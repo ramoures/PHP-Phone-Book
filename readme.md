@@ -1,4 +1,4 @@
-# PHP-Phone-Book
+# PHP Phone Book
 [فارسی](./readme-fa.md) | English
 
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/php_phone_book)
