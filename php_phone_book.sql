@@ -41,10 +41,8 @@ CREATE TABLE `phbk_admins` (
 -- Dumping data for table `phbk_admins`
 --
 
---password is 123----
 INSERT INTO `phbk_admins` (`id`, `username`, `password`, `avatar_id`, `last_signed_at`, `updated_at`, `created_at`) VALUES
-(1, 'admin', 'e37331f827cb57a62815f225acee86724dc7e38733f660a8915cbcac8ea37d8c', NULL, NULL, NULL, '0000-00-00 00:00:00');
---password is 123----
+(1, 'admin', 'e37331f827cb57a62815f225acee86724dc7e38733f660a8915cbcac8ea37d8c', NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -56,7 +54,7 @@ CREATE TABLE `phbk_phone_numbers` (
   `id` int(11) UNSIGNED NOT NULL,
   `nickname` varchar(100) NOT NULL,
   `full_name` varchar(255) DEFAULT NULL,
-  `phone_numbers` text NOT NULL,
+  `phone_numbers` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `image_id` int(11) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -94,8 +92,7 @@ ALTER TABLE `phbk_admins`
 --
 ALTER TABLE `phbk_phone_numbers`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_nickname` (`nickname`),
-  ADD UNIQUE KEY `unique_phone_numbers` (`phone_numbers`) USING HASH;
+  ADD UNIQUE KEY `unique_nickname` (`nickname`);
 
 --
 -- Indexes for table `phbk_upload`
