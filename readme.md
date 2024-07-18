@@ -13,8 +13,11 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
+- Apache module *mod-rewrite* must be enabled. [Solution](https://github.com/ramoures/PHP-Phone-Book/edit/main/readme.md#enable-apache2-mod_rewrite-)
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
+
+3 and 4:
 
 > 3. Browse `/setup` to create the required tables and admin sign up.
 >     > Ex. `https://localhost/PHP-Phone-Book/setup/`
@@ -25,7 +28,7 @@ ___
 >    > Added username after import: admin , password: 123
 
 5. Set `media` directory permission to 777.
-   > sudo chmod -R 777 media
+   > $ sudo chmod -R 777 media
 
 + Browse your project url. `Ex. https://localhost/PHP-Phone-Book/ | Admin panel: https://localhost/PHP-Phone-Book/admin2023`
 ___
@@ -39,17 +42,55 @@ ___
 * Licensed under [MIT](https://github.com/ramoures/PHP-Phone-Book/blob/main/LICENSE)
 
 #### I used:
-+ Multi language suppourt.
++ URL Routing methods.
++ [TWIG](https://twig.symfony.com/) template engine.
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
-+ Errors handling method.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
++ Multi language suppourt.
 + Many *options* for configuration. *`config.php`*
 + Sorting and pagination of items.
 + Client and server side **captcha** for sign in form.
    >  Optional config: *Google reCaptcha* or *Cloudflare Turnstile*
++ Errors handling method.
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 ___
 ### HELP
+
+
+#### Enable the apache module *mod_rewrite*
+`$ sudo a2enmod rewrite`
+
+Edit the Apache config file:
+
+`$ cd /etc/apache2`
+
+`$ sudo nano apache2.conf`
+
+Find:
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+```
+And change it to;
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+```
+Press Ctrl + o (for save), then Ctrl + x (for exit).
+
+Then,
+
+`$ sudo systemctl restart apache2`
+
+- [Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
+- [More about solution](https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2)
+
 #### Add new language
 1. Create your language file in the `lang` folder.
 >Ex. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
