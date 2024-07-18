@@ -17,7 +17,7 @@ ___
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
 
-3 and 4:
+3 & 4:
 
 > 3. Browse `/setup` to create the required tables and admin sign up.
 >     > Ex. `https://localhost/PHP-Phone-Book/setup/`
@@ -25,7 +25,7 @@ ___
 > #### OR
 > 3. Remove `/setup` directory.
 > 4. IMPORT php_phone_book.sql to your database table.
->    > Added username after import: admin , password: 123
+>    > The username added after import is: admin , password: 123
 
 5. Set `media` directory permission to 777.
    > $ sudo chmod -R 777 media
