@@ -13,7 +13,7 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
-- Apache module *mod-rewrite* must be enabled. [Solution](https://github.com/ramoures/PHP-Phone-Book/edit/main/readme.md#enable-apache2-mod_rewrite-)
+- Apache module *mod-rewrite* must be enabled. [Solution](#enable-apache2-mod_rewrite-)
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
 
