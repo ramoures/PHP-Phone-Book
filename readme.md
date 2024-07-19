@@ -13,7 +13,6 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
-- Apache module *mod-rewrite* must be enabled and allowoverride must be set to All in the Apache configuration file. [Solution](#enable-the-apache-module-mod_rewrite-and-set-allowoverride-all)
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
 
@@ -31,6 +30,17 @@ ___
    > $ sudo chmod -R 777 media
 
 + Browse your project url. `Ex. https://localhost/PHP-Phone-Book/ | Admin panel: https://localhost/PHP-Phone-Book/admin2023`
+___
+
+### Requirement
+- Apache http web server.
+- MySQL database
+- PHP ^8.2.4
+- Apache module *mod-rewrite* must be enabled. [&#8628;](#enable-the-apache-module-mod_rewrite)
+- mysqli, mysqlnd, pdo ,pdo_mysql PHP extensions must be enabled.
+> To check the above: `<?php phpinfo(); ?>` - [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
+- allowOverride must be set to All in the Apache configuration file. [&#8628;](#set-config-allowoverride-all)
+
 ___
 ### Information
 + HTTP server: [Apache](https://httpd.apache.org/) 
@@ -55,12 +65,27 @@ ___
 + [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/).
 ___
 ### HELP
+#### Add new language
+1. Create your language file in the `lang` folder.
+>Ex. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
+2. Add your new language for frontend pages.<br>
+```
+<!-- Example: -->
+<div class="changeLanguage">
+     <button id="fr">Fr</button>
+     <button id="en">En</button>
+</div>
+<!-- Look at: .changeLanguage click function on view/assets/js/app.js or backend.js  -->
 
+```
+______
+#### Solutions
 
-#### Enable the apache module *mod_rewrite* and set allowoverride All
-- If you are using xampp, these settings are there by default. And there is no need to do anything.
+##### Enable the apache module *mod_rewrite*
   
 `$ sudo a2enmod rewrite`
+
+##### Set config allowoverride All
 
 Edit the Apache config file:
 
@@ -76,7 +101,7 @@ Find:
         Require all granted
 </Directory>
 ```
-And change it to;
+And change it to:
 ```
 <Directory /var/www/>
         Options Indexes FollowSymLinks
@@ -84,28 +109,16 @@ And change it to;
         Require all granted
 </Directory>
 ```
+> `/var/www/` : your root directory.
+> 
 Press Ctrl + o (for save), then Ctrl + x (for exit).
 
 Then,
 
 `$ sudo systemctl restart apache2`
 
-- [Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
-- [More about solution](https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2)
+[Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
 
-#### Add new language
-1. Create your language file in the `lang` folder.
->Ex. *fr.php* or *ar.php* and develop similar to `lang/fa.php`.
-2. Add your new language for frontend pages.<br>
-```
-<!-- Example: -->
-<div class="changeLanguage">
-     <button id="fr">Fr</button>
-     <button id="en">En</button>
-</div>
-<!-- Look at: .changeLanguage click function on view/assets/js/app.js or backend.js  -->
-
-```
 ____
 
 Linkedin: [ramoures](https://www.linkedin.com/in/ramoures/)<br>
