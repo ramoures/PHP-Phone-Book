@@ -13,7 +13,7 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
-- Apache module *mod-rewrite* must be enabled. [Solution](#enable-the-apache-module-mod_rewrite)
+- Apache module *mod-rewrite* must be enabled and allowoverride must be set to All in the Apache configuration file. [Solution](#enable-the-apache-module-mod_rewrite)
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
 
@@ -58,6 +58,8 @@ ___
 
 
 #### Enable the apache module *mod_rewrite*
+- If you are using xampp, these settings are there by default. And there is no need to do anything.
+  
 `$ sudo a2enmod rewrite`
 
 Edit the Apache config file:
