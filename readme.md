@@ -13,7 +13,7 @@ ___
 + [Front page demo](https://awaweb.ir/projects/free/php_phone_book)
 
 ### Setup
-- Apache module *mod-rewrite* must be enabled and allowoverride must be set to All in the Apache configuration file. [Solution](#enable-the-apache-module-mod_rewrite)
+- Apache module *mod-rewrite* must be enabled and allowoverride must be set to All in the Apache configuration file. [Solution](#enable-the-apache-module-mod_rewrite-and-set-allowoverride-all)
 1. Create a new MySQL database.
 2. Set your **database information** and your `PROJECT_URL` in `config.php`.
 
