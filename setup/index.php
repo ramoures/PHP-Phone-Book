@@ -22,13 +22,16 @@ try {
         $success1 = false;
         $success2 = false;
         $success3 = false;
-        $step = (int)$_GET['step'];
+        $step = (int)$u->get('step');
         $step = $step<=0?1:$step;
         $step = $step>2?2:$step;
         $PASSWORD_PATTERN = PASSWORD_PATTERN;
         $forRegex = "/".$PASSWORD_PATTERN."/";
         $tablePrefix = TABLE_PREFIX;
-
+        $alert = "";
+        $username = "";
+        $password = "";
+        $msg = "";
         function encrypt($str){
             try {
                 //See also: core/Utils.php
@@ -51,8 +54,8 @@ try {
                     `password` varchar(64) NOT NULL,
                     `avatar_id` int(11) DEFAULT NULL,
                     `last_signed_at` timestamp NULL DEFAULT NULL,
-                    `updated_at` timestamp NULL DEFAULT NULL,
-                    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+                    `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                    `created_at` timestamp NOT NULL DEFAULT current_timestamp()
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
                 ALTER TABLE `".TABLE_PREFIX."admins`
                     ADD PRIMARY KEY (`id`),
@@ -67,16 +70,15 @@ try {
                     `id` int(11) UNSIGNED NOT NULL,
                     `nickname` varchar(100) NOT NULL,
                     `full_name` varchar(255) DEFAULT NULL,
-                    `phone_numbers` text NOT NULL,
+                    `phone_numbers` varchar(255) NOT NULL,
                     `address` varchar(255) DEFAULT NULL,
                     `image_id` int(11) DEFAULT NULL,
-                    `updated_at` timestamp NULL DEFAULT NULL,
-                    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+                    `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+                    `created_at` timestamp NOT NULL DEFAULT current_timestamp()
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
                 ALTER TABLE `".TABLE_PREFIX."phone_numbers`
                     ADD PRIMARY KEY (`id`),
-                    ADD UNIQUE KEY `unique_nickname` (`nickname`),
-                    ADD UNIQUE KEY `unique_phone_numbers` (`phone_numbers`) USING HASH;
+                    ADD UNIQUE KEY `unique_nickname` (`nickname`);
                 ALTER TABLE `".TABLE_PREFIX."phone_numbers`
                     MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;";
                 $stmt2 = $pdo->prepare($sql2)->execute();
@@ -87,7 +89,7 @@ try {
                     `folder` varchar(100) NOT NULL,
                     `name` varchar(255) NOT NULL,
                     `alt` varchar(255) DEFAULT NULL,
-                    `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+                    `created_at` timestamp NOT NULL DEFAULT current_timestamp()
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
                 ALTER TABLE `".TABLE_PREFIX."upload`
                     ADD PRIMARY KEY (`id`);
