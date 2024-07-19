@@ -33,13 +33,13 @@ ___
 ___
 
 ### Requirement
-- Apache http web server.
+- Apache HTTP web server.
 - MySQL database
 - PHP ^8.2.4
 - Apache module *mod-rewrite* must be enabled. [&#8628;](#enable-the-apache-module-mod_rewrite)
 - mysqli, mysqlnd, pdo ,pdo_mysql PHP extensions must be enabled.
 > To check the above: `<?php phpinfo(); ?>` - [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
-- allowOverride must be set to All in the Apache configuration file. [&#8628;](#set-config-allowoverride-all)
+- allowOverride must be set to All (for your root directory) in the Apache configuration file. [&#8628;](#set-config-allowoverride-all)
 
 ___
 ### Information
