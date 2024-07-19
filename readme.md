@@ -57,7 +57,7 @@ ___
 ### HELP
 
 
-#### Enable the apache module *mod_rewrite*
+#### Enable the apache module *mod_rewrite* and set allowoverride All
 - If you are using xampp, these settings are there by default. And there is no need to do anything.
   
 `$ sudo a2enmod rewrite`
