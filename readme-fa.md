@@ -114,7 +114,7 @@
 
 ##### تنظیم allowoverride روی All
 
-ویرایش فایل کانفیگ Apache :
+ویرایش فایل کانفیگ Apache:
 
   دستور کامند زیر را برای ورود به دایرکتوری apache خود اجرا کنید:
 
@@ -140,20 +140,20 @@
         Require all granted
 </Directory>
 ```
-> `/var/www/` : دایرکتوری روت شما است.
-> 
+>  - دایرکتوری روت شما `/var/www/` است.
+>
+> - همانطور که می‌بینید فقط AllowOverride None به AllowOverride All تبدیل شده است.
+
 برای ذخیره کلیدهای Ctrl + o و سپس برای خروج Ctrl + x را بفشارید.
 
 سپس،
-  دستور کامند زیر را اجرا کنید:
+  دستور کامند زیر را برای راه‌اندازی دوباره‌ی Apache اجرا کنید:
 
 `$ sudo systemctl restart apache2`
 
-[Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
+(بیشتر بدانید: [Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html))
 
-____
 ---
-
 
 Linkedin: [ramoures](https://www.linkedin.com/in/ramoures/)<br>
 E-mail: ramoures@gmail.com
