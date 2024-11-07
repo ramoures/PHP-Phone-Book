@@ -49,9 +49,9 @@
 ---
 ### موراد مورد نیاز 
 
-- Apache HTTP web server.
-- MySQL database
-- PHP ^8.2.4
+- وب سرور Apache .
+- دیتابیس MySQL 
+- نسخه‌ی PHP بالاتر و یا مساوی با 8.2.4
 -  ماژول *mod-rewrite* باید در Apache فعال شده باشد. [&#8628;](#enable-the-apache-module-mod_rewrite)
 - اکستنشن یا افرونه‌های mysqli, mysqlnd, pdo ,pdo_mysql در PHP باید فعال شده باشند.
 > برای چک کردن موارد بالا `<?php phpinfo(); ?>` را در یک فایل PHP بنویسید و اجرا کنید. [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
