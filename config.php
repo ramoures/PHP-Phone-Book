@@ -9,7 +9,7 @@
 //MySQL Information
     define("DB_HOST","localhost");
     define("DB_USER","root");
-    define("DB_PASWORD","");
+    define("DB_PASSWORD","");
     define("DB_NAME","php_phone_book");
 
     define("TABLE_PREFIX","phbk_");

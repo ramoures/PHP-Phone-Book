@@ -43,7 +43,7 @@ try {
         }
         try {
             $dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME;
-            $pdo = new PDO($dsn, DB_USER, DB_PASWORD);
+            $pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
 
             if($pdo){
                 $pdo->exec("set names utf8mb4");

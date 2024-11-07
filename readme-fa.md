@@ -21,6 +21,7 @@
 
 ۲. **اطلاعات دیتابیس‌**تان و `PROJECT_URL` خودتان را در فایل config.php وارد کنید.
 
+مرحله ۳ و ۴: (به دو روش مختلف)
 > ۳. برای افزوده‌شدن خودکار جدول‌های دیتابیس و افزودن نام کاربری و رمز عبور مدیریت، کافی‌ست `/setup` را اجرا کنید.
 >
 > > مثال: `https://localhost/PHP-Phone-Book/setup`
@@ -33,7 +34,7 @@
 >
 > ۴. فایل ‍`php_phone_book.sql` را در دیتابیس خود IMPORT کنید.
 >
-> > نام کاربری شما `admin` و رمز عبورتان `123` خواهد بود.
+> > دراین‌صورت نام کاربری شما `admin` و رمز عبورتان `123` خواهد بود.
 
 ۵. دسترسی یا `permission` پوشه‌ی `media` را روی ‍777 قرار دهید.
 
@@ -46,6 +47,15 @@
 پنل مدیریت: https://localhost/PHP-Phone-Book/admin2023
 
 ---
+### موراد مورد نیاز 
+
+- Apache HTTP web server.
+- MySQL database
+- PHP ^8.2.4
+-  ماژول *mod-rewrite* باید در Apache فعال شده باشد. [&#8628;](#enable-the-apache-module-mod_rewrite)
+- اکستنشن یا افرونه‌های mysqli, mysqlnd, pdo ,pdo_mysql در PHP باید فعال شده باشند.
+> برای چک کردن موارد بالا `<?php phpinfo(); ?>` را در یک فایل PHP بنویسید و اجرا کنید. [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
+-   در فایل کانفیگ Apache شما باید allowOverride برای دایرکتوری root شما روی All تنظیم شده باشد.. [&#8628;](#set-config-allowoverride-all)
 
 ### اطلاعات برنامه
 
@@ -80,8 +90,8 @@
    > مثال: _fr.php_ یا _ar.php_ که باید مثل فایل`lang/fa.php` توسعه دهید .
 2. در html صفحه‌های خود، زبان تازه را اضافه کنید.
 
+
 ```
-<!-- مثال: -->
 <div class="changeLanguage">
      <button id="fr">Fr</button>
      <button id="en">En</button>
@@ -93,6 +103,53 @@
 
 ```
 
+#### راه حل‌ها
+
+##### فعال کردن ماژول *mod_rewrite*
+  دستور کامند زیر را اجرا کنید:
+
+`$ sudo a2enmod rewrite`
+
+##### تنظیم allowoverride روی All
+
+ویرایش فایل کانفیگ Apache :
+
+  دستور کامند زیر را برای ورود به دایرکتوری apache خود اجرا کنید:
+
+`$ cd /etc/apache2`
+
+  سپس دستور کامند زیر را برای ورود به محیط ویرایش فایل کانفیگ، اجرا کنید:
+
+`$ sudo nano apache2.conf`
+
+بگردید و خطوط زیر را پیدا کنید:
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+```
+و به شکل زیر تغییر دهید:
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+```
+> `/var/www/` : دایرکتوری روت شما است.
+> 
+برای ذخیره کلیدهای Ctrl + o و سپس برای خروج Ctrl + x را بفشارید.
+
+سپس،
+  دستور کامند زیر را اجرا کنید:
+
+`$ sudo systemctl restart apache2`
+
+[Apache mod_rewrite module](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
+
+____
 ---
 
 
