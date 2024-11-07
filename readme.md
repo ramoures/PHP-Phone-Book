@@ -56,7 +56,7 @@ ___
 + [TWIG](https://twig.symfony.com/) template engine.
 +  *[PDO](https://www.php.net/manual/en/book.pdo.php) & [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)* MySQL Connection.
 + [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [**design patterns**](https://en.wikipedia.org/wiki/Design_Patterns) for some required classes.
-+ Multi language suppourt.
++ Multi language support.
 + Many *options* for configuration. *`config.php`*
 + Sorting and pagination of items.
 + Client and server side **captcha** for sign in form.

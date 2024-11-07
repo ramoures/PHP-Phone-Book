@@ -49,12 +49,12 @@
 ---
 ### موراد مورد نیاز 
 
-- وب سرور Apache .
+- وب سرور Apache
 - دیتابیس MySQL 
 - نسخه‌ی PHP بالاتر و یا مساوی با 8.2.4
 -  ماژول *mod-rewrite* باید در Apache فعال شده باشد. [&#8628;](#فعال-کردن-ماژول-mod_rewrite)
 - اکستنشن یا افرونه‌های mysqli, mysqlnd, pdo ,pdo_mysql در PHP باید فعال شده باشند.
-> برای چک کردن موارد بالا `<?php phpinfo(); ?>` را در یک فایل PHP بنویسید و اجرا کنید. [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
+> برای چک کردن مورد بالا `<?php phpinfo(); ?>` را در یک فایل PHP بنویسید و اجرا کنید. [PHPInfo](https://www.php.net/manual/en/function.phpinfo.php)
 -   در فایل کانفیگ Apache شما باید allowOverride برای دایرکتوری root شما روی All تنظیم شده باشد.. [&#8628;](#تنظیم-allowoverride-روی-all)
 
 ### اطلاعات برنامه
@@ -70,10 +70,12 @@
 
 #### موارد به‌ کار رفته شده:
 
-- پشتیبانی از سیستم چندزبانه.
+- متد پیمایش در URLها.
+- موتور قالب‌ساز Twig
 - استفاده از _[PDO](https://www.php.net/manual/en/book.pdo.php) و [Prepared Statements](https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php)_ در ارتباط با mySQL.
-- خطاهای احتمالیِ مدیریت شده.
+- متد مدیریت خطاهای احتمالیِ .
 - استفاده از [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) [(**الگوی طراحی**)](https://en.wikipedia.org/wiki/Design_Patterns) برای برخی از class ها.
+- پشتیبانی از سیستم چندزبانه.
 - چندین _option_ برای کانفیک برنامه در _`config.php`_.
 - سیستم صفحه‌بندی و سیستم چیدمان دلخواه برای موارد اضافه شده.
 - سیستم **captcha** برای ورود (سمت کلاینت و سرور).
